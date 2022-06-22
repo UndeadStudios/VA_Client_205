@@ -1031,8 +1031,8 @@ public class Client extends ClientEngine {
 					break;
 				}
 				int i3 = -1;
-				for (int j3 = 0; j3 < menuActionRow; j3++) {
-					int k3 = k1 + 31 + (menuActionRow - 1 - j3) * 15;
+				for (int j3 = 0; j3 < menu_id; j3++) {
+					int k3 = k1 + 31 + (menu_id - 1 - j3) * 15;
 					if (k2 > l && k2 < l + i2 && l2 > k3 - 13 && l2 < k3 + 3)
 						i3 = j3;
 				}
@@ -1078,11 +1078,11 @@ public class Client extends ClientEngine {
 			}
 			RSInterface.currentInputField = null;
 		} else {
-			if (j == 1 && menuActionRow > 0) {
-				int i1 = menuActionID[menuActionRow - 1];
+			if (j == 1 && menu_id > 0) {
+				int i1 = menuActionID[menu_id - 1];
 				if (i1 == 632 || i1 == 78 || i1 == 867 || i1 == 431 || i1 == 53 || i1 == 74 || i1 == 454 || i1 == 539 || i1 == 493 || i1 == 847 || i1 == 447 || i1 == 1125) {
-					int l1 = menuActionCmd2[menuActionRow - 1];
-					int j2 = menuActionCmd3[menuActionRow - 1];
+					int l1 = menuActionCmd2[menu_id - 1];
+					int j2 = menuActionCmd3[menu_id - 1];
 					RSInterface class9 = RSInterface.interfaceCache[j2];
 					if (class9.aBoolean259 || class9.aBoolean235) {
 						aBoolean1242 = false;
@@ -1100,11 +1100,11 @@ public class Client extends ClientEngine {
 					}
 				}
 			}
-			if (j == 1 && (anInt1253 == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2)
+			if (j == 1 && (anInt1253 == 1 || menuHasAddFriend(menu_id - 1)) && menu_id > 2)
 				j = 2;
-			if (j == 1 && menuActionRow > 0)
-				doAction(menuActionRow - 1);
-			if (j == 2 && menuActionRow > 0)
+			if (j == 1 && menu_id > 0)
+				doAction(menu_id - 1);
+			if (j == 2 && menu_id > 0)
 				determineMenuSize();
 			processMainScreenClick();
 			processTabClick();
@@ -1497,36 +1497,36 @@ public class Client extends ClientEngine {
 					if (child.contentType != 0)
 						flag = buildFriendsListMenu(child);
 					if (!flag) {
-						menuActionName[menuActionRow] = child.tooltip;
-						menuActionID[menuActionRow] = 315;
-						menuActionCmd3[menuActionRow] = child.id;
-						menuActionRow++;
+						menuActionName[menu_id] = child.tooltip;
+						menuActionID[menu_id] = 315;
+						menuActionCmd3[menu_id] = child.id;
+						menu_id++;
 					}
 				}
 				if (child.atActionType == 2 && spellSelected == 0 && mouseX >= childX && mouseY >= childY && mouseX < childX + child.width && mouseY < childY + child.height) {
 					String s = child.selectedActionName;
 					if (s.indexOf(" ") != -1)
 						s = s.substring(0, s.indexOf(" "));
-					menuActionName[menuActionRow] = s + " @gre@" + child.spellName;
-					menuActionID[menuActionRow] = 626;
-					menuActionCmd3[menuActionRow] = child.id;
-					menuActionRow++;
+					menuActionName[menu_id] = s + " @gre@" + child.spellName;
+					menuActionID[menu_id] = 626;
+					menuActionCmd3[menu_id] = child.id;
+					menu_id++;
 				}
 				if (child.atActionType == 3 && mouseX >= childX && mouseY >= childY && mouseX < childX + child.width && mouseY < childY + child.height) {
-					menuActionName[menuActionRow] = "Close";
-					menuActionID[menuActionRow] = 200;
-					menuActionCmd3[menuActionRow] = child.id;
-					menuActionRow++;
+					menuActionName[menu_id] = "Close";
+					menuActionID[menu_id] = 200;
+					menuActionCmd3[menu_id] = child.id;
+					menu_id++;
 				}
 				if (child.atActionType == 4 && mouseX >= childX && mouseY >= childY && mouseX < childX + child.width && mouseY < childY + child.height) {
 					// System.out.println("2"+class9_1.tooltip + ", " +
 					// class9_1.interfaceID);
 					// menuActionName[menuActionRow] = class9_1.tooltip + ", " +
 					// class9_1.id;
-					menuActionName[menuActionRow] = child.tooltip;
-					menuActionID[menuActionRow] = 169;
-					menuActionCmd3[menuActionRow] = child.id;
-					menuActionRow++;
+					menuActionName[menu_id] = child.tooltip;
+					menuActionID[menu_id] = 169;
+					menuActionCmd3[menu_id] = child.id;
+					menu_id++;
 					if (child.hoverText != null) {
 						// drawHoverBox(k, l, class9_1.hoverText);
 						// System.out.println("DRAWING INTERFACE: " +
@@ -1538,27 +1538,27 @@ public class Client extends ClientEngine {
 					// class9_1.interfaceID);
 					// menuActionName[menuActionRow] = class9_1.tooltip + ", " +
 					// class9_1.id;
-					menuActionName[menuActionRow] = child.tooltip;
-					menuActionID[menuActionRow] = 646;
-					menuActionCmd3[menuActionRow] = child.id;
-					menuActionRow++;
+					menuActionName[menu_id] = child.tooltip;
+					menuActionID[menu_id] = 646;
+					menuActionCmd3[menu_id] = child.id;
+					menu_id++;
 				}
 				if (child.atActionType == 6 && !aBoolean1149 && mouseX >= childX && mouseY >= childY && mouseX < childX + child.width && mouseY < childY + child.height) {
 					// System.out.println("4"+class9_1.tooltip + ", " +
 					// class9_1.interfaceID);
 					// menuActionName[menuActionRow] = class9_1.tooltip + ", " +
 					// class9_1.id;
-					menuActionName[menuActionRow] = child.tooltip;
-					menuActionID[menuActionRow] = 679;
-					menuActionCmd3[menuActionRow] = child.id;
-					menuActionRow++;
+					menuActionName[menu_id] = child.tooltip;
+					menuActionID[menu_id] = 679;
+					menuActionCmd3[menu_id] = child.id;
+					menu_id++;
 				}
 				if (child.atActionType == 8 && !aBoolean1149 && mouseX >= childX && mouseY >= childY && mouseX < childX + child.width && mouseY < childY + child.height) {
 					for (int i = 0; i < child.actions.length; i++) {
-						menuActionName[menuActionRow] = child.actions[i];
-						menuActionID[menuActionRow] = 1700 + i;
-						menuActionCmd3[menuActionRow] = child.id;
-						menuActionRow++;
+						menuActionName[menu_id] = child.actions[i];
+						menuActionID[menu_id] = 1700 + i;
+						menuActionCmd3[menu_id] = child.id;
+						menu_id++;
 					}
 				}
 				if (mouseX >= childX && mouseY >= childY && mouseX < childX + (child.type == 4 ? 100 : child.width) && mouseY < childY + child.height) {
@@ -1566,11 +1566,11 @@ public class Client extends ClientEngine {
 						if ((child.type == 4 && child.disabledMessage.length() > 0) || child.type == 5) {
 							for (int action = child.actions.length - 1; action >= 0; action--) {
 								if (child.actions[action] != null) {
-									menuActionName[menuActionRow] = child.actions[action] + (child.type == 4 ? " " + child.disabledMessage : "");
-									menuActionID[menuActionRow] = 647;
-									menuActionCmd2[menuActionRow] = action;
-									menuActionCmd3[menuActionRow] = child.id;
-									menuActionRow++;
+									menuActionName[menu_id] = child.actions[action] + (child.type == 4 ? " " + child.disabledMessage : "");
+									menuActionID[menu_id] = 647;
+									menuActionCmd2[menu_id] = action;
+									menuActionCmd3[menu_id] = child.id;
+									menu_id++;
 								}
 							}
 						}
@@ -1631,66 +1631,66 @@ public class Client extends ClientEngine {
 									ItemDefinition itemDef = ItemDefinition.forID(itemId);
 									if (itemSelected == 1 && child.isInventoryInterface) {
 										if (child.id != anInt1284 || k2 != anInt1283) {
-											menuActionName[menuActionRow] = "Use " + selectedItemName + " with @lre@" + itemDef.name;
-											menuActionID[menuActionRow] = 870;
-											menuActionCmd1[menuActionRow] = itemDef.id;
-											menuActionCmd2[menuActionRow] = k2;
-											menuActionCmd3[menuActionRow] = child.id;
-											menuActionRow++;
+											menuActionName[menu_id] = "Use " + selectedItemName + " with @lre@" + itemDef.name;
+											menuActionID[menu_id] = 870;
+											menuActionCmd1[menu_id] = itemDef.id;
+											menuActionCmd2[menu_id] = k2;
+											menuActionCmd3[menu_id] = child.id;
+											menu_id++;
 										}
 									} else if (spellSelected == 1 && child.isInventoryInterface) {
 										if ((spellUsableOn & 0x10) == 16) {
-											menuActionName[menuActionRow] = spellTooltip + " @lre@" + itemDef.name;
-											menuActionID[menuActionRow] = 543;
-											menuActionCmd1[menuActionRow] = itemDef.id;
-											menuActionCmd2[menuActionRow] = k2;
-											menuActionCmd3[menuActionRow] = child.id;
-											menuActionRow++;
+											menuActionName[menu_id] = spellTooltip + " @lre@" + itemDef.name;
+											menuActionID[menu_id] = 543;
+											menuActionCmd1[menu_id] = itemDef.id;
+											menuActionCmd2[menu_id] = k2;
+											menuActionCmd3[menu_id] = child.id;
+											menu_id++;
 										}
 									} else {
 										if (child.isInventoryInterface) {
 											for (int l3 = 4; l3 >= 3; l3--)
 												if (itemDef.itemActions != null && itemDef.itemActions[l3] != null) {
-													menuActionName[menuActionRow] = itemDef.itemActions[l3] + " @lre@" + itemDef.name;
+													menuActionName[menu_id] = itemDef.itemActions[l3] + " @lre@" + itemDef.name;
 													if (l3 == 3)
-														menuActionID[menuActionRow] = 493;
+														menuActionID[menu_id] = 493;
 													if (l3 == 4)
-														menuActionID[menuActionRow] = 847;
-													menuActionCmd1[menuActionRow] = itemDef.id;
-													menuActionCmd2[menuActionRow] = k2;
-													menuActionCmd3[menuActionRow] = child.id;
-													menuActionRow++;
+														menuActionID[menu_id] = 847;
+													menuActionCmd1[menu_id] = itemDef.id;
+													menuActionCmd2[menu_id] = k2;
+													menuActionCmd3[menu_id] = child.id;
+													menu_id++;
 												} else if (l3 == 4) {
-													menuActionName[menuActionRow] = "Drop @lre@" + itemDef.name;
-													menuActionID[menuActionRow] = 847;
-													menuActionCmd1[menuActionRow] = itemDef.id;
-													menuActionCmd2[menuActionRow] = k2;
-													menuActionCmd3[menuActionRow] = child.id;
-													menuActionRow++;
+													menuActionName[menu_id] = "Drop @lre@" + itemDef.name;
+													menuActionID[menu_id] = 847;
+													menuActionCmd1[menu_id] = itemDef.id;
+													menuActionCmd2[menu_id] = k2;
+													menuActionCmd3[menu_id] = child.id;
+													menu_id++;
 												}
 										}
 										if (child.usableItemInterface) {
-											menuActionName[menuActionRow] = "Use @lre@" + itemDef.name;
-											menuActionID[menuActionRow] = 447;
-											menuActionCmd1[menuActionRow] = itemDef.id;
-											menuActionCmd2[menuActionRow] = k2;
-											menuActionCmd3[menuActionRow] = child.id;
-											menuActionRow++;
+											menuActionName[menu_id] = "Use @lre@" + itemDef.name;
+											menuActionID[menu_id] = 447;
+											menuActionCmd1[menu_id] = itemDef.id;
+											menuActionCmd2[menu_id] = k2;
+											menuActionCmd3[menu_id] = child.id;
+											menu_id++;
 										}
 										if (child.isInventoryInterface && itemDef.itemActions != null) {
 											for (int i4 = 2; i4 >= 0; i4--)
 												if (itemDef.itemActions[i4] != null) {
-													menuActionName[menuActionRow] = itemDef.itemActions[i4] + " @lre@" + itemDef.name;
+													menuActionName[menu_id] = itemDef.itemActions[i4] + " @lre@" + itemDef.name;
 													if (i4 == 0)
-														menuActionID[menuActionRow] = 74;
+														menuActionID[menu_id] = 74;
 													if (i4 == 1)
-														menuActionID[menuActionRow] = 454;
+														menuActionID[menu_id] = 454;
 													if (i4 == 2)
-														menuActionID[menuActionRow] = 539;
-													menuActionCmd1[menuActionRow] = itemDef.id;
-													menuActionCmd2[menuActionRow] = k2;
-													menuActionCmd3[menuActionRow] = child.id;
-													menuActionRow++;
+														menuActionID[menu_id] = 539;
+													menuActionCmd1[menu_id] = itemDef.id;
+													menuActionCmd2[menu_id] = k2;
+													menuActionCmd3[menu_id] = child.id;
+													menu_id++;
 												}
 
 										}
@@ -1707,47 +1707,47 @@ public class Client extends ClientEngine {
 												if (j4 > child.actions.length - 1)
 													continue;
 												if (child.actions[j4] != null) {
-													menuActionName[menuActionRow] = child.actions[j4] + " @lre@" + itemDef.name;
+													menuActionName[menu_id] = child.actions[j4] + " @lre@" + itemDef.name;
 													if (j4 == 0)
-														menuActionID[menuActionRow] = 632;
+														menuActionID[menu_id] = 632;
 													if (j4 == 1)
-														menuActionID[menuActionRow] = 78;
+														menuActionID[menu_id] = 78;
 													if (j4 == 2)
-														menuActionID[menuActionRow] = 867;
+														menuActionID[menu_id] = 867;
 													if (j4 == 3)
-														menuActionID[menuActionRow] = 431;
+														menuActionID[menu_id] = 431;
 													if (j4 == 4)
-														menuActionID[menuActionRow] = 53;
+														menuActionID[menu_id] = 53;
 													if (rsinterface.parentID == 5292) {
 														if (child.actions[j4] == null) {
 															if (j4 == 5)
-																menuActionID[menuActionRow] = 291;
+																menuActionID[menu_id] = 291;
 														} else {
 															if (j4 == 5)
-																menuActionID[menuActionRow] = 300;
+																menuActionID[menu_id] = 300;
 															if (j4 == 6)
-																menuActionID[menuActionRow] = 291;
+																menuActionID[menu_id] = 291;
 														}
 													}
 
-													menuActionCmd1[menuActionRow] = itemDef.id;
-													menuActionCmd2[menuActionRow] = k2;
-													menuActionCmd3[menuActionRow] = child.id;
-													menuActionRow++;
+													menuActionCmd1[menu_id] = itemDef.id;
+													menuActionCmd2[menu_id] = k2;
+													menuActionCmd3[menu_id] = child.id;
+													menu_id++;
 												}
 											}
 										}
 										if (ClientConstants.DEBUG_MODE) {
-											menuActionName[menuActionRow] = "@gre@(@whi@" + itemDef.id + "@gre@)(@whi@"  + + itemDef.modelID + "@gre@)(@whi@" +itemDef.anInt200 + "@gre@)(@whi@" + itemDef.anInt165 + "@gre@)(@whi@" + itemDef.anInt164 + "@gre@)";
+											menuActionName[menu_id] = "@gre@(@whi@" + itemDef.id + "@gre@)(@whi@"  + + itemDef.modelID + "@gre@)(@whi@" +itemDef.anInt200 + "@gre@)(@whi@" + itemDef.anInt165 + "@gre@)(@whi@" + itemDef.anInt164 + "@gre@)";
 											//id(itemId) | modelID(modelId) | anInt200(femalewieldId) | anInt165(malewieldId) | anInt164(femaleArmId) | anInt188(maleArmId)
 										} else {
-											menuActionName[menuActionRow] = "Examine @lre@" + itemDef.name;
+											menuActionName[menu_id] = "Examine @lre@" + itemDef.name;
 										}
-										menuActionID[menuActionRow] = 1125;
-										menuActionCmd1[menuActionRow] = itemDef.id;
-										menuActionCmd2[menuActionRow] = k2;
-										menuActionCmd3[menuActionRow] = child.id;
-										menuActionRow++;
+										menuActionID[menu_id] = 1125;
+										menuActionCmd1[menu_id] = itemDef.id;
+										menuActionCmd2[menu_id] = k2;
+										menuActionCmd3[menu_id] = child.id;
+										menu_id++;
 									}
 								}
 							}
@@ -2847,8 +2847,8 @@ public class Client extends ClientEngine {
 			newBoldFont.drawBasicString("Choose Option", xPos + 3, yPos + 14, menuColor, 1);
 			int mouseX = super.mouseX - (xOffSet);
 			int mouseY = (-yOffSet) + super.mouseY;
-			for (int i = 0; i < menuActionRow; i++) {
-				int textY = yPos + 31 + (menuActionRow - 1 - i) * 15;
+			for (int i = 0; i < menu_id; i++) {
+				int textY = yPos + 31 + (menu_id - 1 - i) * 15;
 				int textColor = 0xffffff;
 				if (mouseX > xPos && mouseX < xPos + menuW && mouseY > textY - 13 && mouseY < textY + 3) {
 					Rasterizer2D.drawPixels(15, textY - 11, xPos + 3, 0x6f695d, menuWidth - 6);
@@ -2887,8 +2887,8 @@ public class Client extends ClientEngine {
 		}
 		int mouseX = super.mouseX - (xOffSet);
 		int mouseY = (-yOffSet) + super.mouseY;
-		for (int l1 = 0; l1 < menuActionRow; l1++) {
-			int textY = yPos + 31 + (menuActionRow - 1 - l1) * 15;
+		for (int l1 = 0; l1 < menu_id; l1++) {
+			int textY = yPos + 31 + (menu_id - 1 - l1) * 15;
 			int disColor = 0xc6b895;
 			if (mouseX > xPos && mouseX < xPos + menuW && mouseY > textY - 13 && mouseY < textY + 3) {
 				Rasterizer2D.drawPixels(15, textY - 11, xPos + 3, 0x6f695d, menuWidth - 6);
@@ -3873,10 +3873,10 @@ public class Client extends ClientEngine {
 						stream.method433(dragFromSlot);
 						stream.method431(mouseInvInterfaceIndex);
 					}
-				} else if ((anInt1253 == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2)
+				} else if ((anInt1253 == 1 || menuHasAddFriend(menu_id - 1)) && menu_id > 2)
 					determineMenuSize();
-				else if (menuActionRow > 0)
-					doAction(menuActionRow - 1);
+				else if (menu_id > 0)
+					doAction(menu_id - 1);
 				atInventoryLoopCycle = 10;
 				super.clickMode3 = 0;
 			}
@@ -5374,11 +5374,11 @@ public class Client extends ClientEngine {
 
 	private void build3dScreenMenu() {
 		if (itemSelected == 0 && spellSelected == 0) {
-			menuActionName[menuActionRow] = "Walk here";
-			menuActionID[menuActionRow] = 519;
-			menuActionCmd2[menuActionRow] = super.mouseX;
-			menuActionCmd3[menuActionRow] = super.mouseY;
-			menuActionRow++;
+			menuActionName[menu_id] = "Walk here";
+			menuActionID[menu_id] = 519;
+			menuActionCmd2[menu_id] = super.mouseX;
+			menuActionCmd3[menu_id] = super.mouseY;
+			menu_id++;
 		}
 		int j = -1;
 		for (int k = 0; k < Model.obj_loaded; k++) {
@@ -5400,53 +5400,53 @@ public class Client extends ClientEngine {
 					continue;
 				}
 				if (itemSelected == 1) {
-					menuActionName[menuActionRow] = "Use " + selectedItemName + " with @cya@" + class46.name;
-					menuActionID[menuActionRow] = 62;
-					menuActionCmd1[menuActionRow] = l;
-					menuActionCmd2[menuActionRow] = i1;
-					menuActionCmd3[menuActionRow] = j1;
-					menuActionRow++;
+					menuActionName[menu_id] = "Use " + selectedItemName + " with @cya@" + class46.name;
+					menuActionID[menu_id] = 62;
+					menuActionCmd1[menu_id] = l;
+					menuActionCmd2[menu_id] = i1;
+					menuActionCmd3[menu_id] = j1;
+					menu_id++;
 				} else if (spellSelected == 1) {
 					if ((spellUsableOn & 4) == 4) {
-						menuActionName[menuActionRow] = spellTooltip + " @cya@" + class46.name;
-						menuActionID[menuActionRow] = 956;
-						menuActionCmd1[menuActionRow] = l;
-						menuActionCmd2[menuActionRow] = i1;
-						menuActionCmd3[menuActionRow] = j1;
-						menuActionRow++;
+						menuActionName[menu_id] = spellTooltip + " @cya@" + class46.name;
+						menuActionID[menu_id] = 956;
+						menuActionCmd1[menu_id] = l;
+						menuActionCmd2[menu_id] = i1;
+						menuActionCmd3[menu_id] = j1;
+						menu_id++;
 					}
 				} else {
 					if (class46.actions != null) {
 						for (int i2 = 4; i2 >= 0; i2--)
 							if (class46.actions[i2] != null) {
-								menuActionName[menuActionRow] = class46.actions[i2] + " @cya@" + class46.name;
+								menuActionName[menu_id] = class46.actions[i2] + " @cya@" + class46.name;
 								if (i2 == 0)
-									menuActionID[menuActionRow] = 502;
+									menuActionID[menu_id] = 502;
 								if (i2 == 1)
-									menuActionID[menuActionRow] = 900;
+									menuActionID[menu_id] = 900;
 								if (i2 == 2)
-									menuActionID[menuActionRow] = 113;
+									menuActionID[menu_id] = 113;
 								if (i2 == 3)
-									menuActionID[menuActionRow] = 872;
+									menuActionID[menu_id] = 872;
 								if (i2 == 4)
-									menuActionID[menuActionRow] = 1062;
-								menuActionCmd1[menuActionRow] = l;
-								menuActionCmd2[menuActionRow] = i1;
-								menuActionCmd3[menuActionRow] = j1;
-								menuActionRow++;
+									menuActionID[menu_id] = 1062;
+								menuActionCmd1[menu_id] = l;
+								menuActionCmd2[menu_id] = i1;
+								menuActionCmd3[menu_id] = j1;
+								menu_id++;
 							}
 
 					}
 					if (ClientConstants.DEBUG_MODE) {
-						menuActionName[menuActionRow] = "Examine @cya@" + class46.name + " @gre@(@whi@" + l1 + "@gre@) (@whi@" + (i1 + baseX) + "," + (j1 + baseY) + "@gre@)";
+						menuActionName[menu_id] = "Examine @cya@" + class46.name + " @gre@(@whi@" + l1 + "@gre@) (@whi@" + (i1 + baseX) + "," + (j1 + baseY) + "@gre@)";
 					} else {
-						menuActionName[menuActionRow] = "Examine @cya@" + class46.name;
+						menuActionName[menu_id] = "Examine @cya@" + class46.name;
 					}
-					menuActionID[menuActionRow] = 1226;
-					menuActionCmd1[menuActionRow] = class46.type << 14;
-					menuActionCmd2[menuActionRow] = i1;
-					menuActionCmd3[menuActionRow] = j1;
-					menuActionRow++;
+					menuActionID[menu_id] = 1226;
+					menuActionCmd1[menu_id] = class46.type << 14;
+					menuActionCmd2[menu_id] = i1;
+					menuActionCmd3[menu_id] = j1;
+					menu_id++;
 				}
 			}
 			if (k1 == 1) {
@@ -5492,53 +5492,53 @@ public class Client extends ClientEngine {
 					for (Item item = (Item) class19.getFirst(); item != null; item = (Item) class19.getNext()) {
 						ItemDefinition itemDef = ItemDefinition.forID(item.ID);
 						if (itemSelected == 1) {
-							menuActionName[menuActionRow] = "Use " + selectedItemName + " with @lre@" + itemDef.name;
-							menuActionID[menuActionRow] = 511;
-							menuActionCmd1[menuActionRow] = item.ID;
-							menuActionCmd2[menuActionRow] = i1;
-							menuActionCmd3[menuActionRow] = j1;
-							menuActionRow++;
+							menuActionName[menu_id] = "Use " + selectedItemName + " with @lre@" + itemDef.name;
+							menuActionID[menu_id] = 511;
+							menuActionCmd1[menu_id] = item.ID;
+							menuActionCmd2[menu_id] = i1;
+							menuActionCmd3[menu_id] = j1;
+							menu_id++;
 						} else if (spellSelected == 1) {
 							if ((spellUsableOn & 1) == 1) {
-								menuActionName[menuActionRow] = spellTooltip + " @lre@" + itemDef.name;
-								menuActionID[menuActionRow] = 94;
-								menuActionCmd1[menuActionRow] = item.ID;
-								menuActionCmd2[menuActionRow] = i1;
-								menuActionCmd3[menuActionRow] = j1;
-								menuActionRow++;
+								menuActionName[menu_id] = spellTooltip + " @lre@" + itemDef.name;
+								menuActionID[menu_id] = 94;
+								menuActionCmd1[menu_id] = item.ID;
+								menuActionCmd2[menu_id] = i1;
+								menuActionCmd3[menu_id] = j1;
+								menu_id++;
 							}
 						} else {
 							for (int j3 = 4; j3 >= 0; j3--)
 								if (itemDef.groundActions != null && itemDef.groundActions[j3] != null) {
-									menuActionName[menuActionRow] = itemDef.groundActions[j3] + " @lre@" + itemDef.name;
+									menuActionName[menu_id] = itemDef.groundActions[j3] + " @lre@" + itemDef.name;
 									if (j3 == 0)
-										menuActionID[menuActionRow] = 652;
+										menuActionID[menu_id] = 652;
 									if (j3 == 1)
-										menuActionID[menuActionRow] = 567;
+										menuActionID[menu_id] = 567;
 									if (j3 == 2)
-										menuActionID[menuActionRow] = 234;
+										menuActionID[menu_id] = 234;
 									if (j3 == 3)
-										menuActionID[menuActionRow] = 244;
+										menuActionID[menu_id] = 244;
 									if (j3 == 4)
-										menuActionID[menuActionRow] = 213;
-									menuActionCmd1[menuActionRow] = item.ID;
-									menuActionCmd2[menuActionRow] = i1;
-									menuActionCmd3[menuActionRow] = j1;
-									menuActionRow++;
+										menuActionID[menu_id] = 213;
+									menuActionCmd1[menu_id] = item.ID;
+									menuActionCmd2[menu_id] = i1;
+									menuActionCmd3[menu_id] = j1;
+									menu_id++;
 								} else if (j3 == 2) {
-									menuActionName[menuActionRow] = "Take @lre@" + itemDef.name;
-									menuActionID[menuActionRow] = 234;
-									menuActionCmd1[menuActionRow] = item.ID;
-									menuActionCmd2[menuActionRow] = i1;
-									menuActionCmd3[menuActionRow] = j1;
-									menuActionRow++;
+									menuActionName[menu_id] = "Take @lre@" + itemDef.name;
+									menuActionID[menu_id] = 234;
+									menuActionCmd1[menu_id] = item.ID;
+									menuActionCmd2[menu_id] = i1;
+									menuActionCmd3[menu_id] = j1;
+									menu_id++;
 								}
-							menuActionName[menuActionRow] = "Examine @lre@" + itemDef.name;
-							menuActionID[menuActionRow] = 1448;
-							menuActionCmd1[menuActionRow] = item.ID;
-							menuActionCmd2[menuActionRow] = i1;
-							menuActionCmd3[menuActionRow] = j1;
-							menuActionRow++;
+							menuActionName[menu_id] = "Examine @lre@" + itemDef.name;
+							menuActionID[menu_id] = 1448;
+							menuActionCmd1[menu_id] = item.ID;
+							menuActionCmd2[menu_id] = i1;
+							menuActionCmd3[menu_id] = j1;
+							menu_id++;
 						}
 					}
 
@@ -6207,16 +6207,16 @@ public class Client extends ClientEngine {
 			if ((j1 == 1 || j1 == 2) && (j1 == 1 || publicChatMode == 0 || publicChatMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1 && !s.equals(myPlayer.name)) {
 					if (myPrivilege >= 1) {
-						menuActionName[menuActionRow] = "Report abuse @whi@" + s;
-						menuActionID[menuActionRow] = 606;
-						menuActionRow++;
+						menuActionName[menu_id] = "Report abuse @whi@" + s;
+						menuActionID[menu_id] = 606;
+						menu_id++;
 					}
-					menuActionName[menuActionRow] = "Add ignore @whi@" + s;
-					menuActionID[menuActionRow] = 42;
-					menuActionRow++;
-					menuActionName[menuActionRow] = "Add friend @whi@" + s;
-					menuActionID[menuActionRow] = 337;
-					menuActionRow++;
+					menuActionName[menu_id] = "Add ignore @whi@" + s;
+					menuActionID[menu_id] = 42;
+					menu_id++;
+					menuActionName[menu_id] = "Add friend @whi@" + s;
+					menuActionID[menu_id] = 337;
+					menu_id++;
 				}
 				l++;
 			}
@@ -6245,16 +6245,16 @@ public class Client extends ClientEngine {
 			if ((j1 == 3 || j1 == 7) && (splitPrivateChat == 0 || chatTypeView == 2) && (j1 == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1) {
 					if (myPrivilege >= 1) {
-						menuActionName[menuActionRow] = "Report abuse @whi@" + s;
-						menuActionID[menuActionRow] = 606;
-						menuActionRow++;
+						menuActionName[menu_id] = "Report abuse @whi@" + s;
+						menuActionID[menu_id] = 606;
+						menu_id++;
 					}
-					menuActionName[menuActionRow] = "Add ignore @whi@" + s;
-					menuActionID[menuActionRow] = 42;
-					menuActionRow++;
-					menuActionName[menuActionRow] = "Add friend @whi@" + s;
-					menuActionID[menuActionRow] = 337;
-					menuActionRow++;
+					menuActionName[menu_id] = "Add ignore @whi@" + s;
+					menuActionID[menu_id] = 42;
+					menu_id++;
+					menuActionName[menu_id] = "Add friend @whi@" + s;
+					menuActionID[menu_id] = 337;
+					menu_id++;
 				}
 				l++;
 			}
@@ -6280,25 +6280,25 @@ public class Client extends ClientEngine {
 			}
 			if (chatTypeView == 3 && j1 == 4 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1) {
-					menuActionName[menuActionRow] = "Accept trade @whi@" + s;
-					menuActionID[menuActionRow] = 484;
-					menuActionRow++;
+					menuActionName[menu_id] = "Accept trade @whi@" + s;
+					menuActionID[menu_id] = 484;
+					menu_id++;
 				}
 				l++;
 			}
 			if (chatTypeView == 4 && j1 == 8 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1) {
-					menuActionName[menuActionRow] = "Accept challenge @whi@" + s;
-					menuActionID[menuActionRow] = 6;
-					menuActionRow++;
+					menuActionName[menu_id] = "Accept challenge @whi@" + s;
+					menuActionID[menu_id] = 6;
+					menu_id++;
 				}
 				l++;
 			}
 			if (j1 == 12) {
 				if (j > k1 - 14 && j <= k1) {
-					menuActionName[menuActionRow] = "Go-to @blu@" + s;
-					menuActionID[menuActionRow] = 915;
-					menuActionRow++;
+					menuActionName[menu_id] = "Go-to @blu@" + s;
+					menuActionID[menu_id] = 915;
+					menu_id++;
 				}
 				l++;
 			}
@@ -6340,40 +6340,40 @@ public class Client extends ClientEngine {
 			if ((j1 == 1 || j1 == 2) && (j1 == 1 || publicChatMode == 0 || publicChatMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1 && !s.equals(myPlayer.name)) {
 					if (myPrivilege >= 1) {
-						menuActionName[menuActionRow] = "Report abuse @whi@" + s;
-						menuActionID[menuActionRow] = 606;
-						menuActionRow++;
+						menuActionName[menu_id] = "Report abuse @whi@" + s;
+						menuActionID[menu_id] = 606;
+						menu_id++;
 					}
-					menuActionName[menuActionRow] = "Add ignore @whi@" + s;
-					menuActionID[menuActionRow] = 42;
-					menuActionRow++;
-					menuActionName[menuActionRow] = "Add friend @whi@" + s;
-					menuActionID[menuActionRow] = 337;
-					menuActionRow++;
+					menuActionName[menu_id] = "Add ignore @whi@" + s;
+					menuActionID[menu_id] = 42;
+					menu_id++;
+					menuActionName[menu_id] = "Add friend @whi@" + s;
+					menuActionID[menu_id] = 337;
+					menu_id++;
 				}
 				l++;
 			}
 			if ((j1 == 3 || j1 == 7) && splitPrivateChat == 0 && (j1 == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1) {
 					if (myPrivilege >= 1) {
-						menuActionName[menuActionRow] = "Report abuse @whi@" + s;
-						menuActionID[menuActionRow] = 606;
-						menuActionRow++;
+						menuActionName[menu_id] = "Report abuse @whi@" + s;
+						menuActionID[menu_id] = 606;
+						menu_id++;
 					}
-					menuActionName[menuActionRow] = "Add ignore @whi@" + s;
-					menuActionID[menuActionRow] = 42;
-					menuActionRow++;
-					menuActionName[menuActionRow] = "Add friend @whi@" + s;
-					menuActionID[menuActionRow] = 337;
-					menuActionRow++;
+					menuActionName[menu_id] = "Add ignore @whi@" + s;
+					menuActionID[menu_id] = 42;
+					menu_id++;
+					menuActionName[menu_id] = "Add friend @whi@" + s;
+					menuActionID[menu_id] = 337;
+					menu_id++;
 				}
 				l++;
 			}
 			if (j1 == 4 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1) {
-					menuActionName[menuActionRow] = "Accept trade @whi@" + s;
-					menuActionID[menuActionRow] = 484;
-					menuActionRow++;
+					menuActionName[menu_id] = "Accept trade @whi@" + s;
+					menuActionID[menu_id] = 484;
+					menu_id++;
 				}
 				l++;
 			}
@@ -6381,9 +6381,9 @@ public class Client extends ClientEngine {
 				l++;
 			if (j1 == 8 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1) {
-					menuActionName[menuActionRow] = "Accept challenge @whi@" + s;
-					menuActionID[menuActionRow] = 6;
-					menuActionRow++;
+					menuActionName[menu_id] = "Accept challenge @whi@" + s;
+					menuActionID[menu_id] = 6;
+					menu_id++;
 				}
 				l++;
 			}
@@ -7243,11 +7243,11 @@ public class Client extends ClientEngine {
 			if (super.mouseX >= 5 && super.mouseX <= 61) {
 				menuActionName[1] = "View All";
 				menuActionID[1] = 999;
-				menuActionRow = 2;
+				menu_id = 2;
 			} else if (super.mouseX >= 71 && super.mouseX <= 127) {
 				menuActionName[1] = "View Game";
 				menuActionID[1] = 998;
-				menuActionRow = 2;
+				menu_id = 2;
 			} else if (super.mouseX >= 137 && super.mouseX <= 193) {
 				menuActionName[1] = "Hide public";
 				menuActionID[1] = 997;
@@ -7259,7 +7259,7 @@ public class Client extends ClientEngine {
 				menuActionID[4] = 994;
 				menuActionName[5] = "View public";
 				menuActionID[5] = 993;
-				menuActionRow = 6;
+				menu_id = 6;
 			} else if (super.mouseX >= 203 && super.mouseX <= 259) {
 				menuActionName[1] = "Off private";
 				menuActionID[1] = 992;
@@ -7269,7 +7269,7 @@ public class Client extends ClientEngine {
 				menuActionID[3] = 990;
 				menuActionName[4] = "View private";
 				menuActionID[4] = 989;
-				menuActionRow = 5;
+				menu_id = 5;
 			} else if (super.mouseX >= 269 && super.mouseX <= 325) {
 				menuActionName[1] = "Off clan chat";
 				menuActionID[1] = 1003;
@@ -7279,7 +7279,7 @@ public class Client extends ClientEngine {
 				menuActionID[3] = 1001;
 				menuActionName[4] = "View clan chat";
 				menuActionID[4] = 1000;
-				menuActionRow = 5;
+				menu_id = 5;
 			} else if (super.mouseX >= 335 && super.mouseX <= 391) {
 				menuActionName[1] = "Off trade";
 				menuActionID[1] = 987;
@@ -7289,11 +7289,11 @@ public class Client extends ClientEngine {
 				menuActionID[3] = 985;
 				menuActionName[4] = "View trade";
 				menuActionID[4] = 984;
-				menuActionRow = 5;
+				menu_id = 5;
 			} else if (super.mouseX >= 404 && super.mouseX <= 515) {
 				menuActionName[1] = "Report Abuse";
 				menuActionID[1] = 606;
-				menuActionRow = 2;
+				menu_id = 2;
 			}
 		}
 	}
@@ -7304,7 +7304,7 @@ public class Client extends ClientEngine {
 		}
 		menuActionName[0] = "Cancel";
 		menuActionID[0] = 1107;
-		menuActionRow = 1;
+		menu_id = 1;
 		if (showChatComponents) {
 			buildSplitPrivateChatMenu();
 		}
@@ -7415,7 +7415,7 @@ public class Client extends ClientEngine {
 		boolean flag = false;
 		while (!flag) {
 			flag = true;
-			for (int j = 0; j < menuActionRow - 1; j++) {
+			for (int j = 0; j < menu_id - 1; j++) {
 				if (menuActionID[j] < 1000 && menuActionID[j + 1] > 1000) {
 					String s = menuActionName[j];
 					menuActionName[j] = menuActionName[j + 1];
@@ -7545,7 +7545,7 @@ public class Client extends ClientEngine {
 				anInt1104 = 0;
 				anInt1011 = 0;
 				anInt855 = 0;
-				menuActionRow = 0;
+				menu_id = 0;
 				menuOpen = false;
 				super.idleTime = 0;
 				for (int j1 = 0; j1 < 500; j1++)
@@ -7688,7 +7688,7 @@ public class Client extends ClientEngine {
 				pktSize = 0;
 				anInt1009 = 0;
 				anInt1104 = 0;
-				menuActionRow = 0;
+				menu_id = 0;
 				menuOpen = false;
 				aLong824 = System.currentTimeMillis();
 				return;
@@ -8031,7 +8031,7 @@ public class Client extends ClientEngine {
 	}
 
 	private void buildAtNPCMenu(EntityDef entityDef, int i, int j, int k) {
-		if (menuActionRow >= 400)
+		if (menu_id >= 400)
 			return;
 		if (entityDef.childrenIDs != null)
 			entityDef = entityDef.method161();
@@ -8043,42 +8043,42 @@ public class Client extends ClientEngine {
 		if (entityDef.combatLevel != 0)
 			s = s + combatDiffColor(myPlayer.combatLevel, entityDef.combatLevel) + " (level-" + entityDef.combatLevel + ")";
 		if (itemSelected == 1) {
-			menuActionName[menuActionRow] = "Use " + selectedItemName + " with @yel@" + s;
-			menuActionID[menuActionRow] = 582;
-			menuActionCmd1[menuActionRow] = i;
-			menuActionCmd2[menuActionRow] = k;
-			menuActionCmd3[menuActionRow] = j;
-			menuActionRow++;
+			menuActionName[menu_id] = "Use " + selectedItemName + " with @yel@" + s;
+			menuActionID[menu_id] = 582;
+			menuActionCmd1[menu_id] = i;
+			menuActionCmd2[menu_id] = k;
+			menuActionCmd3[menu_id] = j;
+			menu_id++;
 			return;
 		}
 		if (spellSelected == 1) {
 			if ((spellUsableOn & 2) == 2) {
-				menuActionName[menuActionRow] = spellTooltip + " @yel@" + s;
-				menuActionID[menuActionRow] = 413;
-				menuActionCmd1[menuActionRow] = i;
-				menuActionCmd2[menuActionRow] = k;
-				menuActionCmd3[menuActionRow] = j;
-				menuActionRow++;
+				menuActionName[menu_id] = spellTooltip + " @yel@" + s;
+				menuActionID[menu_id] = 413;
+				menuActionCmd1[menu_id] = i;
+				menuActionCmd2[menu_id] = k;
+				menuActionCmd3[menu_id] = j;
+				menu_id++;
 			}
 		} else {
 			if (entityDef.actions != null) {
 				for (int l = 4; l >= 0; l--)
 					if (entityDef.actions[l] != null && !entityDef.actions[l].equalsIgnoreCase("attack")) {
-						menuActionName[menuActionRow] = entityDef.actions[l] + " @yel@" + s;
+						menuActionName[menu_id] = entityDef.actions[l] + " @yel@" + s;
 						if (l == 0)
-							menuActionID[menuActionRow] = 20;
+							menuActionID[menu_id] = 20;
 						if (l == 1)
-							menuActionID[menuActionRow] = 412;
+							menuActionID[menu_id] = 412;
 						if (l == 2)
-							menuActionID[menuActionRow] = 225;
+							menuActionID[menu_id] = 225;
 						if (l == 3)
-							menuActionID[menuActionRow] = 965;
+							menuActionID[menu_id] = 965;
 						if (l == 4)
-							menuActionID[menuActionRow] = 478;
-						menuActionCmd1[menuActionRow] = i;
-						menuActionCmd2[menuActionRow] = k;
-						menuActionCmd3[menuActionRow] = j;
-						menuActionRow++;
+							menuActionID[menu_id] = 478;
+						menuActionCmd1[menu_id] = i;
+						menuActionCmd2[menu_id] = k;
+						menuActionCmd3[menu_id] = j;
+						menu_id++;
 					}
 
 			}
@@ -8089,41 +8089,41 @@ public class Client extends ClientEngine {
 						if (Configuration.entityAttackPriority && entityDef.combatLevel > myPlayer.combatLevel) {
 							c = '\u07D0';
 						}
-						menuActionName[menuActionRow] = entityDef.actions[i1] + " @yel@" + s;
+						menuActionName[menu_id] = entityDef.actions[i1] + " @yel@" + s;
 						if (i1 == 0)
-							menuActionID[menuActionRow] = 20 + c;
+							menuActionID[menu_id] = 20 + c;
 						if (i1 == 1)
-							menuActionID[menuActionRow] = 412 + c;
+							menuActionID[menu_id] = 412 + c;
 						if (i1 == 2)
-							menuActionID[menuActionRow] = 225 + c;
+							menuActionID[menu_id] = 225 + c;
 						if (i1 == 3)
-							menuActionID[menuActionRow] = 965 + c;
+							menuActionID[menu_id] = 965 + c;
 						if (i1 == 4)
-							menuActionID[menuActionRow] = 478 + c;
-						menuActionCmd1[menuActionRow] = i;
-						menuActionCmd2[menuActionRow] = k;
-						menuActionCmd3[menuActionRow] = j;
-						menuActionRow++;
+							menuActionID[menu_id] = 478 + c;
+						menuActionCmd1[menu_id] = i;
+						menuActionCmd2[menu_id] = k;
+						menuActionCmd3[menu_id] = j;
+						menu_id++;
 					}
 
 			}
 			if (ClientConstants.DEBUG_MODE) {
-				menuActionName[menuActionRow] = "Examine @yel@" + s + "@whi@(ID: @yel@" + entityDef.interfaceType + "@whi@)";
+				menuActionName[menu_id] = "Examine @yel@" + s + "@whi@(ID: @yel@" + entityDef.interfaceType + "@whi@)";
 			} else {
-				menuActionName[menuActionRow] = "Examine @yel@" + s;
+				menuActionName[menu_id] = "Examine @yel@" + s;
 			}
-			menuActionID[menuActionRow] = 1025;
-			menuActionCmd1[menuActionRow] = i;
-			menuActionCmd2[menuActionRow] = k;
-			menuActionCmd3[menuActionRow] = j;
-			menuActionRow++;
+			menuActionID[menu_id] = 1025;
+			menuActionCmd1[menu_id] = i;
+			menuActionCmd2[menu_id] = k;
+			menuActionCmd3[menu_id] = j;
+			menu_id++;
 		}
 	}
 
 	private void buildAtPlayerMenu(int i, int j, Player player, int k) {
 		if (player == myPlayer)
 			return;
-		if (menuActionRow >= 400)
+		if (menu_id >= 400)
 			return;
 		String s;
 		String title = player.title.length() > 0 ? (player.titlePrefix ? " " : "") + "<col=" + player.titleColor + ">" + player.title + "</col>" + (player.titlePrefix ? "" : " ") : "";
@@ -8141,25 +8141,25 @@ public class Client extends ClientEngine {
 			}
 		}
 		if (itemSelected == 1) {
-			menuActionName[menuActionRow] = "Use " + selectedItemName + " with @whi@" + s;
-			menuActionID[menuActionRow] = 491;
-			menuActionCmd1[menuActionRow] = j;
-			menuActionCmd2[menuActionRow] = i;
-			menuActionCmd3[menuActionRow] = k;
-			menuActionRow++;
+			menuActionName[menu_id] = "Use " + selectedItemName + " with @whi@" + s;
+			menuActionID[menu_id] = 491;
+			menuActionCmd1[menu_id] = j;
+			menuActionCmd2[menu_id] = i;
+			menuActionCmd3[menu_id] = k;
+			menu_id++;
 		} else if (spellSelected == 1) {
 			if ((spellUsableOn & 8) == 8) {
-				menuActionName[menuActionRow] = spellTooltip + " @whi@" + s;
-				menuActionID[menuActionRow] = 365;
-				menuActionCmd1[menuActionRow] = j;
-				menuActionCmd2[menuActionRow] = i;
-				menuActionCmd3[menuActionRow] = k;
-				menuActionRow++;
+				menuActionName[menu_id] = spellTooltip + " @whi@" + s;
+				menuActionID[menu_id] = 365;
+				menuActionCmd1[menu_id] = j;
+				menuActionCmd2[menu_id] = i;
+				menuActionCmd3[menu_id] = k;
+				menu_id++;
 			}
 		} else {
 			for (int l = 4; l >= 0; l--)
 				if (atPlayerActions[l] != null) {
-					menuActionName[menuActionRow] = atPlayerActions[l] + " @whi@" + s;
+					menuActionName[menu_id] = atPlayerActions[l] + " @whi@" + s;
 					char c = '\0';
 					if (atPlayerActions[l].equalsIgnoreCase("attack")) {
 						if (Configuration.entityAttackPriority && player.combatLevel > myPlayer.combatLevel)
@@ -8172,23 +8172,23 @@ public class Client extends ClientEngine {
 					} else if (atPlayerArray[l])
 						c = '\u07D0';
 					if (l == 0)
-						menuActionID[menuActionRow] = 561 + c;
+						menuActionID[menu_id] = 561 + c;
 					if (l == 1)
-						menuActionID[menuActionRow] = 779 + c;
+						menuActionID[menu_id] = 779 + c;
 					if (l == 2)
-						menuActionID[menuActionRow] = 27 + c;
+						menuActionID[menu_id] = 27 + c;
 					if (l == 3)
-						menuActionID[menuActionRow] = 577 + c;
+						menuActionID[menu_id] = 577 + c;
 					if (l == 4)
-						menuActionID[menuActionRow] = 729 + c;
-					menuActionCmd1[menuActionRow] = j;
-					menuActionCmd2[menuActionRow] = i;
-					menuActionCmd3[menuActionRow] = k;
-					menuActionRow++;
+						menuActionID[menu_id] = 729 + c;
+					menuActionCmd1[menu_id] = j;
+					menuActionCmd2[menu_id] = i;
+					menuActionCmd3[menu_id] = k;
+					menu_id++;
 				}
 
 		}
-		for (int i1 = 0; i1 < menuActionRow; i1++) {
+		for (int i1 = 0; i1 < menu_id; i1++) {
 			if (menuActionID[i1] == 519) {
 				menuActionName[i1] = "Walk here @whi@" + s;
 				return;
@@ -9111,18 +9111,18 @@ public class Client extends ClientEngine {
 				i -= 101;
 			else
 				i--;
-			menuActionName[menuActionRow] = "Remove @whi@" + friendsList[i];
-			menuActionID[menuActionRow] = 792;
-			menuActionRow++;
-			menuActionName[menuActionRow] = "Message @whi@" + friendsList[i];
-			menuActionID[menuActionRow] = 639;
-			menuActionRow++;
+			menuActionName[menu_id] = "Remove @whi@" + friendsList[i];
+			menuActionID[menu_id] = 792;
+			menu_id++;
+			menuActionName[menu_id] = "Message @whi@" + friendsList[i];
+			menuActionID[menu_id] = 639;
+			menu_id++;
 			return true;
 		}
 		if (i >= 401 && i <= 500) {
-			menuActionName[menuActionRow] = "Remove @whi@" + class9.disabledMessage;
-			menuActionID[menuActionRow] = 322;
-			menuActionRow++;
+			menuActionName[menu_id] = "Remove @whi@" + class9.disabledMessage;
+			menuActionID[menu_id] = 322;
+			menu_id++;
 			return true;
 		} else {
 			return false;
@@ -10703,14 +10703,14 @@ public class Client extends ClientEngine {
 
 	private void determineMenuSize() {
 		int boxLength = newBoldFont.getTextWidth("Choose option");
-		for (int row = 0; row < menuActionRow; row++) {
+		for (int row = 0; row < menu_id; row++) {
 			int actionLength = newBoldFont.getTextWidth(menuActionName[row]);
 			if (actionLength > boxLength) {
 				boxLength = actionLength;
 			}
 		}
 		boxLength += 8;
-		int offset = 15 * menuActionRow + 21;
+		int offset = 15 * menu_id + 21;
 		if (super.saveClickX > 0 && super.saveClickY > 0 && super.saveClickX < frameWidth && super.saveClickY < frameHeight) {
 			int xClick = super.saveClickX - boxLength / 2;
 			if (xClick + boxLength > frameWidth - 4) {
@@ -10730,7 +10730,7 @@ public class Client extends ClientEngine {
 			menuOffsetX = xClick;
 			menuOffsetY = yClick;
 			menuWidth = boxLength;
-			menuHeight = 15 * menuActionRow + 22;
+			menuHeight = 15 * menu_id + 22;
 		}
 	}
 
@@ -11078,22 +11078,22 @@ public class Client extends ClientEngine {
 	}
 
 	private void drawTooltip() {
-		if (menuActionRow < 2 && itemSelected == 0 && spellSelected == 0) {
+		if (menu_id < 2 && itemSelected == 0 && spellSelected == 0) {
 			return;
 		}
 		
 		String s;
 		
-		if (itemSelected == 1 && menuActionRow < 2) {
+		if (itemSelected == 1 && menu_id < 2) {
 			s = "Use " + selectedItemName + " with...";
-		} else if (spellSelected == 1 && menuActionRow < 2) {
+		} else if (spellSelected == 1 && menu_id < 2) {
 			s = spellTooltip + "...";
 		} else {
-			s = menuActionName[menuActionRow - 1];
+			s = menuActionName[menu_id - 1];
 		}
 		
-		if (menuActionRow > 2 && !Configuration.menuHovers) {
-			s = s + "@whi@ / " + (menuActionRow - 2) + " more options";
+		if (menu_id > 2 && !Configuration.menuHovers) {
+			s = s + "@whi@ / " + (menu_id - 2) + " more options";
 		} else {
 			s = s + "@whi@";
 		}
@@ -11369,16 +11369,16 @@ public class Client extends ClientEngine {
 							i1 = 450;
 						if (super.mouseX < 4 + i1) {
 							if (myPrivilege >= 1) {
-								menuActionName[menuActionRow] = "Report abuse @whi@" + s;
-								menuActionID[menuActionRow] = 2606;
-								menuActionRow++;
+								menuActionName[menu_id] = "Report abuse @whi@" + s;
+								menuActionID[menu_id] = 2606;
+								menu_id++;
 							}
-							menuActionName[menuActionRow] = "Add ignore @whi@" + s;
-							menuActionID[menuActionRow] = 2042;
-							menuActionRow++;
-							menuActionName[menuActionRow] = "Add friend @whi@" + s;
-							menuActionID[menuActionRow] = 2337;
-							menuActionRow++;
+							menuActionName[menu_id] = "Add ignore @whi@" + s;
+							menuActionID[menu_id] = 2042;
+							menu_id++;
+							menuActionName[menu_id] = "Add friend @whi@" + s;
+							menuActionID[menu_id] = 2337;
+							menu_id++;
 						}
 					}
 					if (++i >= 5)
@@ -13491,19 +13491,19 @@ public class Client extends ClientEngine {
 		if (fixed ? super.mouseX >= 542 && super.mouseX <= 579 && super.mouseY >= 2 && super.mouseY <= 38 : super.mouseX >= frameWidth - 180 && super.mouseX <= frameWidth - 139 && super.mouseY >= 0 && super.mouseY <= 40) {
 			menuActionName[1] = "Face North";
 			menuActionID[1] = 696;
-			menuActionRow = 2;
+			menu_id = 2;
 		}
 		if (changeChatArea) {
 			if (super.mouseX >= 256 && super.mouseX <= 264 && super.mouseY >= frameHeight - 170 - extendChatArea && super.mouseY <= frameHeight - 160 - extendChatArea) {
 				menuActionName[1] = "Drag to Extend Chat";
 				menuActionID[1] = 701;
-				menuActionRow = 2;
+				menu_id = 2;
 			}
 		}
 		if (fixed ? super.mouseX >= 742 && super.mouseX <= 765 && super.mouseY >= 0 && super.mouseY <= 24 : super.mouseX >= frameWidth - 26 && super.mouseX <= frameWidth - 1 && super.mouseY >= 2 && super.mouseY <= 24) {
 			menuActionName[1] = "Logout";
 			menuActionID[1] = 1004;
-			menuActionRow = 2;
+			menu_id = 2;
 		}
 		if (Configuration.enableStatusOrbs) {
 			if (counterHover) {
@@ -13513,7 +13513,7 @@ public class Client extends ClientEngine {
 				menuActionID[2] = 475;
 				menuActionName[1] = "XP Settings";
 				menuActionID[1] = 476;
-				menuActionRow = 4;
+				menu_id = 4;
 			}
 			/*if (counterHover) {
 				cacheSprite[520].drawSprite(frameMode == ScreenMode.FIXED ? -2 : frameWidth - 210, frameMode == ScreenMode.FIXED ? 21 : 20);
@@ -13523,7 +13523,7 @@ public class Client extends ClientEngine {
 			if (worldHover) {
 				menuActionName[1] = "Teleports";
 				menuActionID[1] = 850;
-				menuActionRow = 2;
+				menu_id = 2;
 			}
 			if (pouchHover & Configuration.enablePouch) {
 				menuActionName[3] = "Withdraw coins";
@@ -13532,20 +13532,20 @@ public class Client extends ClientEngine {
 				menuActionID[2] = 715;
 				menuActionName[1] = "Examine pouch";
 				menuActionID[1] = 714;
-				menuActionRow = 4;
+				menu_id = 4;
 			}
 			if (prayHover) {
 				menuActionName[2] = prayClicked ? "Turn quick-prayers off" : "Turn quick-prayers on";
 				menuActionID[2] = 1500;
-				menuActionRow = 2;
+				menu_id = 2;
 				menuActionName[1] = "Select quick-prayers";
 				menuActionID[1] = 1506;
-				menuActionRow = 3;
+				menu_id = 3;
 			}
 			if (runHover) {
 				menuActionName[1] = variousSettings[173] == 0 ? "Turn run mode on" : "Turn run mode off";
 				menuActionID[1] = 1050;
-				menuActionRow = 2;
+				menu_id = 2;
 			}
 		}
 	}
@@ -14273,7 +14273,7 @@ public class Client extends ClientEngine {
 	public static final int[] tabInterfaceIDs = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 	private int anInt1131;
 	public int anInt1132;
-	private int menuActionRow;
+	private int menu_id;
 	private static int anInt1134;
 	private int spellSelected;
 	private int anInt1137;
