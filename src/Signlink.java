@@ -103,13 +103,13 @@ public final class Signlink implements Runnable {
 	}
 	
 	public static String findcachedir() {
-		File file = new File(System.getProperty("user.home") + "/ValiusCacheV5/");
+		File file = new File("./cache/");
 		if (!file.exists()) {
 			if (!file.mkdir())
 				return secondDir();
 		}
-		return System.getProperty("user.home") + "/ValiusCacheV5/";
-		//return "./Cache/";
+		//return System.getProperty("user.home") + "/ValiusCacheV5/";
+		return "./Cache/";
     }
 	
 	public static String secondDir() {
