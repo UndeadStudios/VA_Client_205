@@ -570,7 +570,7 @@ public final class ObjectDefinition {
 				aByte742 = stream.readSignedByte();
 			else if (type >= 30 && type < 39) {
 				if (actions == null)
-					actions = new String[5];
+					actions = new String[10];
 				actions[type - 30] = stream.readString();
 				if (actions[type - 30].equalsIgnoreCase("hidden"))
 					actions[type - 30] = null;

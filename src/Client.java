@@ -4324,17 +4324,17 @@ public class Client extends ClientEngine {
 			inputDialogState = 0;
 			inputTaken = true;
 		}
-		int j = firstMenuAction[i];
-		int k = secondMenuAction[i];
-		int l = menuActionTypes[i];
+		int first_menu_action = firstMenuAction[i];
+		int second_menu_action = secondMenuAction[i];
+		int action = menuActionTypes[i];
 		long local_player_index = selectedMenuActions[i];
 
-		if (l >= 2000)
-			l -= 2000;
-		if (l == 701) {
+		if (action >= 2000)
+			action -= 2000;
+		if (action == 701) {
 			extendChatArea();
 		}
-		if (l == 713) {
+		if (action == 713) {
 			inputTaken = true;
 			messagePromptRaised = true;
 			amountOrNameInput = "";
@@ -4343,59 +4343,59 @@ public class Client extends ClientEngine {
 			friendsListAction = 557;
 			aString1121 = "Enter amount to withdraw";
 		}
-		if (l == 714) {
+		if (action == 714) {
 			stream.createFrame(185);
 			stream.writeWord(714);
 		}
-		if (l == 715) {
+		if (action == 715) {
 			stream.createFrame(185);
 			stream.writeWord(715);
 		}
-		if (l == 850) {
+		if (action == 850) {
 			stream.createFrame(185);
 			stream.writeWord(1507);
 		}
-		if (l == 291) {
+		if (action == 291) {
 			stream.createFrame(140);
-			stream.method432(j);
-			stream.writeWord(k);
+			stream.method432(first_menu_action);
+			stream.writeWord(second_menu_action);
 			stream.method432((int) local_player_index);
 		}
 
-		if (l == 300) {
+		if (action == 300) {
 			stream.createFrame(141);
-			stream.method432(j);
-			stream.writeWord(k);
+			stream.method432(first_menu_action);
+			stream.writeWord(second_menu_action);
 			stream.method432((int) local_player_index);
 			stream.writeDWord(modifiableXValue);
 		}
-		if (l == 474) {
+		if (action == 474) {
 			counterOn = !counterOn;
 		}
-		if (l == 475) {
+		if (action == 475) {
 			xpCounter = 0;
 			stream.createFrame(148);
 		}
-		if (l == 476) {
+		if (action == 476) {
 			openInterfaceID = 32800;
 		}
-		if (l == 696) {
+		if (action == 696) {
 			setNorth();
 		}
-		if (l == 1506) { // Select quick prayers
+		if (action == 1506) { // Select quick prayers
 			stream.createFrame(185);
 			stream.writeWord(5001);
 		}
-		if (l == 1500) { // Toggle quick prayers
+		if (action == 1500) { // Toggle quick prayers
 			prayClicked = !prayClicked;
 			stream.createFrame(185);
 			stream.writeWord(5000);
 		}
-		if (l == 104) {
-			RSInterface class9_1 = RSInterface.interfaceCache[k];
+		if (action == 104) {
+			RSInterface class9_1 = RSInterface.interfaceCache[second_menu_action];
 			spellID = class9_1.id;
 		}
-		if (l == 582) {
+		if (action == 582) {
 			Npc npc = npcs[(int) local_player_index];
 			if (npc != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, npc.waypoint_y[0], local_player.waypoint_x[0], false, npc.waypoint_x[0]);
@@ -4410,32 +4410,32 @@ public class Client extends ClientEngine {
 				stream.method432(anInt1284);
 			}
 		}
-		if (l == 234) {
-			boolean flag1 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, k, local_player.waypoint_x[0], false, j);
+		if (action == 234) {
+			boolean flag1 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			if (!flag1)
-				flag1 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, k, local_player.waypoint_x[0], false, j);
+				flag1 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			crossX = super.saveClickX;
 			crossY = super.saveClickY;
 			crossType = 2;
 			crossIndex = 0;
 			stream.createFrame(236);
-			stream.method431(k + baseY);
+			stream.method431(second_menu_action + baseY);
 			stream.writeWord((int) local_player_index);
-			stream.method431(j + baseX);
+			stream.method431(first_menu_action + baseX);
 		}
-		if (l == 62 && method66(local_player_index, k, j)) {
+		if (action == 62 && method66(local_player_index, second_menu_action, first_menu_action)) {
 			stream.createFrame(192);
 			stream.writeWord(anInt1284);
 			stream.method431(get_object_key(local_player_index));
-			stream.method433(k + baseY);
+			stream.method433(second_menu_action + baseY);
 			stream.method431(anInt1283);
-			stream.method433(j + baseX);
+			stream.method433(first_menu_action + baseX);
 			stream.writeWord(anInt1285);
 		}
-		if (l == 511) {
-			boolean flag2 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, k, local_player.waypoint_x[0], false, j);
+		if (action == 511) {
+			boolean flag2 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			if (!flag2)
-				flag2 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, k, local_player.waypoint_x[0], false, j);
+				flag2 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			crossX = super.saveClickX;
 			crossY = super.saveClickY;
 			crossType = 2;
@@ -4444,26 +4444,26 @@ public class Client extends ClientEngine {
 			stream.method431(anInt1284);
 			stream.method432(anInt1285);
 			stream.writeWord((int) local_player_index);
-			stream.method432(k + baseY);
+			stream.method432(second_menu_action + baseY);
 			stream.method433(anInt1283);
-			stream.writeWord(j + baseX);
+			stream.writeWord(first_menu_action + baseX);
 		}
-		if (l == 74) {
+		if (action == 74) {
 			stream.createFrame(122);
-			stream.method433(k);
-			stream.method432(j);
+			stream.method433(second_menu_action);
+			stream.method432(first_menu_action);
 			stream.method431((int) local_player_index);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 315) {
-			RSInterface class9 = RSInterface.interfaceCache[k];
+		if (action == 315) {
+			RSInterface class9 = RSInterface.interfaceCache[second_menu_action];
 			boolean flag8 = true;
 			if (class9.contentType > 0)
 				flag8 = promptUserForInput(class9);
@@ -4473,11 +4473,11 @@ public class Client extends ClientEngine {
 					return;
 				}*/
 				
-				if (Settings.click(this, k)) {
+				if (Settings.click(this, second_menu_action)) {
 					return;
 				}
 
-				switch (k) {
+				switch (second_menu_action) {
 				// Colors
 				case 37510:// White
 					changeChat("FFFFFF", "white");
@@ -4538,9 +4538,9 @@ public class Client extends ClientEngine {
 
 				default:
 					stream.createFrame(185);
-					stream.writeWord(k);
-					if (k >= 61101 && k <= 61200) {
-						int selected = k - 61101;
+					stream.writeWord(second_menu_action);
+					if (second_menu_action >= 61101 && second_menu_action <= 61200) {
+						int selected = second_menu_action - 61101;
 						for (int ii = 0, slot = -1; ii < ItemDefinition.totalItems && slot < 100; ii++) {
 							ItemDefinition def = ItemDefinition.forID(ii);
 
@@ -4575,7 +4575,7 @@ public class Client extends ClientEngine {
 				}
 			}
 		}
-		if (l == 561) {
+		if (action == 561) {
 			Player player = players[(int) local_player_index];
 			if (player != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, player.waypoint_y[0], local_player.waypoint_x[0], false, player.waypoint_x[0]);
@@ -4592,7 +4592,7 @@ public class Client extends ClientEngine {
 				stream.writeWord((int) local_player_index);
 			}
 		}
-		if (l == 20) {
+		if (action == 20) {
 			Npc class30_sub2_sub4_sub1_sub1_1 = npcs[(int) local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_1 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_1.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_1.waypoint_x[0]);
@@ -4604,7 +4604,7 @@ public class Client extends ClientEngine {
 				stream.method431((int) local_player_index);
 			}
 		}
-		if (l == 779) {
+		if (action == 779) {
 			Player class30_sub2_sub4_sub1_sub2_1 = players[(int) local_player_index];
 			if (class30_sub2_sub4_sub1_sub2_1 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub2_1.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub2_1.waypoint_x[0]);
@@ -4616,87 +4616,87 @@ public class Client extends ClientEngine {
 				stream.method431((int) local_player_index);
 			}
 		}
-		if (l == 519)
+		if (action == 519)
 			if (!menuOpen)
 				scene.method312(super.saveClickY - 4, super.saveClickX - 4);
 			else
-				scene.method312(k - 4, j - 4);
-		if (l == 1062) {
+				scene.method312(second_menu_action - 4, first_menu_action - 4);
+		if (action == 1062) {
 			anInt924 += baseX;
 			if (anInt924 >= 113) {
 				stream.createFrame(183);
 				stream.writeDWordBigEndian(0xe63271);
 				anInt924 = 0;
 			}
-			method66(local_player_index, k, j);
+			method66(local_player_index, second_menu_action, first_menu_action);
 			stream.createFrame(228);
 			stream.method432(get_object_key(local_player_index));
-			stream.method432(k + baseY);
-			stream.writeWord(j + baseX);
+			stream.method432(second_menu_action + baseY);
+			stream.writeWord(first_menu_action + baseX);
 		}
-		if (l == 679 && !aBoolean1149) {
+		if (action == 679 && !aBoolean1149) {
 			stream.createFrame(40);
-			stream.writeWord(k);
+			stream.writeWord(second_menu_action);
 			aBoolean1149 = true;
 		}
-		if (l == 431) {
+		if (action == 431) {
 			stream.createFrame(129);
-			stream.method432(j);
-			stream.writeWord(k);
+			stream.method432(first_menu_action);
+			stream.writeWord(second_menu_action);
 			stream.method432((int) local_player_index);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 337 || l == 42 || l == 792 || l == 322) {
+		if (action == 337 || action == 42 || action == 792 || action == 322) {
 			String s = menuActionText[i];
 			int k1 = s.indexOf("@whi@");
 			if (k1 != -1) {
 				long l3 = TextClass.longForName(s.substring(k1 + 5).trim());
-				if (l == 337)
+				if (action == 337)
 					addFriend(l3);
-				if (l == 42)
+				if (action == 42)
 					addIgnore(l3);
-				if (l == 792)
+				if (action == 792)
 					delFriend(l3);
-				if (l == 322)
+				if (action == 322)
 					delIgnore(l3);
 			}
 		}
-		if (l == 53) {
+		if (action == 53) {
 			stream.createFrame(135);
-			stream.method431(j);
-			stream.method432(k);
+			stream.method431(first_menu_action);
+			stream.method432(second_menu_action);
 			stream.method431((int) local_player_index);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 539) {
+		if (action == 539) {
 			stream.createFrame(16);
 			stream.method432((int) local_player_index);
-			stream.method433(j);
-			stream.method433(k);
+			stream.method433(first_menu_action);
+			stream.method433(second_menu_action);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 484 || l == 6) {
+		if (action == 484 || action == 6) {
 			String s1 = menuActionText[i];
 			int l1 = s1.indexOf("@whi@");
 			if (l1 != -1) {
@@ -4708,11 +4708,11 @@ public class Client extends ClientEngine {
 					if (class30_sub2_sub4_sub1_sub2_7 == null || class30_sub2_sub4_sub1_sub2_7.username == null || !class30_sub2_sub4_sub1_sub2_7.username.equalsIgnoreCase(s7))
 						continue;
 					doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub2_7.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub2_7.waypoint_x[0]);
-					if (l == 484) {
+					if (action == 484) {
 						stream.createFrame(139);
 						stream.method431(local_players[j3]);
 					}
-					if (l == 6) {
+					if (action == 6) {
 						anInt1188 += local_player_index;
 						if (anInt1188 >= 90) {
 							stream.createFrame(136);
@@ -4729,42 +4729,42 @@ public class Client extends ClientEngine {
 					pushMessage("Unable to find " + s7, 0, "");
 			}
 		}
-		if (l == 870) {
+		if (action == 870) {
 			stream.createFrame(53);
-			stream.writeWord(j);
+			stream.writeWord(first_menu_action);
 			stream.method432(anInt1283);
 			stream.method433((int) local_player_index);
 			stream.writeWord(anInt1284);
 			stream.method431(anInt1285);
-			stream.writeWord(k);
+			stream.writeWord(second_menu_action);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 847) {
+		if (action == 847) {
 			stream.createFrame(87);
 			stream.method432((int) local_player_index);
-			stream.writeWord(k);
-			stream.method432(j);
+			stream.writeWord(second_menu_action);
+			stream.method432(first_menu_action);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 626) {
-			RSInterface class9_1 = RSInterface.interfaceCache[k];
+		if (action == 626) {
+			RSInterface class9_1 = RSInterface.interfaceCache[second_menu_action];
 			spellSelected = 1;
 			spellID = class9_1.id;
-			anInt1137 = k;
+			anInt1137 = second_menu_action;
 			spellUsableOn = class9_1.spellUsableOn;
 			itemSelected = 0;
 			String s4 = class9_1.selectedActionName;
@@ -4784,21 +4784,21 @@ public class Client extends ClientEngine {
 			}
 			return;
 		}
-		if (l == 78) {
+		if (action == 78) {
 			stream.createFrame(117);
-			stream.method433(k);
+			stream.method433(second_menu_action);
 			stream.method433((int) local_player_index);
-			stream.method431(j);
+			stream.method431(first_menu_action);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 27) {
+		if (action == 27) {
 			Player class30_sub2_sub4_sub1_sub2_2 = players[(int) local_player_index];
 			if (class30_sub2_sub4_sub1_sub2_2 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub2_2.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub2_2.waypoint_x[0]);
@@ -4816,38 +4816,38 @@ public class Client extends ClientEngine {
 				stream.method431((int) local_player_index);
 			}
 		}
-		if (l == 213) {
-			boolean flag3 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, k, local_player.waypoint_x[0], false, j);
+		if (action == 213) {
+			boolean flag3 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			if (!flag3)
-				flag3 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, k, local_player.waypoint_x[0], false, j);
+				flag3 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			crossX = super.saveClickX;
 			crossY = super.saveClickY;
 			crossType = 2;
 			crossIndex = 0;
 			stream.createFrame(79);
-			stream.method431(k + baseY);
+			stream.method431(second_menu_action + baseY);
 			stream.writeWord((int) local_player_index);
-			stream.method432(j + baseX);
+			stream.method432(first_menu_action + baseX);
 		}
-		if (l == 632) {
+		if (action == 632) {
 			stream.createFrame(145);
-			stream.method432(k);
-			stream.method432(j);
+			stream.method432(second_menu_action);
+			stream.method432(first_menu_action);
 			stream.method432((int) local_player_index);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 1050) {
+		if (action == 1050) {
 			stream.createFrame(185);
 			stream.writeWord(152);
 		}
-		if (l == 1004) {
+		if (action == 1004) {
 			if (tabInterfaceIDs[14] != -1) {
 				if (frameMode != ScreenMode.FIXED && changeTabArea) {
 					if (tabID == 14) {
@@ -4860,100 +4860,100 @@ public class Client extends ClientEngine {
 				tabAreaAltered = true;
 			}
 		}
-		if (l == 1003) {
+		if (action == 1003) {
 			clanChatMode = 2;
 			inputTaken = true;
 		}
-		if (l == 1002) {
+		if (action == 1002) {
 			clanChatMode = 1;
 			inputTaken = true;
 		}
-		if (l == 1001) {
+		if (action == 1001) {
 			clanChatMode = 0;
 			inputTaken = true;
 		}
-		if (l == 1000) {
+		if (action == 1000) {
 			cButtonCPos = 4;
 			chatTypeView = 11;
 			inputTaken = true;
 		}
-		if (l == 999) {
+		if (action == 999) {
 			cButtonCPos = 0;
 			chatTypeView = 0;
 			inputTaken = true;
 		}
-		if (l == 998) {
+		if (action == 998) {
 			cButtonCPos = 1;
 			chatTypeView = 5;
 			inputTaken = true;
 		}
-		if (l == 997) {
+		if (action == 997) {
 			publicChatMode = 3;
 			inputTaken = true;
 		}
-		if (l == 996) {
+		if (action == 996) {
 			publicChatMode = 2;
 			inputTaken = true;
 		}
-		if (l == 995) {
+		if (action == 995) {
 			publicChatMode = 1;
 			inputTaken = true;
 		}
-		if (l == 994) {
+		if (action == 994) {
 			publicChatMode = 0;
 			inputTaken = true;
 		}
-		if (l == 993) {
+		if (action == 993) {
 			cButtonCPos = 2;
 			chatTypeView = 1;
 			inputTaken = true;
 		}
-		if (l == 992) {
+		if (action == 992) {
 			privateChatMode = 2;
 			inputTaken = true;
 		}
-		if (l == 991) {
+		if (action == 991) {
 			privateChatMode = 1;
 			inputTaken = true;
 		}
-		if (l == 990) {
+		if (action == 990) {
 			privateChatMode = 0;
 			inputTaken = true;
 		}
-		if (l == 989) {
+		if (action == 989) {
 			cButtonCPos = 3;
 			chatTypeView = 2;
 			inputTaken = true;
 		}
-		if (l == 987) {
+		if (action == 987) {
 			tradeMode = 2;
 			inputTaken = true;
 		}
-		if (l == 986) {
+		if (action == 986) {
 			tradeMode = 1;
 			inputTaken = true;
 		}
-		if (l == 985) {
+		if (action == 985) {
 			tradeMode = 0;
 			inputTaken = true;
 		}
-		if (l == 984) {
+		if (action == 984) {
 			cButtonCPos = 5;
 			chatTypeView = 3;
 			inputTaken = true;
 		}
-		if (l == 980) {
+		if (action == 980) {
 			cButtonCPos = 6;
 			chatTypeView = 4;
 			inputTaken = true;
 		}
-		if (l == 647) {
+		if (action == 647) {
 			stream.createFrame(213);
-			stream.writeWord(k);
-			stream.writeWord(j);
-			switch (k) {
+			stream.writeWord(second_menu_action);
+			stream.writeWord(first_menu_action);
+			switch (second_menu_action) {
 			case 43704:
-				if (j == 0) {
+				if (first_menu_action == 0) {
 					inputTaken = true;
 					inputDialogState = 0;
 					messagePromptRaised = true;
@@ -4964,40 +4964,40 @@ public class Client extends ClientEngine {
 				break;
 			}
 		}
-		if (l == 493) {
+		if (action == 493) {
 			stream.createFrame(75);
-			stream.method433(k);
-			stream.method431(j);
+			stream.method433(second_menu_action);
+			stream.method431(first_menu_action);
 			stream.method432((int) local_player_index);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 652) {
-			boolean flag4 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, k, local_player.waypoint_x[0], false, j);
+		if (action == 652) {
+			boolean flag4 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			if (!flag4)
-				flag4 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, k, local_player.waypoint_x[0], false, j);
+				flag4 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			crossX = super.saveClickX;
 			crossY = super.saveClickY;
 			crossType = 2;
 			crossIndex = 0;
 			stream.createFrame(156);
-			stream.method432(j + baseX);
-			stream.method431(k + baseY);
+			stream.method432(first_menu_action + baseX);
+			stream.method431(second_menu_action + baseY);
 			stream.method433((int)local_player_index);
 		}
-		if (l == 647) {
+		if (action == 647) {
 			stream.createFrame(213);
-			stream.writeWord(k);
-			stream.writeWord(j);
-			switch (k) {
+			stream.writeWord(second_menu_action);
+			stream.writeWord(first_menu_action);
+			switch (second_menu_action) {
 			case 43704:
-				if (j == 0) {
+				if (first_menu_action == 0) {
 					inputTaken = true;
 					inputDialogState = 0;
 					messagePromptRaised = true;
@@ -5008,24 +5008,24 @@ public class Client extends ClientEngine {
 				break;
 			}
 		}
-		if (l == 94) {
-			boolean flag5 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, k, local_player.waypoint_x[0], false, j);
+		if (action == 94) {
+			boolean flag5 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			if (!flag5)
-				flag5 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, k, local_player.waypoint_x[0], false, j);
+				flag5 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			crossX = super.saveClickX;
 			crossY = super.saveClickY;
 			crossType = 2;
 			crossIndex = 0;
 			stream.createFrame(181);
-			stream.method431(k + baseY);
+			stream.method431(second_menu_action + baseY);
 			stream.writeWord((int)local_player_index);
-			stream.method431(j + baseX);
+			stream.method431(first_menu_action + baseX);
 			stream.method432(anInt1137);
 		}
-		if (l == 646) {
+		if (action == 646) {
 			stream.createFrame(185);
-			stream.writeWord(k);
-			RSInterface class9_2 = RSInterface.interfaceCache[k];
+			stream.writeWord(second_menu_action);
+			RSInterface class9_2 = RSInterface.interfaceCache[second_menu_action];
 			if (class9_2.valueIndexArray != null && class9_2.valueIndexArray[0][0] == 5) {
 				int i2 = class9_2.valueIndexArray[0][1];
 				if (variousSettings[i2] != class9_2.anIntArray212[0]) {
@@ -5033,7 +5033,7 @@ public class Client extends ClientEngine {
 					updateConfigValues(i2);
 				}
 			}
-			switch (k) {
+			switch (second_menu_action) {
 			// clan chat
 			case 18129:
 				if (RSInterface.interfaceCache[18135].disabledMessage.toLowerCase().contains("join")) {
@@ -5068,7 +5068,7 @@ public class Client extends ClientEngine {
 				break;
 			}
 		}
-		if (l == 225) {
+		if (action == 225) {
 			Npc class30_sub2_sub4_sub1_sub1_2 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_2 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_2.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_2.waypoint_x[0]);
@@ -5086,7 +5086,7 @@ public class Client extends ClientEngine {
 				stream.method433((int)local_player_index);
 			}
 		}
-		if (l == 965) {
+		if (action == 965) {
 			Npc class30_sub2_sub4_sub1_sub1_3 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_3 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_3.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_3.waypoint_x[0]);
@@ -5104,7 +5104,7 @@ public class Client extends ClientEngine {
 				stream.writeWord((int)local_player_index);
 			}
 		}
-		if (l == 413) {
+		if (action == 413) {
 			Npc class30_sub2_sub4_sub1_sub1_4 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_4 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_4.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_4.waypoint_x[0]);
@@ -5117,9 +5117,9 @@ public class Client extends ClientEngine {
 				stream.method432(anInt1137);
 			}
 		}
-		if (l == 200)
+		if (action == 200)
 			clearTopInterfaces();
-		if (l == 1025) {
+		if (action == 1025) {
 			Npc class30_sub2_sub4_sub1_sub1_5 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_5 != null) {
 				EntityDef entityDef = class30_sub2_sub4_sub1_sub1_5.desc;
@@ -5135,14 +5135,14 @@ public class Client extends ClientEngine {
 				}
 			}
 		}
-		if (l == 900) {
-			method66(local_player_index, k, j);
+		if (action == 900) {
+			method66(local_player_index, second_menu_action, first_menu_action);
 			stream.createFrame(252);
 			stream.method433(get_object_key(local_player_index));
-			stream.method431(k + baseY);
-			stream.method432(j + baseX);
+			stream.method431(second_menu_action + baseY);
+			stream.method432(first_menu_action + baseX);
 		}
-		if (l == 412) {
+		if (action == 412) {
 			Npc class30_sub2_sub4_sub1_sub1_6 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_6 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_6.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_6.waypoint_x[0]);
@@ -5154,7 +5154,7 @@ public class Client extends ClientEngine {
 				stream.method432((int) local_player_index);
 			}
 		}
-		if (l == 365) {
+		if (action == 365) {
 			Player class30_sub2_sub4_sub1_sub2_3 = players[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub2_3 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub2_3.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub2_3.waypoint_x[0]);
@@ -5167,7 +5167,7 @@ public class Client extends ClientEngine {
 				stream.method431(anInt1137);
 			}
 		}
-		if (l == 729) {
+		if (action == 729) {
 			Player class30_sub2_sub4_sub1_sub2_4 = players[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub2_4 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub2_4.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub2_4.waypoint_x[0]);
@@ -5179,7 +5179,7 @@ public class Client extends ClientEngine {
 				stream.method431((int)local_player_index);
 			}
 		}
-		if (l == 577) {
+		if (action == 577) {
 			Player class30_sub2_sub4_sub1_sub2_5 = players[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub2_5 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub2_5.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub2_5.waypoint_x[0]);
@@ -5191,27 +5191,27 @@ public class Client extends ClientEngine {
 				stream.method431((int)local_player_index);
 			}
 		}
-		if (l == 956 && method66(local_player_index, k, j)) {
+		if (action == 956 && method66(local_player_index, second_menu_action, first_menu_action)) {
 			stream.createFrame(35);
-			stream.method431(j + baseX);
+			stream.method431(first_menu_action + baseX);
 			stream.method432(anInt1137);
-			stream.method432(k + baseY);
+			stream.method432(second_menu_action + baseY);
 			stream.method431(get_object_key(local_player_index));
 		}
-		if (l == 567) {
-			boolean flag6 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, k, local_player.waypoint_x[0], false, j);
+		if (action == 567) {
+			boolean flag6 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			if (!flag6)
-				flag6 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, k, local_player.waypoint_x[0], false, j);
+				flag6 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			crossX = super.saveClickX;
 			crossY = super.saveClickY;
 			crossType = 2;
 			crossIndex = 0;
 			stream.createFrame(23);
-			stream.method431(k + baseY);
+			stream.method431(second_menu_action + baseY);
 			stream.method431((int)local_player_index);
-			stream.method431(j + baseX);
+			stream.method431(first_menu_action + baseX);
 		}
-		if (l == 867) {
+		if (action == 867) {
 			if ((local_player_index & 3) == 0)
 				anInt1175++;
 			if (anInt1175 >= 59) {
@@ -5220,38 +5220,38 @@ public class Client extends ClientEngine {
 				anInt1175 = 0;
 			}
 			stream.createFrame(43);
-			stream.method431(k);
+			stream.method431(second_menu_action);
 			stream.method432((int)local_player_index);
-			stream.method432(j);
+			stream.method432(first_menu_action);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 543) {
+		if (action == 543) {
 			stream.createFrame(237);
-			stream.writeWord(j);
+			stream.writeWord(first_menu_action);
 			stream.method432((int)local_player_index);
-			stream.writeWord(k);
+			stream.writeWord(second_menu_action);
 			stream.method432(anInt1137);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 606) {
+		if (action == 606) {
 			stream.createFrame(185);
 			stream.writeWord(606);
 		}
-		if (l == 491) {
+		if (action == 491) {
 			Player class30_sub2_sub4_sub1_sub2_6 = players[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub2_6 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub2_6.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub2_6.waypoint_x[0]);
@@ -5266,7 +5266,7 @@ public class Client extends ClientEngine {
 				stream.method431(anInt1283);
 			}
 		}
-		if (l == 639) {
+		if (action == 639) {
 			String s3 = menuActionText[i];
 			int k2 = s3.indexOf("@whi@");
 			if (k2 != -1) {
@@ -5290,21 +5290,21 @@ public class Client extends ClientEngine {
 				}
 			}
 		}
-		if (l == 454) {
+		if (action == 454) {
 			stream.createFrame(41);
 			stream.writeWord((int)local_player_index);
-			stream.method432(j);
-			stream.method432(k);
+			stream.method432(first_menu_action);
+			stream.method432(second_menu_action);
 			atInventoryLoopCycle = 0;
-			atInventoryInterface = k;
-			atInventoryIndex = j;
+			atInventoryInterface = second_menu_action;
+			atInventoryIndex = first_menu_action;
 			atInventoryInterfaceType = 2;
-			if (RSInterface.interfaceCache[k].parentID == openInterfaceID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == openInterfaceID)
 				atInventoryInterfaceType = 1;
-			if (RSInterface.interfaceCache[k].parentID == backDialogID)
+			if (RSInterface.interfaceCache[second_menu_action].parentID == backDialogID)
 				atInventoryInterfaceType = 3;
 		}
-		if (l == 478) {
+		if (action == 478) {
 			Npc class30_sub2_sub4_sub1_sub1_7 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_7 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_7.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_7.waypoint_x[0]);
@@ -5323,65 +5323,65 @@ public class Client extends ClientEngine {
 				stream.method431((int)local_player_index);
 			}
 		}
-		if (l == 113) {
-			method66(local_player_index, k, j);
+		if (action == 113) {
+			method66(local_player_index, second_menu_action, first_menu_action);
 			stream.createFrame(70);
-			stream.method431(j + baseX);
-			stream.writeWord(k + baseY);
+			stream.method431(first_menu_action + baseX);
+			stream.writeWord(second_menu_action + baseY);
 			stream.method433(get_object_key(local_player_index));
 		}
-		if (l == 872) {
-			method66(local_player_index, k, j);
+		if (action == 872) {
+			method66(local_player_index, second_menu_action, first_menu_action);
 			stream.createFrame(234);
-			stream.method433(j + baseX);
+			stream.method433(first_menu_action + baseX);
 			stream.method432(get_object_key(local_player_index));
-			stream.method433(k + baseY);
+			stream.method433(second_menu_action + baseY);
 		}
-		if (l == 502) {
-			method66(local_player_index, k, j);
+		if (action == 502) {
+			method66(local_player_index, second_menu_action, first_menu_action);
 			stream.createFrame(132);
-			stream.method433(j + baseX);
+			stream.method433(first_menu_action + baseX);
 			stream.writeWord(get_object_key(local_player_index));
-			stream.method432(k + baseY);
+			stream.method432(second_menu_action + baseY);
 		}
-		if (l == 1125) {
+		if (action == 1125) {
 			ItemDefinition itemDef = ItemDefinition.forID((int) local_player_index);
-			RSInterface class9_4 = RSInterface.interfaceCache[k];
+			RSInterface class9_4 = RSInterface.interfaceCache[second_menu_action];
 			String s5;
 			if (class9_4 == null) {
 				return;
 			}
-			if (class9_4 != null && class9_4.invStackSizes != null && class9_4.invStackSizes[j] >= 0x186a0) {
+			if (class9_4 != null && class9_4.invStackSizes != null && class9_4.invStackSizes[first_menu_action] >= 0x186a0) {
 				DecimalFormatSymbols separator = new DecimalFormatSymbols();
 				separator.setGroupingSeparator(',');
 				DecimalFormat formatter = new DecimalFormat("#,###,###,###", separator);
-				s5 = formatter.format(class9_4.invStackSizes[j]) + " x " + itemDef.name;
+				s5 = formatter.format(class9_4.invStackSizes[first_menu_action]) + " x " + itemDef.name;
 			} else if (itemDef.description != null)
 				s5 = new String(itemDef.description);
 			else
 				s5 = "It's a " + itemDef.name + ".";
 			pushMessage(s5, 0, "");
 		}
-		if (l == 169) {
+		if (action == 169) {
 			stream.createFrame(185);
-			stream.writeWord(k);
-			RSInterface class9_3 = RSInterface.interfaceCache[k];
+			stream.writeWord(second_menu_action);
+			RSInterface class9_3 = RSInterface.interfaceCache[second_menu_action];
 			if (class9_3.valueIndexArray != null && class9_3.valueIndexArray[0][0] == 5) {
 				int l2 = class9_3.valueIndexArray[0][1];
 				variousSettings[l2] = 1 - variousSettings[l2];
 				updateConfigValues(l2);
 			}
 		}
-		if (l == 447) {
+		if (action == 447) {
 			itemSelected = 1;
-			anInt1283 = j;
-			anInt1284 = k;
+			anInt1283 = first_menu_action;
+			anInt1284 = second_menu_action;
 			anInt1285 = (int) local_player_index;
 			selectedItemName = ItemDefinition.forID((int) local_player_index).name;
 			spellSelected = 0;
 			return;
 		}
-		if (l == 1226) {
+		if (action == 1226) {
 			int j1 = get_object_key(local_player_index);
 			ObjectDefinition class46 = ObjectDefinition.forID(j1);
 			String s10;
@@ -5391,20 +5391,20 @@ public class Client extends ClientEngine {
 				s10 = "It's a " + class46.name + ".";
 			pushMessage(s10, 0, "");
 		}
-		if (l == 244) {
-			boolean flag7 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, k, local_player.waypoint_x[0], false, j);
+		if (action == 244) {
+			boolean flag7 = doWalkTo(2, 0, 0, 0, local_player.waypoint_y[0], 0, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			if (!flag7)
-				flag7 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, k, local_player.waypoint_x[0], false, j);
+				flag7 = doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, second_menu_action, local_player.waypoint_x[0], false, first_menu_action);
 			crossX = super.saveClickX;
 			crossY = super.saveClickY;
 			crossType = 2;
 			crossIndex = 0;
 			stream.createFrame(253);
-			stream.method431(j + baseX);
-			stream.method433(k + baseY);
+			stream.method431(first_menu_action + baseX);
+			stream.method433(second_menu_action + baseY);
 			stream.method432((int)local_player_index);
 		}
-		if (l == 1448) {
+		if (action == 1448) {
 			ItemDefinition itemDef_1 = ItemDefinition.forID((int) local_player_index);
 			String s6;
 			if (itemDef_1.description != null) {
@@ -5536,7 +5536,7 @@ public class Client extends ClientEngine {
 						menuActionText[menuActionRow] = "Examine @cya@" + class46.name;
 					}
 					menuActionTypes[menuActionRow] = 1226;
-					selectedMenuActions[menuActionRow] = class46.type << 14;
+					selectedMenuActions[menuActionRow] = current;
 					firstMenuAction[menuActionRow] = x;
 					secondMenuAction[menuActionRow] = y;
 					menuActionRow++;
