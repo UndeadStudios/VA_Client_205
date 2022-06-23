@@ -51,7 +51,7 @@ public final class Npc extends Entity
 				model = new Model(aModel);
 			}
 		}
-		if(desc.aByte68 == 1)
+		if(desc.occupied_tiles == 1)
 			model.fits_on_single_square = true;
 		return model;
 	}

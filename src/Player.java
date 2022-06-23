@@ -118,7 +118,7 @@ public final class Player extends Entity {
 		super.running_animation_id = stream.readUnsignedWord();
 		if (super.running_animation_id == 65535)
 			super.running_animation_id = -1;
-		name = TextClass.fixName(stream.readString());
+		username = TextClass.fixName(stream.readString());
 
 		titleColor = stream.readString();
 		title = TextClass.fixName(stream.readString());
@@ -341,7 +341,7 @@ public final class Player extends Entity {
 	final int[] anIntArray1700;
 	public int team;
 	int anInt1702;
-	public String name;
+	public String username;
 	static MRUNodes mruNodes = new MRUNodes(260);
 	public int combatLevel;
 	public int headIcon;

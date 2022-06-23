@@ -91,7 +91,7 @@ public final class EntityDef {
 			entityDef.anIntArray76[4] = 55203;
 			entityDef.anInt91 = 128;
 			entityDef.anInt86 = 128;
-			entityDef.aByte68 = 2;
+			entityDef.occupied_tiles = 2;
 			break;
 
 		case 6145:
@@ -120,7 +120,7 @@ public final class EntityDef {
 			entityDef.anIntArray76[4] = 55203;
 			entityDef.anInt91 = 128;
 			entityDef.anInt86 = 128;
-			entityDef.aByte68 = 2;
+			entityDef.occupied_tiles = 2;
 			break;
 
 		case 6146:
@@ -147,7 +147,7 @@ public final class EntityDef {
 			entityDef.anIntArray76[4] = 55203;
 			entityDef.anInt91 = 128;
 			entityDef.anInt86 = 128;
-			entityDef.aByte68 = 2;
+			entityDef.occupied_tiles = 2;
 			break;
 
 		case 6147:
@@ -176,7 +176,7 @@ public final class EntityDef {
 			entityDef.anIntArray76[4] = 55203;
 			entityDef.anInt91 = 128;
 			entityDef.anInt86 = 128;
-			entityDef.aByte68 = 2;
+			entityDef.occupied_tiles = 2;
 			break;
 			
 		case 311:
@@ -450,7 +450,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[0] = 29270;
 			entityDef.anInt91 = 200;
 			entityDef.anInt86 = 200;
-			entityDef.aByte68 = 6;
+			entityDef.occupied_tiles = 6;
 			break;
 			
 		case 1498:
@@ -466,7 +466,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[1] = 27665;
 			entityDef.anInt91 = 200;
 			entityDef.anInt86 = 200;
-			entityDef.aByte68 = 5;
+			entityDef.occupied_tiles = 5;
 			break;
 			
 		case 1234:
@@ -481,7 +481,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[0] = 26395;
 			entityDef.anInt91 = 75;
 			entityDef.anInt86 = 75;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 1833:
@@ -496,7 +496,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[0] = 31653;
 			entityDef.anInt91 = 130;
 			entityDef.anInt86 = 130;
-			entityDef.aByte68 = 6;
+			entityDef.occupied_tiles = 6;
 			break;
 			
 		case 76:
@@ -513,7 +513,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[2] = 13907;
 			entityDef.anInt91 = 20;
 			entityDef.anInt86 = 20;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 7264:
@@ -528,7 +528,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[0] = 31653;
 			entityDef.anInt91 = 20;
 			entityDef.anInt86 = 20;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 5000:
@@ -543,7 +543,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[0] = 21193;
 			entityDef.anInt91 = 75;
 			entityDef.anInt86 = 75;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 5001:
@@ -558,7 +558,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[0] = 21189;
 			entityDef.anInt91 = 75;
 			entityDef.anInt86 = 75;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 5002:
@@ -578,7 +578,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[5] = 11793;
 			entityDef.anInt91 = 75;
 			entityDef.anInt86 = 75;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		
@@ -595,7 +595,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[0] = 13337;
 			entityDef.anInt91 = 75;
 			entityDef.anInt86 = 75;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 2334:
@@ -610,7 +610,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[0] = 13693;
 			entityDef.anInt91 = 70;
 			entityDef.anInt86 = 70;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 2335:
@@ -625,7 +625,7 @@ public final class EntityDef {
 			entityDef.anIntArray94[0] = 13694;
 			entityDef.anInt91 = 75;
 			entityDef.anInt86 = 75;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 2336:
@@ -644,7 +644,7 @@ public final class EntityDef {
 			entityDef.standAnim = 1338;
 			entityDef.anInt91 = 55;
 			entityDef.anInt86 = 55;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 2337:
@@ -663,7 +663,7 @@ public final class EntityDef {
 			entityDef.standAnim = 1338;
 			entityDef.anInt91 = 55;
 			entityDef.anInt86 = 55;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 2338:
@@ -678,7 +678,7 @@ public final class EntityDef {
 			entityDef.standAnim = 1338;
 			entityDef.anInt91 = 60;
 			entityDef.anInt86 = 60;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 2339:
@@ -697,7 +697,7 @@ public final class EntityDef {
 			entityDef.standAnim = 1338;
 			entityDef.anInt91 = 55;
 			entityDef.anInt86 = 55;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 2340:
@@ -716,7 +716,7 @@ public final class EntityDef {
 			entityDef.standAnim = 1338;
 			entityDef.anInt91 = 55;
 			entityDef.anInt86 = 55;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 2341:
@@ -735,14 +735,14 @@ public final class EntityDef {
 			entityDef.standAnim = 1338;
 			entityDef.anInt91 = 55;
 			entityDef.anInt86 = 55;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 84:
 			entityDef.name = "Ancient Warlock";
 			entityDef.actions = new String[5];
 			entityDef.actions[0] = "Attack";
-			entityDef.aByte68 = 3;
+			entityDef.occupied_tiles = 3;
 			entityDef.anInt91 = 250;
 			entityDef.anInt86 = 250;
 			break;
@@ -761,7 +761,7 @@ public final class EntityDef {
 			entityDef.name = "Ancient Archer";
 			entityDef.actions = new String[5];
 			entityDef.actions[0] = "Attack";
-			entityDef.aByte68 = 3;
+			entityDef.occupied_tiles = 3;
 			entityDef.anInt91 = 250;
 			entityDef.anInt86 = 250;
 			break;
@@ -770,7 +770,7 @@ public final class EntityDef {
 			entityDef.name = "Ancient Samurai";
 			entityDef.actions = new String[5];
 			entityDef.actions[0] = "Attack";
-			entityDef.aByte68 = 3;
+			entityDef.occupied_tiles = 3;
 			entityDef.anInt91 = 250;
 			entityDef.anInt86 = 250;
 			break;
@@ -791,7 +791,7 @@ public final class EntityDef {
 			entityDef.standAnim = 7230;
 			entityDef.anInt91 = 35;
 			entityDef.anInt86 = 35;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 4876:
@@ -871,7 +871,7 @@ public final class EntityDef {
 			entityDef.actions[0] = "Pickup";
 			entityDef.anInt86 = 60;
 			entityDef.anInt91 = 60;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 4864:
@@ -881,7 +881,7 @@ public final class EntityDef {
 			entityDef.actions[0] = "Pickup";
 			entityDef.anInt86 = 60;
 			entityDef.anInt91 = 60;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 2906:
@@ -898,7 +898,7 @@ public final class EntityDef {
 			entityDef.actions[0] = "Pickup";
 			entityDef.anInt86 = 75;
 			entityDef.anInt91 = 75;
-			entityDef.aByte68 = 1;
+			entityDef.occupied_tiles = 1;
 			break;
 			
 		case 2903:
@@ -1582,7 +1582,7 @@ public final class EntityDef {
 					fw.write(System.getProperty("line.separator"));
 					fw.write("entityDef.anInt86 = "+ed.anInt86+";");
 					fw.write(System.getProperty("line.separator"));
-					fw.write("entityDef.aByte68 = "+ed.aByte68+";");
+					fw.write("entityDef.aByte68 = "+ed.occupied_tiles +";");
 					fw.write(System.getProperty("line.separator"));
 					fw.write("break;"); 
 					fw.write(System.getProperty("line.separator"));
@@ -1656,7 +1656,7 @@ public final class EntityDef {
 	        model_1.method466();
 			model_1.faceGroups = null;
 			model_1.vertexGroups = null;
-			if(aByte68 == 1)
+			if(occupied_tiles == 1)
 				model_1.fits_on_single_square = true;
 			return model_1;
 		}
@@ -1706,7 +1706,7 @@ public final class EntityDef {
 		model_1.method466();
 		model_1.faceGroups = null;
 		model_1.vertexGroups = null;
-		if (aByte68 == 1)
+		if (occupied_tiles == 1)
 			model_1.fits_on_single_square = true;
 		return model_1;
 	}
@@ -1727,7 +1727,7 @@ public final class EntityDef {
 			else if (i == 3)
 				description = stream.readBytes();
 			else if (i == 12)
-				aByte68 = stream.readSignedByte();
+				occupied_tiles = stream.readSignedByte();
 			else if (i == 13)
 				standAnim = stream.readUnsignedWord();
 			else if (i == 14)
@@ -1781,7 +1781,7 @@ public final class EntityDef {
 			else if (i == 98)
 				anInt86 = stream.readUnsignedWord();
 			else if (i == 99)
-				aBoolean93 = true;
+				render_priority = true;
 			else if (i == 100)
 				anInt85 = stream.readSignedByte();
 			else if (i == 101)
@@ -1812,7 +1812,7 @@ public final class EntityDef {
 				childrenIDs[i1 + 1] = var3;
 
 			} else if (i == 107)
-				aBoolean84 = false;
+				isClickable = false;
 			else if(i == 111 || i == 107 || i == 109) {
 			} else if (i == 112) {
 				opcode112 = stream.readString();
@@ -1828,17 +1828,17 @@ public final class EntityDef {
 		combatLevel = -1;
 		anInt64 = 1834;
 		walkAnim = -1;
-		aByte68 = 1;
+		occupied_tiles = 1;
 		anInt75 = -1;
 		standAnim = -1;
 		interfaceType = -1L;
 		anInt79 = 32;
 		anInt83 = -1;
-		aBoolean84 = true;
+		isClickable = true;
 		anInt86 = 128;
 		aBoolean87 = true;
 		anInt91 = 128;
-		aBoolean93 = false;
+		render_priority = false;
 	}
 
 	public int anInt55;
@@ -1852,7 +1852,7 @@ public final class EntityDef {
 	public String name;
 	public String actions[];
 	public int walkAnim;
-	public byte aByte68;
+	public byte occupied_tiles;
 	public int[] anIntArray70;
 	public static int[] streamIndices;
 	public int[] anIntArray73;
@@ -1864,7 +1864,7 @@ public final class EntityDef {
 	public static EntityDef[] cache;
 	public static Client clientInstance;
 	public int anInt83;
-	public boolean aBoolean84;
+	public boolean isClickable;
 	public int anInt85;
 	public int anInt86;
 	public boolean aBoolean87;
@@ -1872,7 +1872,7 @@ public final class EntityDef {
 	public byte description[];
 	public int anInt91;
 	public int anInt92;
-	public boolean aBoolean93;
+	public boolean render_priority;
 	public int[] anIntArray94;
 	public static MRUNodes mruNodes = new MRUNodes(30);
 

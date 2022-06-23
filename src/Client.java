@@ -794,8 +794,8 @@ public class Client extends ClientEngine {
 				title = "";
 			}
 			String playerName;
-			if (local_player != null && local_player.name != null) {
-				playerName = local_player.name;
+			if (local_player != null && local_player.username != null) {
+				playerName = local_player.username;
 			} else {
 				playerName = TextClass.fixName(myUsername);
 			}
@@ -1426,22 +1426,25 @@ public class Client extends ClientEngine {
 	}
 
 	private void drawNPCs(boolean flag) {
-		for (int j = 0; j < npcCount; j++) {
-			Npc npc = npcArray[npcIndices[j]];
-			int k = 0x20000000 + (npcIndices[j] << 14);
-			if (npc == null || !npc.isVisible() || npc.desc.aBoolean93 != flag)
+		for (int index = 0; index < npcs_in_region; index++) {
+			Npc npc = npcs[local_npcs[index]];
+			long k = 0x20000000L | (long) local_npcs[index] << 32;
+			if (npc == null || !npc.isVisible() || npc.desc.render_priority != flag)
 				continue;
-			int l = npc.world_x >> 7;
-			int i1 = npc.world_y >> 7;
-			if (l < 0 || l >= 104 || i1 < 0 || i1 >= 104)
+			int x = npc.world_x >> 7;
+			int y = npc.world_y >> 7;
+			if (x < 0 || x >= 104 || y < 0 || y >= 104) {
 				continue;
-			if (npc.occupied_tiles == 1 && (npc.world_x & 0x7f) == 64 && (npc.world_y & 0x7f) == 64) {
-				if (tile_cycle_map[l][i1] == render_cycle)
-					continue;
-				tile_cycle_map[l][i1] = render_cycle;
 			}
-			if (!npc.desc.aBoolean84)
-				k += 0x80000000;
+			if (npc.occupied_tiles == 1 && (npc.world_x & 0x7f) == 64 && (npc.world_y & 0x7f) == 64) {
+				if (tile_cycle_map[x][y] == render_cycle) {
+					continue;
+				}
+				tile_cycle_map[x][y] = render_cycle;
+			}
+			if (!npc.desc.isClickable) {
+				k |= ~0x7fffffffffffffffL;
+			}
 			scene.add_entity(plane, npc.current_rotation, get_tile_pos(plane, npc.world_y, npc.world_x), k, npc.world_y, (npc.occupied_tiles - 1) * 64 + 60, npc.world_x, npc, npc.dynamic);
 		}
 	}
@@ -1906,9 +1909,9 @@ public class Client extends ClientEngine {
 		method86(stream);
 		for (int k = 0; k < anInt839; k++) {
 			int l = anIntArray840[k];
-			if (npcArray[l].anInt1537 != game_tick) {
-				npcArray[l].desc = null;
-				npcArray[l] = null;
+			if (npcs[l].anInt1537 != game_tick) {
+				npcs[l].desc = null;
+				npcs[l] = null;
 			}
 		}
 
@@ -1916,9 +1919,9 @@ public class Client extends ClientEngine {
 			Signlink.reporterror(myUsername + " size mismatch in getnpcpos - pos:" + stream.currentPosition + " psize:" + i);
 			throw new RuntimeException("eek");
 		}
-		for (int i1 = 0; i1 < npcCount; i1++)
-			if (npcArray[npcIndices[i1]] == null) {
-				Signlink.reporterror(myUsername + " null entry in npc list - pos:" + i1 + " size:" + npcCount);
+		for (int i1 = 0; i1 < npcs_in_region; i1++)
+			if (npcs[local_npcs[i1]] == null) {
+				Signlink.reporterror(myUsername + " null entry in npc list - pos:" + i1 + " size:" + npcs_in_region);
 				throw new RuntimeException("eek");
 			}
 
@@ -2225,14 +2228,14 @@ public class Client extends ClientEngine {
 	public void updateEntities() {
 		try {
 			int anInt974 = 0;
-			for (int j = -1; j < players_in_region + npcCount; j++) {
+			for (int j = -1; j < players_in_region + npcs_in_region; j++) {
 				Object obj;
 				if (j == -1)
 					obj = local_player;
 				else if (j < players_in_region)
 					obj = players[local_players[j]];
 				else
-					obj = npcArray[npcIndices[j - players_in_region]];
+					obj = npcs[local_npcs[j - players_in_region]];
 				if (obj == null || !((Entity) (obj)).isVisible())
 					continue;
 				if (obj instanceof Npc) {
@@ -2270,13 +2273,13 @@ public class Client extends ClientEngine {
 						if (spriteDrawX > -1)
 							headIcons[entityDef_1.anInt75].drawSprite(spriteDrawX - 12, spriteDrawY - 30);
 					}
-					if (anInt855 == 1 && anInt1222 == npcIndices[j - players_in_region] && game_tick % 20 < 10) {
+					if (anInt855 == 1 && anInt1222 == local_npcs[j - players_in_region] && game_tick % 20 < 10) {
 						npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height + 15);
 						if (spriteDrawX > -1)
 							headIconsHint[0].drawSprite(spriteDrawX - 12, spriteDrawY - 28);
 					}
 				}
-				if (((Entity) (obj)).textSpoken != null && (j >= players_in_region || publicChatMode == 0 || publicChatMode == 3 || publicChatMode == 1 && isFriendOrSelf(((Player) obj).name))) {
+				if (((Entity) (obj)).textSpoken != null && (j >= players_in_region || publicChatMode == 0 || publicChatMode == 3 || publicChatMode == 1 && isFriendOrSelf(((Player) obj).username))) {
 					npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height);
 					if (spriteDrawX > -1 && anInt974 < anInt975) {
 						anIntArray979[anInt974] = boldText.method384(((Entity) (obj)).textSpoken) / 2;
@@ -2741,9 +2744,9 @@ public class Client extends ClientEngine {
 					player.textSpoken = null;
 			}
 		}
-		for (int k = 0; k < npcCount; k++) {
-			int l = npcIndices[k];
-			Npc npc = npcArray[l];
+		for (int k = 0; k < npcs_in_region; k++) {
+			int l = local_npcs[k];
+			Npc npc = npcs[l];
 			if (npc != null && npc.message_cycle > 0) {
 				npc.message_cycle--;
 				if (npc.message_cycle == 0)
@@ -2921,7 +2924,7 @@ public class Client extends ClientEngine {
 					return;
 				}
 
-			if (s.equals(local_player.name)) {
+			if (s.equals(local_player.username)) {
 				pushMessage("You may not add yourself!", 0, "");
 				return;
 			} else {
@@ -3013,10 +3016,10 @@ public class Client extends ClientEngine {
 			int k = stream.readBits(14);
 			if (k == 16383)
 				break;
-			if (npcArray[k] == null)
-				npcArray[k] = new Npc();
-			Npc npc = npcArray[k];
-			npcIndices[npcCount++] = k;
+			if (npcs[k] == null)
+				npcs[k] = new Npc();
+			Npc npc = npcs[k];
+			local_npcs[npcs_in_region++] = k;
 			npc.anInt1537 = game_tick;
 			int l = stream.readBits(5);
 			if (l > 15)
@@ -3029,7 +3032,7 @@ public class Client extends ClientEngine {
 			int k1 = stream.readBits(1);
 			if (k1 == 1)
 				anIntArray894[anInt893++] = k;
-			npc.occupied_tiles = npc.desc.aByte68;
+			npc.occupied_tiles = npc.desc.occupied_tiles;
 			npc.rotation = npc.desc.anInt79;
 			npc.walk_animation_id = npc.desc.walkAnim;
 			npc.turn_around_animation_id = npc.desc.anInt58;
@@ -3605,7 +3608,7 @@ public class Client extends ClientEngine {
 				class30_sub2_sub4_sub4.unlink();
 			else if (game_tick >= class30_sub2_sub4_sub4.anInt1571) {
 				if (class30_sub2_sub4_sub4.anInt1590 > 0) {
-					Npc npc = npcArray[class30_sub2_sub4_sub4.anInt1590 - 1];
+					Npc npc = npcs[class30_sub2_sub4_sub4.anInt1590 - 1];
 					if (npc != null && npc.world_x >= 0 && npc.world_x < 13312 && npc.world_y >= 0 && npc.world_y < 13312)
 						class30_sub2_sub4_sub4.method455(game_tick, npc.world_y, get_tile_pos(class30_sub2_sub4_sub4.anInt1597, npc.world_y, npc.world_x) - class30_sub2_sub4_sub4.anInt1583, npc.world_x);
 				}
@@ -4393,7 +4396,7 @@ public class Client extends ClientEngine {
 			spellID = class9_1.id;
 		}
 		if (l == 582) {
-			Npc npc = npcArray[(int) local_player_index];
+			Npc npc = npcs[(int) local_player_index];
 			if (npc != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, npc.waypoint_y[0], local_player.waypoint_x[0], false, npc.waypoint_x[0]);
 				crossX = super.saveClickX;
@@ -4590,7 +4593,7 @@ public class Client extends ClientEngine {
 			}
 		}
 		if (l == 20) {
-			Npc class30_sub2_sub4_sub1_sub1_1 = npcArray[(int) local_player_index];
+			Npc class30_sub2_sub4_sub1_sub1_1 = npcs[(int) local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_1 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_1.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_1.waypoint_x[0]);
 				crossX = super.saveClickX;
@@ -4702,7 +4705,7 @@ public class Client extends ClientEngine {
 				boolean flag9 = false;
 				for (int j3 = 0; j3 < players_in_region; j3++) {
 					Player class30_sub2_sub4_sub1_sub2_7 = players[local_players[j3]];
-					if (class30_sub2_sub4_sub1_sub2_7 == null || class30_sub2_sub4_sub1_sub2_7.name == null || !class30_sub2_sub4_sub1_sub2_7.name.equalsIgnoreCase(s7))
+					if (class30_sub2_sub4_sub1_sub2_7 == null || class30_sub2_sub4_sub1_sub2_7.username == null || !class30_sub2_sub4_sub1_sub2_7.username.equalsIgnoreCase(s7))
 						continue;
 					doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub2_7.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub2_7.waypoint_x[0]);
 					if (l == 484) {
@@ -5066,7 +5069,7 @@ public class Client extends ClientEngine {
 			}
 		}
 		if (l == 225) {
-			Npc class30_sub2_sub4_sub1_sub1_2 = npcArray[(int)local_player_index];
+			Npc class30_sub2_sub4_sub1_sub1_2 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_2 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_2.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_2.waypoint_x[0]);
 				crossX = super.saveClickX;
@@ -5084,7 +5087,7 @@ public class Client extends ClientEngine {
 			}
 		}
 		if (l == 965) {
-			Npc class30_sub2_sub4_sub1_sub1_3 = npcArray[(int)local_player_index];
+			Npc class30_sub2_sub4_sub1_sub1_3 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_3 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_3.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_3.waypoint_x[0]);
 				crossX = super.saveClickX;
@@ -5102,7 +5105,7 @@ public class Client extends ClientEngine {
 			}
 		}
 		if (l == 413) {
-			Npc class30_sub2_sub4_sub1_sub1_4 = npcArray[(int)local_player_index];
+			Npc class30_sub2_sub4_sub1_sub1_4 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_4 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_4.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_4.waypoint_x[0]);
 				crossX = super.saveClickX;
@@ -5117,7 +5120,7 @@ public class Client extends ClientEngine {
 		if (l == 200)
 			clearTopInterfaces();
 		if (l == 1025) {
-			Npc class30_sub2_sub4_sub1_sub1_5 = npcArray[(int)local_player_index];
+			Npc class30_sub2_sub4_sub1_sub1_5 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_5 != null) {
 				EntityDef entityDef = class30_sub2_sub4_sub1_sub1_5.desc;
 				if (entityDef.childrenIDs != null)
@@ -5140,7 +5143,7 @@ public class Client extends ClientEngine {
 			stream.method432(j + baseX);
 		}
 		if (l == 412) {
-			Npc class30_sub2_sub4_sub1_sub1_6 = npcArray[(int)local_player_index];
+			Npc class30_sub2_sub4_sub1_sub1_6 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_6 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_6.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_6.waypoint_x[0]);
 				crossX = super.saveClickX;
@@ -5302,7 +5305,7 @@ public class Client extends ClientEngine {
 				atInventoryInterfaceType = 3;
 		}
 		if (l == 478) {
-			Npc class30_sub2_sub4_sub1_sub1_7 = npcArray[(int)local_player_index];
+			Npc class30_sub2_sub4_sub1_sub1_7 = npcs[(int)local_player_index];
 			if (class30_sub2_sub4_sub1_sub1_7 != null) {
 				doWalkTo(2, 0, 1, 0, local_player.waypoint_y[0], 1, 0, class30_sub2_sub4_sub1_sub1_7.waypoint_y[0], local_player.waypoint_x[0], false, class30_sub2_sub4_sub1_sub1_7.waypoint_x[0]);
 				crossX = super.saveClickX;
@@ -5470,6 +5473,7 @@ public class Client extends ClientEngine {
 			menuActionRow++;
 		}
 		long previous = -1L;
+		boolean drawInteractedPlayer = false;
 		for (int k = 0; k < Model.obj_loaded; k++) {
 			long current = Model.obj_key[k];
 			int x = get_object_x(current);
@@ -5539,13 +5543,13 @@ public class Client extends ClientEngine {
 				}
 			}
 			if (opcode == 1) {
-				Npc npc = npcArray[uid];
+				Npc npc = npcs[uid];
 				try {
-					if (npc.desc.aByte68 == 1 && (npc.world_x & 0x7f) == 64 && (npc.world_y & 0x7f) == 64) {
-						for (int j2 = 0; j2 < npcCount; j2++) {
-							Npc npc2 = npcArray[npcIndices[j2]];
-							if (npc2 != null && npc2 != npc && npc2.desc.aByte68 == 1 && npc2.world_x == npc.world_x && npc2.world_y == npc.world_y)
-								buildAtNPCMenu(npc2.desc, npcIndices[j2], y, x);
+					if (npc.desc.occupied_tiles == 1 && (npc.world_x & 0x7f) == 64 && (npc.world_y & 0x7f) == 64) {
+						for (int j2 = 0; j2 < npcs_in_region; j2++) {
+							Npc npc2 = npcs[local_npcs[j2]];
+							if (npc2 != null && npc2 != npc && npc2.desc.occupied_tiles == 1 && npc2.world_x == npc.world_x && npc2.world_y == npc.world_y)
+								buildAtNPCMenu(npc2.desc, local_npcs[j2], y, x);
 						}
 						for (int l2 = 0; l2 < players_in_region; l2++) {
 							Player player = players[local_players[l2]];
@@ -5558,22 +5562,38 @@ public class Client extends ClientEngine {
 				}
 			}
 			if (opcode == 0) {
-				Player player = players[uid];
-				if ((player.world_x & 0x7f) == 64 && (player.world_y & 0x7f) == 64) {
-					for (int k2 = 0; k2 < npcCount; k2++) {
-						Npc class30_sub2_sub4_sub1_sub1_2 = npcArray[npcIndices[k2]];
-						if (class30_sub2_sub4_sub1_sub1_2 != null && class30_sub2_sub4_sub1_sub1_2.desc.aByte68 == 1 && class30_sub2_sub4_sub1_sub1_2.world_x == player.world_x && class30_sub2_sub4_sub1_sub1_2.world_y == player.world_y)
-							buildAtNPCMenu(class30_sub2_sub4_sub1_sub1_2.desc, npcIndices[k2], y, x);
+				Player playerOnTop = players[uid];// The player ontop.
+				Player interactingPlayer = getInteractingWithEntityId() == -1 ? null : players[getInteractingWithEntityId()];
+				if ((playerOnTop.world_x & 0x7f) == 64 && (playerOnTop.world_y & 0x7f) == 64) {
+					for (int k2 = 0; k2 < npcs_in_region; k2++) {
+						Npc npc = npcs[local_npcs[k2]];
+						try {
+							if (npc != null && npc.desc.occupied_tiles == 1 && npc.world_x == playerOnTop.world_x && npc.world_y == playerOnTop.world_y) {
+								buildAtNPCMenu(npc.desc, local_npcs[k2], y, x);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
 
 					for (int i3 = 0; i3 < players_in_region; i3++) {
-						Player class30_sub2_sub4_sub1_sub2_2 = players[local_players[i3]];
-						if (class30_sub2_sub4_sub1_sub2_2 != null && class30_sub2_sub4_sub1_sub2_2 != player && class30_sub2_sub4_sub1_sub2_2.world_x == player.world_x && class30_sub2_sub4_sub1_sub2_2.world_y == player.world_y)
-							buildAtPlayerMenu(x, local_players[i3], class30_sub2_sub4_sub1_sub2_2, y);
+						Player loop = players[local_players[i3]];
+						if (loop != null && loop != playerOnTop && loop.world_x == playerOnTop.world_x && loop.world_y == playerOnTop.world_y) {
+							buildAtPlayerMenu(x, local_players[i3], loop, y);
+						}
 					}
 
 				}
-				buildAtPlayerMenu(x, uid, player, y);
+				// These two is called on players.
+				if (interactingPlayer != null) {
+					if (!interactingPlayer.username.equals(playerOnTop.username)) {
+						buildAtPlayerMenu(x, uid, playerOnTop, y); // Only called for the person that is ontop of my mouse.
+					} else {
+						drawInteractedPlayer = true;
+					}
+				} else {
+					buildAtPlayerMenu(x, uid, playerOnTop, y); // Only called for the person that is ontop of my mouse.
+				}
 			}
 			if (opcode == 3) {
 				NodeList class19 = groundArray[plane][x][y];
@@ -5717,8 +5737,8 @@ public class Client extends ClientEngine {
 		anIntArray894 = null;
 		aStreamArray895s = null;
 		anIntArray840 = null;
-		npcArray = null;
-		npcIndices = null;
+		npcs = null;
+		local_npcs = null;
 		groundArray = null;
 		aClass19_1179 = null;
 		aClass19_1013 = null;
@@ -6237,9 +6257,9 @@ public class Client extends ClientEngine {
 						local_player.anInt1531 = i3;
 						local_player.message_cycle = 150;
 						if (myPrivilege >= 1)
-							pushMessage(local_player.textSpoken, 2, "@cr" + myPrivilege + "@" + local_player.name, local_player.title, local_player.titleColor);
+							pushMessage(local_player.textSpoken, 2, "@cr" + myPrivilege + "@" + local_player.username, local_player.title, local_player.titleColor);
 						else
-							pushMessage(local_player.textSpoken, 2, local_player.name, local_player.title, local_player.titleColor);
+							pushMessage(local_player.textSpoken, 2, local_player.username, local_player.title, local_player.titleColor);
 						if (publicChatMode == 2) {
 							publicChatMode = 3;
 							stream.createFrame(95);
@@ -6294,7 +6314,7 @@ public class Client extends ClientEngine {
 				}
 			}
 			if ((j1 == 1 || j1 == 2) && (j1 == 1 || publicChatMode == 0 || publicChatMode == 1 && isFriendOrSelf(s))) {
-				if (j > k1 - 14 && j <= k1 && !s.equals(local_player.name)) {
+				if (j > k1 - 14 && j <= k1 && !s.equals(local_player.username)) {
 					if (myPrivilege >= 1) {
 						menuActionText[menuActionRow] = "Report abuse @whi@" + s;
 						menuActionTypes[menuActionRow] = 606;
@@ -6427,7 +6447,7 @@ public class Client extends ClientEngine {
 			if (j1 == 0)
 				l++;
 			if ((j1 == 1 || j1 == 2) && (j1 == 1 || publicChatMode == 0 || publicChatMode == 1 && isFriendOrSelf(s))) {
-				if (j > k1 - 14 && j <= k1 && !s.equals(local_player.name)) {
+				if (j > k1 - 14 && j <= k1 && !s.equals(local_player.username)) {
 					if (myPrivilege >= 1) {
 						menuActionText[menuActionRow] = "Report abuse @whi@" + s;
 						menuActionTypes[menuActionRow] = 606;
@@ -7649,7 +7669,7 @@ public class Client extends ClientEngine {
 				travel_destination_x = 0;
 				travel_destination_y = 0;
 				players_in_region = 0;
-				npcCount = 0;
+				npcs_in_region = 0;
 				for (int i2 = 0; i2 < maxPlayers; i2++) {
 					players[i2] = null;
 					aStreamArray895s[i2] = null;
@@ -7658,7 +7678,7 @@ public class Client extends ClientEngine {
 					console.inputConsoleMessages[index] = "";
 				}
 				for (int k2 = 0; k2 < 16384; k2++)
-					npcArray[k2] = null;
+					npcs[k2] = null;
 				local_player = players[LOCAL_PLAYER_INDEX] = new Player();
 				aClass19_1013.removeAll();
 				aClass19_1056.removeAll();
@@ -8037,7 +8057,7 @@ public class Client extends ClientEngine {
 	private void method86(Buffer stream) {
 		for (int j = 0; j < anInt893; j++) {
 			int k = anIntArray894[j];
-			Npc npc = npcArray[k];
+			Npc npc = npcs[k];
 			int l = stream.readUnsignedByte();
 			if ((l & 0x10) != 0) {
 				int i1 = stream.method434();
@@ -8104,7 +8124,7 @@ public class Client extends ClientEngine {
 			}
 			if ((l & 2) != 0) {
 				npc.desc = EntityDef.forID(stream.method436());
-				npc.occupied_tiles = npc.desc.aByte68;
+				npc.occupied_tiles = npc.desc.occupied_tiles;
 				npc.rotation = npc.desc.anInt79;
 				npc.walk_animation_id = npc.desc.walkAnim;
 				npc.turn_around_animation_id = npc.desc.anInt58;
@@ -8126,7 +8146,7 @@ public class Client extends ClientEngine {
 			entityDef = entityDef.method161();
 		if (entityDef == null)
 			return;
-		if (!entityDef.aBoolean84)
+		if (!entityDef.isClickable)
 			return;
 		String s = entityDef.name;
 		if (entityDef.combatLevel != 0)
@@ -8218,15 +8238,15 @@ public class Client extends ClientEngine {
 		String title = player.title.length() > 0 ? (player.titlePrefix ? " " : "") + "<col=" + player.titleColor + ">" + player.title + "</col>" + (player.titlePrefix ? "" : " ") : "";
 		if (player.skill == 0) {
 			if (!player.titlePrefix) {
-				s = title + "<col=ffffff>" + player.name + "</col>" + combatDiffColor(local_player.combatLevel, player.combatLevel) + " (level-" + player.combatLevel + ")";
+				s = title + "<col=ffffff>" + player.username + "</col>" + combatDiffColor(local_player.combatLevel, player.combatLevel) + " (level-" + player.combatLevel + ")";
 			}	else {
-				s = "</col>" + player.name + combatDiffColor(local_player.combatLevel, player.combatLevel) + title + " (level-" + player.combatLevel + ")";
+				s = "</col>" + player.username + combatDiffColor(local_player.combatLevel, player.combatLevel) + title + " (level-" + player.combatLevel + ")";
 			}
 		} else {
 			if (!player.titlePrefix) {
-				s = title + player.name + " (skill-" + player.skill + ")";
+				s = title + player.username + " (skill-" + player.skill + ")";
 			} else {
-				s = player.name + title + " (skill-" + player.skill + ")";
+				s = player.username + title + " (skill-" + player.skill + ")";
 			}
 		}
 		if (itemSelected == 1) {
@@ -8763,9 +8783,9 @@ public class Client extends ClientEngine {
 	}
 
 	private void method95() {
-		for (int j = 0; j < npcCount; j++) {
-			int k = npcIndices[j];
-			Npc npc = npcArray[k];
+		for (int j = 0; j < npcs_in_region; j++) {
+			int k = local_npcs[j];
+			Npc npc = npcs[k];
 			if (npc != null)
 				method96(npc);
 		}
@@ -8946,7 +8966,7 @@ public class Client extends ClientEngine {
 		if (entity.rotation == 0)
 			return;
 		if (entity.engaged_entity_id != -1 && entity.engaged_entity_id < 32768) {
-			Npc npc = npcArray[entity.engaged_entity_id];
+			Npc npc = npcs[entity.engaged_entity_id];
 			if (npc != null) {
 				int i1 = entity.world_x - npc.world_x;
 				int k1 = entity.world_y - npc.world_y;
@@ -10116,9 +10136,9 @@ public class Client extends ClientEngine {
 			player.textSpoken = stream.readString();
 			if (player.textSpoken.charAt(0) == '~') {
 				player.textSpoken = player.textSpoken.substring(1);
-				pushMessage(player.textSpoken, 2, player.name, player.title, player.titleColor);
+				pushMessage(player.textSpoken, 2, player.username, player.title, player.titleColor);
 			} else if (player == local_player)
-				pushMessage(player.textSpoken, 2, player.name, player.title, player.titleColor);
+				pushMessage(player.textSpoken, 2, player.username, player.title, player.titleColor);
 			player.anInt1513 = 0;
 			player.anInt1531 = 0;
 			player.message_cycle = 150;
@@ -10129,8 +10149,8 @@ public class Client extends ClientEngine {
 			int j2 = stream.readUnsignedByte();
 			int j3 = stream.method427();
 			int k3 = stream.currentPosition;
-			if (player.name != null && player.visible) {
-				long l3 = TextClass.longForName(player.name);
+			if (player.username != null && player.visible) {
+				long l3 = TextClass.longForName(player.username);
 				boolean flag = false;
 				if (j2 <= 1) {
 					for (int i4 = 0; i4 < ignoreCount; i4++) {
@@ -10154,9 +10174,9 @@ public class Client extends ClientEngine {
 						player.anInt1531 = i1 & 0xff;
 						player.message_cycle = 150;
 						if (j2 >= 1)
-							pushMessage(s, 1, "@cr" + j2 + "@" + player.name, player.title, player.titleColor);
+							pushMessage(s, 1, "@cr" + j2 + "@" + player.username, player.title, player.titleColor);
 						else
-							pushMessage(s, 2, player.name, player.title, player.titleColor);
+							pushMessage(s, 2, player.username, player.title, player.titleColor);
 					} catch (Exception exception) {
 						Signlink.reporterror("cde2");
 						exception.printStackTrace();
@@ -10334,7 +10354,7 @@ public class Client extends ClientEngine {
 		for (int i = 0; i < friendsCount; i++)
 			if (s.equalsIgnoreCase(friendsList[i]))
 				return true;
-		return s.equalsIgnoreCase(local_player.name);
+		return s.equalsIgnoreCase(local_player.username);
 	}
 
 	private static String combatDiffColor(int i, int j) {
@@ -10723,7 +10743,7 @@ public class Client extends ClientEngine {
 				return;
 			}
 			String s = TextClass.fixName(TextClass.nameForLong(l));
-			if (s.equals(local_player.name)) {
+			if (s.equals(local_player.username)) {
 				pushMessage("You may not ignore yourself!", 0, "");
 				return;
 			}
@@ -11280,14 +11300,14 @@ public class Client extends ClientEngine {
 				}
 			}
 		}
-		for (int i6 = 0; i6 < npcCount; i6++) {
-			Npc npc = npcArray[npcIndices[i6]];
+		for (int i6 = 0; i6 < npcs_in_region; i6++) {
+			Npc npc = npcs[local_npcs[i6]];
 			if (npc != null && npc.isVisible()) {
 				EntityDef entityDef = npc.desc;
 				if (entityDef.childrenIDs != null) {
 					entityDef = entityDef.method161();
 				}
-				if (entityDef != null && entityDef.aBoolean87 && entityDef.aBoolean84) {
+				if (entityDef != null && entityDef.aBoolean87 && entityDef.isClickable) {
 					int i1 = npc.world_x / 32 - local_player.world_x / 32;
 					int k3 = npc.world_y / 32 - local_player.world_y / 32;
 					markMinimap(mapDotNPC, i1, k3);
@@ -11305,13 +11325,13 @@ public class Client extends ClientEngine {
 					if (clanList[j3] == null) {
 						continue;
 					}
-					if (!clanList[j3].equalsIgnoreCase(player.name)) {
+					if (!clanList[j3].equalsIgnoreCase(player.username)) {
 						continue;
 					}
 					flag3 = true;
 					break;
 				}
-				long l6 = TextClass.longForName(player.name);
+				long l6 = TextClass.longForName(player.username);
 				for (int k6 = 0; k6 < friendsCount; k6++) {
 					if (l6 != friendsListAsLongs[k6] || friendsNodeIDs[k6] == 0) {
 						continue;
@@ -11335,8 +11355,8 @@ public class Client extends ClientEngine {
 			}
 		}
 		if (anInt855 != 0 && game_tick % 20 < 10) {
-			if (anInt855 == 1 && anInt1222 >= 0 && anInt1222 < npcArray.length) {
-				Npc class30_sub2_sub4_sub1_sub1_1 = npcArray[anInt1222];
+			if (anInt855 == 1 && anInt1222 >= 0 && anInt1222 < npcs.length) {
+				Npc class30_sub2_sub4_sub1_sub1_1 = npcs[anInt1222];
 				if (class30_sub2_sub4_sub1_sub1_1 != null) {
 					int k1 = class30_sub2_sub4_sub1_sub1_1.world_x / 32 - local_player.world_x / 32;
 					int i4 = class30_sub2_sub4_sub1_sub1_1.world_y / 32 - local_player.world_y / 32;
@@ -11923,31 +11943,31 @@ public class Client extends ClientEngine {
 	private void method139(Buffer stream) {
 		stream.initBitAccess();
 		int k = stream.readBits(8);
-		if (k < npcCount) {
-			for (int l = k; l < npcCount; l++)
-				anIntArray840[anInt839++] = npcIndices[l];
+		if (k < npcs_in_region) {
+			for (int l = k; l < npcs_in_region; l++)
+				anIntArray840[anInt839++] = local_npcs[l];
 
 		}
-		if (k > npcCount) {
+		if (k > npcs_in_region) {
 			Signlink.reporterror(myUsername + " Too many npcs");
 			throw new RuntimeException("eek");
 		}
-		npcCount = 0;
+		npcs_in_region = 0;
 		for (int i1 = 0; i1 < k; i1++) {
-			int j1 = npcIndices[i1];
-			Npc npc = npcArray[j1];
+			int j1 = local_npcs[i1];
+			Npc npc = npcs[j1];
 			int k1 = stream.readBits(1);
 			if (k1 == 0) {
-				npcIndices[npcCount++] = j1;
+				local_npcs[npcs_in_region++] = j1;
 				npc.anInt1537 = game_tick;
 			} else {
 				int l1 = stream.readBits(2);
 				if (l1 == 0) {
-					npcIndices[npcCount++] = j1;
+					local_npcs[npcs_in_region++] = j1;
 					npc.anInt1537 = game_tick;
 					anIntArray894[anInt893++] = j1;
 				} else if (l1 == 1) {
-					npcIndices[npcCount++] = j1;
+					local_npcs[npcs_in_region++] = j1;
 					npc.anInt1537 = game_tick;
 					int i2 = stream.readBits(3);
 					npc.moveInDir(false, i2);
@@ -11955,7 +11975,7 @@ public class Client extends ClientEngine {
 					if (k2 == 1)
 						anIntArray894[anInt893++] = j1;
 				} else if (l1 == 2) {
-					npcIndices[npcCount++] = j1;
+					local_npcs[npcs_in_region++] = j1;
 					npc.anInt1537 = game_tick;
 					int j2 = stream.readBits(3);
 					npc.moveInDir(true, j2);
@@ -12543,7 +12563,7 @@ public class Client extends ClientEngine {
 				anInt1036 = baseX;
 				anInt1037 = baseY;
 				for (int j24 = 0; j24 < 16384; j24++) {
-					Npc npc = npcArray[j24];
+					Npc npc = npcs[j24];
 					if (npc != null) {
 						for (int j29 = 0; j29 < 10; j29++) {
 							npc.waypoint_x[j29] -= i17;
@@ -12778,9 +12798,9 @@ public class Client extends ClientEngine {
 				for (int k4 = 0; k4 < players.length; k4++)
 					if (players[k4] != null)
 						players[k4].animation = -1;
-				for (int j12 = 0; j12 < npcArray.length; j12++)
-					if (npcArray[j12] != null)
-						npcArray[j12].animation = -1;
+				for (int j12 = 0; j12 < npcs.length; j12++)
+					if (npcs[j12] != null)
+						npcs[j12].animation = -1;
 				pktType = -1;
 				return true;
 
@@ -13075,7 +13095,7 @@ public class Client extends ClientEngine {
 					}
 					npcDisplay = new Npc();
 					npcDisplay.desc = EntityDef.forID(npc, false);
-					npcDisplay.occupied_tiles = npcDisplay.desc.aByte68;
+					npcDisplay.occupied_tiles = npcDisplay.desc.occupied_tiles;
 					npcDisplay.rotation = npcDisplay.desc.anInt79;
 					npcDisplay.desc.anInt86 = size;
 					npcDisplay.desc.anInt91 = size;
@@ -13938,8 +13958,8 @@ public class Client extends ClientEngine {
 		groundArray = new NodeList[4][104][104];
 		aBoolean831 = false;
 		aStream_834 = new Buffer(new byte[5000]);
-		npcArray = new Npc[16384];
-		npcIndices = new int[16384];
+		npcs = new Npc[16384];
+		local_npcs = new int[16384];
 		anIntArray840 = new int[1000];
 		aStream_847 = Buffer.create();
 		aBoolean848 = true;
@@ -14101,9 +14121,9 @@ public class Client extends ClientEngine {
 	private Socket aSocket832;
 	int loginScreenState;
 	private Buffer aStream_834;
-	private Npc[] npcArray;
-	private int npcCount;
-	private int[] npcIndices;
+	private Npc[] npcs;
+	private int npcs_in_region;
+	private int[] local_npcs;
 	private int anInt839;
 	private int[] anIntArray840;
 	private int anInt841;
