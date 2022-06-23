@@ -8,10 +8,10 @@ public final class Player extends Entity {
 			return null;
 		super.height = model.modelHeight;
 		model.fits_on_single_square = true;
-		if (aBoolean1699)
+		if (reference_pose)
 			return model;
-		if (super.anInt1520 != -1 && super.anInt1521 != -1) {
-			GraphicsDefinition spotAnim = GraphicsDefinition.cache[super.anInt1520];
+		if (super.graphic_id != -1 && super.anInt1521 != -1) {
+			GraphicsDefinition spotAnim = GraphicsDefinition.cache[super.graphic_id];
 			Model model_2 = spotAnim.getModel();
 			if (model_2 != null) {
 				Model model_3 = new Model(true, SequenceFrame.method532(super.anInt1521), false, model_2);
@@ -29,12 +29,12 @@ public final class Player extends Entity {
 				return null;
 			}
 		}
-		if (aModel_1714 != null) {
-			if (Client.loopCycle >= anInt1708)
-				aModel_1714 = null;
-			if (Client.loopCycle >= anInt1707 && Client.loopCycle < anInt1708) {
-				Model model_1 = aModel_1714;
-				model_1.method475(anInt1711 - super.x, anInt1712 - anInt1709, anInt1713 - super.y);
+		if (transformed_model != null) {
+			if (Client.game_tick >= transform_duration)
+				transformed_model = null;
+			if (Client.game_tick >= transform_delay && Client.game_tick < transform_duration) {
+				Model model_1 = transformed_model;
+				model_1.method475(anInt1711 - super.world_x, anInt1712 - height, anInt1713 - super.world_y);
 				if (super.turnDirection == 512) {
 					model_1.method473();
 					model_1.method473();
@@ -56,7 +56,7 @@ public final class Player extends Entity {
 					model_1.method473();
 					model_1.method473();
 				}
-				model_1.method475(super.x - anInt1711, anInt1709 - anInt1712, super.y - anInt1713);
+				model_1.method475(super.world_x - anInt1711, height - anInt1712, super.world_y - anInt1713);
 			}
 		}
 		model.fits_on_single_square = true;
@@ -97,27 +97,27 @@ public final class Player extends Entity {
 			anIntArray1700[l] = j1;
 		}
 
-		super.anInt1511 = stream.readUnsignedWord();
-		if (super.anInt1511 == 65535)
-			super.anInt1511 = -1;
-		super.anInt1512 = stream.readUnsignedWord();
-		if (super.anInt1512 == 65535)
-			super.anInt1512 = -1;
-		super.anInt1554 = stream.readUnsignedWord();
-		if (super.anInt1554 == 65535)
-			super.anInt1554 = -1;
-		super.anInt1555 = stream.readUnsignedWord();
-		if (super.anInt1555 == 65535)
-			super.anInt1555 = -1;
-		super.anInt1556 = stream.readUnsignedWord();
-		if (super.anInt1556 == 65535)
-			super.anInt1556 = -1;
-		super.anInt1557 = stream.readUnsignedWord();
-		if (super.anInt1557 == 65535)
-			super.anInt1557 = -1;
-		super.anInt1505 = stream.readUnsignedWord();
-		if (super.anInt1505 == 65535)
-			super.anInt1505 = -1;
+		super.idle_animation_id = stream.readUnsignedWord();
+		if (super.idle_animation_id == 65535)
+			super.idle_animation_id = -1;
+		super.standing_turn_animation_id = stream.readUnsignedWord();
+		if (super.standing_turn_animation_id == 65535)
+			super.standing_turn_animation_id = -1;
+		super.walk_animation_id = stream.readUnsignedWord();
+		if (super.walk_animation_id == 65535)
+			super.walk_animation_id = -1;
+		super.turn_around_animation_id = stream.readUnsignedWord();
+		if (super.turn_around_animation_id == 65535)
+			super.turn_around_animation_id = -1;
+		super.pivot_right_animation_id = stream.readUnsignedWord();
+		if (super.pivot_right_animation_id == 65535)
+			super.pivot_right_animation_id = -1;
+		super.pivot_left_animation_id = stream.readUnsignedWord();
+		if (super.pivot_left_animation_id == 65535)
+			super.pivot_left_animation_id = -1;
+		super.running_animation_id = stream.readUnsignedWord();
+		if (super.running_animation_id == 65535)
+			super.running_animation_id = -1;
 		name = TextClass.fixName(stream.readString());
 
 		titleColor = stream.readString();
@@ -157,16 +157,16 @@ public final class Player extends Entity {
 		int j1 = -1;
 		int k1 = -1;
 		if (desc != null) {
-			if (super.anim >= 0 && super.anInt1529 == 0) {
-				final AnimationDefinition seq = AnimationDefinition.anims[super.anim];
+			if (super.animation >= 0 && super.anInt1529 == 0) {
+				final AnimationDefinition seq = AnimationDefinition.anims[super.animation];
 				k = seq.primaryFrames[super.anInt1527];
 				if (Configuration.enableTweening && super.nextAnimFrame != -1) {
 					nextAnim = seq.primaryFrames[super.anInt1527];
 					currCycle = seq.durations[super.anInt1527];
 					nextCycle = super.anInt1528;
 				}
-			} else if (super.anInt1517 >= 0) {
-				final AnimationDefinition seq = AnimationDefinition.anims[super.anInt1517];
+			} else if (super.queued_animation_id >= 0) {
+				final AnimationDefinition seq = AnimationDefinition.anims[super.queued_animation_id];
 				k = seq.primaryFrames[super.anInt1518];
 				if (Configuration.enableTweening && super.nextIdleAnimFrame != -1) {
 					nextAnim = seq.primaryFrames[super.nextIdleAnimFrame];
@@ -176,16 +176,16 @@ public final class Player extends Entity {
 			}
 			return desc.method164(-1, k, nextAnim, currCycle, nextCycle, null);
 		}
-		if (super.anim >= 0 && super.anInt1529 == 0) {
-			final AnimationDefinition animation = AnimationDefinition.anims[super.anim];
+		if (super.animation >= 0 && super.anInt1529 == 0) {
+			final AnimationDefinition animation = AnimationDefinition.anims[super.animation];
 			k = animation.primaryFrames[super.anInt1527];
 			if (Configuration.enableTweening && super.nextAnimFrame != -1) {
 				nextAnim = animation.primaryFrames[super.nextAnimFrame];
 				currCycle = animation.durations[super.anInt1527];
 				nextCycle = super.anInt1528;
 			}
-			if (super.anInt1517 >= 0 && super.anInt1517 != super.anInt1511) {
-				i1 = AnimationDefinition.anims[super.anInt1517].primaryFrames[super.anInt1518];
+			if (super.queued_animation_id >= 0 && super.queued_animation_id != super.idle_animation_id) {
+				i1 = AnimationDefinition.anims[super.queued_animation_id].primaryFrames[super.anInt1518];
 			}
 			if (animation.anInt360 >= 0) {
 				j1 = animation.anInt360;
@@ -195,8 +195,8 @@ public final class Player extends Entity {
 				k1 = animation.anInt361;
 				l += k1 - equipment[3] << 48;
 			}
-		} else if (super.anInt1517 >= 0) {
-			AnimationDefinition seq = AnimationDefinition.anims[super.anInt1517];
+		} else if (super.queued_animation_id >= 0) {
+			AnimationDefinition seq = AnimationDefinition.anims[super.queued_animation_id];
 			k = seq.primaryFrames[super.anInt1518];
 			if (Configuration.enableTweening && super.nextIdleAnimFrame != -1) {
 				nextAnim = seq.primaryFrames[super.nextIdleAnimFrame];
@@ -261,12 +261,12 @@ public final class Player extends Entity {
 			mruNodes.removeFromCache(model_1, l);
 			aLong1697 = l;
 		}
-		if (aBoolean1699)
+		if (reference_pose)
 			return model_1;
 		Model model_2 = Model.EMPTY_MODEL;
 		model_2.method464(model_1, SequenceFrame.method532(k) & SequenceFrame.method532(i1));
 		if (k != -1 && i1 != -1) {
-			model_2.method471(AnimationDefinition.anims[super.anim].anIntArray357, i1, k);
+			model_2.method471(AnimationDefinition.anims[super.animation].anIntArray357, i1, k);
 		} else if (k != -1) {
 			model_2.interpolateFrames(k, nextAnim, nextCycle, currCycle);
 		}
@@ -327,7 +327,7 @@ public final class Player extends Entity {
 
 	Player() {
 		aLong1697 = -1L;
-		aBoolean1699 = false;
+		reference_pose = false;
 		anIntArray1700 = new int[5];
 		visible = false;
 		equipment = new int[12];
@@ -337,7 +337,7 @@ public final class Player extends Entity {
 	public boolean titlePrefix;
 	private long aLong1697;
 	public EntityDef desc;
-	boolean aBoolean1699;
+	boolean reference_pose;
 	final int[] anIntArray1700;
 	public int team;
 	int anInt1702;
@@ -347,20 +347,20 @@ public final class Player extends Entity {
 	public int headIcon;
 	public int skullIcon;
 	public int hintIcon;
-	public int anInt1707;
-	int anInt1708;
-	int anInt1709;
+	public int transform_delay;
+	int transform_duration;
+	int height;
 	boolean visible;
 	int anInt1711;
 	int anInt1712;
 	int anInt1713;
-	Model aModel_1714;
+	Model transformed_model;
 	public final int[] equipment;
 	private long aLong1718;
-	int anInt1719;
-	int anInt1720;
-	int anInt1721;
-	int anInt1722;
+	public int transform_width;
+	public int transform_height;
+	public int transform_width_offset;
+	public int transform_height_offset;
 	int skill;
 
 }

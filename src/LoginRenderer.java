@@ -73,13 +73,13 @@ public class LoginRenderer {
 			Client.smallText.method389(true, centerX + 75, 0xB0AFAB, "Client version " + ClientConstants.CLIENT_VERSION, centerY + 100);
 			Client.smallText.method389(true, centerX - 115, 0xB0AFAB, "Remember me?", centerY + 16);
 			Client.smallText.method389(true, centerX + 40, client.mouseInRegion(centerX + 40, centerY + 7, centerX + 127, centerY + 17) ? 0xFFFFFF : 0xB0AFAB, "Forgot password?", centerY + 16);
-			Client.smallText.method389(true, centerX - 102, 0xB0AFAB, TextClass.capitalize(Client.myUsername) + ((client.loginScreenCursorPos == 0) & (Client.loopCycle % 40 < 20) ? "|" : ""), centerY - 63);// Username
+			Client.smallText.method389(true, centerX - 102, 0xB0AFAB, TextClass.capitalize(Client.myUsername) + ((client.loginScreenCursorPos == 0) & (Client.game_tick % 40 < 20) ? "|" : ""), centerY - 63);// Username
 																																																				// field
 
 			if (client.mouseInRegion(centerX - 138, centerY - 37, centerX - 112, centerY - 11)) {
-				Client.smallText.method389(true, centerX - 102, 0xB0AFAB, Client.myPassword + ((client.loginScreenCursorPos == 1) & (Client.loopCycle % 40 < 20) ? "|" : ""), centerY - 17);
+				Client.smallText.method389(true, centerX - 102, 0xB0AFAB, Client.myPassword + ((client.loginScreenCursorPos == 1) & (Client.game_tick % 40 < 20) ? "|" : ""), centerY - 17);
 			} else {
-				Client.smallText.method389(true, centerX - 102, 0xB0AFAB, TextClass.passwordAsterisks(Client.myPassword) + ((client.loginScreenCursorPos == 1) & (Client.loopCycle % 40 < 20) ? "|" : ""), centerY - 17);// Password
+				Client.smallText.method389(true, centerX - 102, 0xB0AFAB, TextClass.passwordAsterisks(Client.myPassword) + ((client.loginScreenCursorPos == 1) & (Client.game_tick % 40 < 20) ? "|" : ""), centerY - 17);// Password
 			}																																																		// field
 			
 			if (client.loginMessage1.length() > 0) {

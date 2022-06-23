@@ -96,7 +96,7 @@ public final class ObjectDefinition {
 		case 26612:
 		case 26605:
 		case 26602:
-			class46.hasActions = true;
+			class46.isInteractive = true;
 			break;
 		case 22472://Tab Creation
 			class46.name = "Tablet";
@@ -176,7 +176,7 @@ public final class ObjectDefinition {
 			class46.actions[0] = "Vote";
 			class46.actions[1] = "Open store";
 			class46.actions[2] = "Info";
-			class46.hasActions = true;
+			class46.isInteractive = true;
 			break;
 			
 		case 10060:
@@ -185,7 +185,7 @@ public final class ObjectDefinition {
 			class46.actions = new String[5];
 			class46.actions[0] = "Open bank";
 			class46.actions[1] = null;
-			class46.hasActions = true;
+			class46.isInteractive = true;
 			break;
 			
 			
@@ -264,7 +264,7 @@ public final class ObjectDefinition {
 		}
 		if (ClientConstants.DEBUG_MODE) {
 			if (class46.name == null || class46.name.equalsIgnoreCase("null")) {
-				class46.hasActions = true;
+				class46.isInteractive = true;
 			}
 		}
 		return class46;
@@ -281,7 +281,7 @@ public final class ObjectDefinition {
 		anInt761 = 1;
 		aBoolean767 = true;
 		aBoolean757 = true;
-		hasActions = false;
+		isInteractive = false;
 		aBoolean762 = false;
 		aBoolean769 = false;
 		aBoolean764 = false;
@@ -303,7 +303,7 @@ public final class ObjectDefinition {
 		anInt783 = 0;
 		aBoolean736 = false;
 		aBoolean766 = false;
-		anInt760 = -1;
+		supportItems = -1;
 		anInt774 = -1;
 		anInt749 = -1;
 		childrenIDs = null;
@@ -500,7 +500,7 @@ public final class ObjectDefinition {
 			model_3.method475(anInt738, anInt745, anInt783);
 		model_3.method479(85 + aByte737, 768 + aByte742 * 25, -50, -10, -50,
 				 !aBoolean769);
-		if (anInt760 == 1)
+		if (supportItems == 1)
 			model_3.itemDropHeight = model_3.modelHeight;
 		mruNodes2.removeFromCache(model_3, l1);
 		return model_3;
@@ -551,7 +551,7 @@ public final class ObjectDefinition {
 			else if (type == 18)
 				aBoolean757 = false;
 			else if (type == 19)
-				hasActions = (stream.readUnsignedByte() == 1);
+				isInteractive = (stream.readUnsignedByte() == 1);
 			else if (type == 21)
 				aBoolean762 = true;
 			else if (type == 22)
@@ -617,7 +617,7 @@ public final class ObjectDefinition {
 			else if (type == 74)
 				aBoolean766 = true;
 			else if (type == 75)
-				anInt760 = stream.readUnsignedByte();
+				supportItems = stream.readUnsignedByte();
 			else if (type == 77|| type == 92) {
 				anInt774 = stream.readUnsignedWord();
 				if (anInt774 == 65535)
@@ -654,17 +654,17 @@ public final class ObjectDefinition {
 			}
 		} while (true);
 		if (flag == -1  && name != "null" && name != null) {
-			hasActions = anIntArray773 != null
+			isInteractive = anIntArray773 != null
 			&& (anIntArray776 == null || anIntArray776[0] == 10);
 			if (actions != null)
-				hasActions = true;
+				isInteractive = true;
 		}
 		if (aBoolean766) {
 			aBoolean767 = false;
 			aBoolean757 = false;
 		}
-		if (anInt760 == -1)
-			anInt760 = aBoolean767 ? 1 : 0;
+		if (supportItems == -1)
+			supportItems = aBoolean767 ? 1 : 0;
 	}
 	public ObjectDefinition() {
 		type = -1;
@@ -693,7 +693,7 @@ public final class ObjectDefinition {
 	public boolean aBoolean757;
 	public int anInt758;
 	public int childrenIDs[];
-	public int anInt760;
+	public int supportItems;
 	public int anInt761;
 	public boolean aBoolean762;
 	public boolean aBoolean764;
@@ -709,7 +709,7 @@ public final class ObjectDefinition {
 	public int anInt775;
 	public int[] anIntArray776;
 	public byte description[];
-	public boolean hasActions;
+	public boolean isInteractive;
 	public boolean aBoolean779;
 	public static MRUNodes mruNodes2 = new MRUNodes(30);
 	public int anInt781;

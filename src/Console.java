@@ -13,7 +13,7 @@ public class Console {
 		if (openConsole) {
 			Rasterizer2D.fillRectangle(0, 0, width, height, ColorUtility.getHexColors(), 125);
 			Rasterizer2D.drawPixels(1, height - 21, 0, 0xffffff, width);
-			Client.newBoldFont.drawBasicString(consoleInput + (Client.loopCycle % 20 < 10 ? "|" : ""), 35, height - 6, 0xffffff, 0);
+			Client.newBoldFont.drawBasicString(consoleInput + (Client.game_tick % 20 < 10 ? "|" : ""), 35, height - 6, 0xffffff, 0);
 			Client.newBoldFont.drawBasicString("-->", 5, height - 6, 0xffffff, 0);
 			for (int index = 0, messageY = 308; index < 17; index++, messageY -= 18) {
 				if (inputConsoleMessages[index] != null) {

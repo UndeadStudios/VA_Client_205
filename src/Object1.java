@@ -17,6 +17,6 @@ public final class Object1
 	int orientation1;
 	public Animable aClass30_Sub2_Sub4_278;
 	public Animable aClass30_Sub2_Sub4_279;
-	public int uid;
+	public long uid;
 	byte aByte281;
 }

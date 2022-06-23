@@ -22,6 +22,6 @@ public final class Object5
 	int anInt526;
 	int anInt527;
 	int anInt528;
-	public int uid;
+	public long uid;
 	byte aByte530;
 }

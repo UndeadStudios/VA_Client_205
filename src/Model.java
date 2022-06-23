@@ -1435,7 +1435,7 @@ public class Model extends Animable {
 	}
 
 	public final void method443(int i, int j, int k, int l, int i1, int j1,
-			int k1, int l1, int i2) {
+			int k1, int l1, long i2) {
 		int j2 = l1 * i1 - j1 * l >> 16;
 			int k2 = k1 * j + j2 * k >> 16;
 			int l2 = XYZMag * k >> 16;
@@ -1542,7 +1542,7 @@ public class Model extends Animable {
 				}
 	}
 
-	private final void method483(boolean flag, boolean flag1, int i) {
+	private final void method483(boolean flag, boolean flag1, long i) {
 		for (int j = 0; j < maxRenderDepth; j++)
 			depthListIndices[j] = 0;
 
@@ -2101,7 +2101,7 @@ public class Model extends Animable {
 	public static int anInt1685;
 	public static int anInt1686;
 	public static int obj_loaded;
-	public static int obj_key[] = new int[1000];
+	public static long obj_key[] = new long[1000];
 	public static int SINE[];
 	public static int COSINE[];
 	static int modelIntArray3[];
