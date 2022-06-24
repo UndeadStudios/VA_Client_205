@@ -22,7 +22,7 @@ public final class Player extends Entity {
 				model_3.vertexGroups = null;
 				if (spotAnim.anInt410 != 128 || spotAnim.anInt411 != 128)
 					model_3.method478(spotAnim.anInt410, spotAnim.anInt410, spotAnim.anInt411);
-				model_3.method479(84 + spotAnim.anInt413, 1550 + spotAnim.anInt414, -50, -110, -50, true);
+				model_3.light(84 + spotAnim.anInt413, 1550 + spotAnim.anInt414, -50, -110, -50, true);
 				Model aclass30_sub2_sub4_sub6_1s[] = { model, model_3 };
 				model = new Model(aclass30_sub2_sub4_sub6_1s);
 			} else {
@@ -257,7 +257,7 @@ public final class Player extends Entity {
 
 			model_1.method469();
 			model_1.method478(132, 132, 132);
-			model_1.method479(84, 1000, -90, -580, -90, true);
+			model_1.light(84, 1000, -90, -580, -90, true);
 			mruNodes.removeFromCache(model_1, l);
 			aLong1697 = l;
 		}

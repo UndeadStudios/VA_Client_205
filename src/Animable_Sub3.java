@@ -54,7 +54,7 @@ final class Animable_Sub3 extends Animable {
 				model_1.method473();
 			}
 		}
-		model_1.method479(64 + aSpotAnim_1568.anInt413, 850 + aSpotAnim_1568.anInt414, -30, -50, -30, true);
+		model_1.light(64 + aSpotAnim_1568.anInt413, 850 + aSpotAnim_1568.anInt414, -30, -50, -30, true);
 		return model_1;
 	}
 

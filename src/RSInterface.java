@@ -1336,7 +1336,7 @@ public class RSInterface {
 			model_1.method470(k);
 		if (j != -1)
 			model_1.method470(j);
-		model_1.method479(84, 1000, -90, -580, -90, true);
+		model_1.light(64, 768, -50, -10, -50, true);
 		return model_1;
 	}
 

@@ -1640,7 +1640,7 @@ public final class EntityDef {
 
 				}
 	            model.method469();
-	            model.method479(64 + anInt85, 1500 + anInt92, -30, -50, -30, true);
+	            model.light(64 + anInt85, 1500 + anInt92, -30, -50, -30, true);
 	            mruNodes.removeFromCache(model, interfaceType);
 	        }
 	        final Model model_1 = Model.EMPTY_MODEL;
@@ -1692,7 +1692,7 @@ public final class EntityDef {
 
 			}
 			model.method469();
-			model.method479(64 + anInt85, 1500 + anInt92, -30, -50, -30, true);
+			model.light(64 + anInt85, 1500 + anInt92, -30, -50, -30, true);
 			mruNodes.removeFromCache(model, interfaceType);
 		}
 		Model model_1 = Model.EMPTY_MODEL;

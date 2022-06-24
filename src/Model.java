@@ -1195,100 +1195,217 @@ public class Model extends Animable {
 
 	}
 
-	public final void method479(int i, int j, int k, int l, int i1, boolean flag) {
-		int j1 = (int) Math.sqrt(k * k + l * l + i1 * i1);
-		int k1 = j * j1 >> 8;
-		if (colorsX == null) {
-			colorsX = new int[trianglesCount];
-			colorsY = new int[trianglesCount];
-			colorsZ = new int[trianglesCount];
-		}
-		if (super.vertexNormals == null) {
-			super.vertexNormals = new VertexNormal[verticesCount];
-			for (int l1 = 0; l1 < verticesCount; l1++)
-				super.vertexNormals[l1] = new VertexNormal();
+	public void light() {
+		if (vertexNormals == null) {
+			vertexNormals = new VertexNormal[verticesCount];
 
-		}
-		for (int triangle = 0; triangle < trianglesCount; triangle++) {
-            removeColor(37798);
-		}
-		for (int i2 = 0; i2 < trianglesCount; i2++) {
-			if (colors != null && alphas != null)
-				if (colors[i2] == 65535 || colors[i2] == 16705)
-					alphas[i2] = 255;
-			int j2 = trianglesX[i2];
-			int l2 = trianglesY[i2];
-			int i3 = trianglesZ[i2];
-			int j3 = verticesX[l2] - verticesX[j2];
-			int k3 = verticesY[l2] - verticesY[j2];
-			int l3 = verticesZ[l2] - verticesZ[j2];
-			int i4 = verticesX[i3] - verticesX[j2];
-			int j4 = verticesY[i3] - verticesY[j2];
-			int k4 = verticesZ[i3] - verticesZ[j2];
-			int l4 = k3 * k4 - j4 * l3;
-			int i5 = l3 * i4 - k4 * j3;
-			int j5;
-			for (j5 = j3 * j4 - i4 * k3; l4 > 8192 || i5 > 8192 || j5 > 8192
-			|| l4 < -8192 || i5 < -8192 || j5 < -8192; j5 >>= 1) {
-				l4 >>= 1;
-			i5 >>= 1;
+			int var1;
+			for (var1 = 0; var1 < verticesCount; ++var1) {
+				vertexNormals[var1] = new VertexNormal();
 			}
 
-			int k5 = (int) Math.sqrt(l4 * l4 + i5 * i5 + j5 * j5);
-			if (k5 <= 0)
-				k5 = 1;
-			l4 = (l4 * 256) / k5;
-			i5 = (i5 * 256) / k5;
-			j5 = (j5 * 256) / k5;
+			for (var1 = 0; var1 < trianglesCount; ++var1) {
+				final int var2 = trianglesX[var1];
+				final int var3 = trianglesY[var1];
+				final int var4 = trianglesZ[var1];
+				final int var5 = verticesX[var3] - verticesX[var2];
+				final int var6 = verticesY[var3] - verticesY[var2];
+				final int var7 = verticesZ[var3] - verticesZ[var2];
+				final int var8 = verticesX[var4] - verticesX[var2];
+				final int var9 = verticesY[var4] - verticesY[var2];
+				final int var10 = verticesZ[var4] - verticesZ[var2];
+				int var11 = var6 * var10 - var9 * var7;
+				int var12 = var7 * var8 - var10 * var5;
 
-			if (types == null || (types[i2] & 1) == 0) {
+				int var13;
+				for (var13 = var5 * var9 - var8 * var6; var11 > 8192 || var12 > 8192 || var13 > 8192 || var11 < -8192 || var12 < -8192 || var13 < -8192; var13 >>= 1) {
+					var11 >>= 1;
+					var12 >>= 1;
+				}
 
-				VertexNormal class33_2 = super.vertexNormals[j2];
-				class33_2.x += l4;
-				class33_2.y += i5;
-				class33_2.z += j5;
-				class33_2.magnitude++;
-				class33_2 = super.vertexNormals[l2];
-				class33_2.x += l4;
-				class33_2.y += i5;
-				class33_2.z += j5;
-				class33_2.magnitude++;
-				class33_2 = super.vertexNormals[i3];
-				class33_2.x += l4;
-				class33_2.y += i5;
-				class33_2.z += j5;
-				class33_2.magnitude++;
+				int var14 = (int) Math.sqrt(var11 * var11 + var12 * var12 + var13 * var13);
+				if (var14 <= 0) {
+					var14 = 1;
+				}
 
+				var11 = var11 * 256 / var14;
+				var12 = var12 * 256 / var14;
+				var13 = var13 * 256 / var14;
+				final int var15;
+				if (types == null) {
+					var15 = 0;
+				} else {
+					var15 = types[var1];
+				}
+
+				if (var15 == 0) {
+					VertexNormal var16 = vertexNormals[var2];
+					var16.x += var11;
+					var16.y += var12;
+					var16.z += var13;
+					++var16.magnitude;
+					var16 = vertexNormals[var3];
+					var16.x += var11;
+					var16.y += var12;
+					var16.z += var13;
+					++var16.magnitude;
+					var16 = vertexNormals[var4];
+					var16.x += var11;
+					var16.y += var12;
+					var16.z += var13;
+					++var16.magnitude;
+				} else if (var15 == 1) {
+					if (faceNormals == null) {
+						faceNormals = new FaceNormal[trianglesCount];
+					}
+
+					final FaceNormal var17 = faceNormals[var1] = new FaceNormal();
+					var17.x = var11;
+					var17.y = var12;
+					var17.z = var13;
+				}
+			}
+		}
+	}
+	public void light(final int ambient, final int contrast, final int x, final int y, final int z, final boolean flag) {
+
+		light();
+		final int magnitude = (int) Math.sqrt(x * x + y * y + z * z);
+		final int k1 = contrast * magnitude >> 8;
+		colorsX = new int[trianglesCount];
+		colorsY = new int[trianglesCount];
+		colorsZ = new int[trianglesCount];
+
+		for (int var16 = 0; var16 < trianglesCount; ++var16) {
+			int var17;
+			if (types == null) {
+				var17 = 0;
 			} else {
-
-				int l5 = i + (k * l4 + l * i5 + i1 * j5) / (k1 + k1 / 2);
-				colorsX[i2] = method481(colors[i2], l5,
-						types[i2]);
-
-			}
-		}
-
-		if (flag) {
-			method480(i, k1, k, l, i1);
-		} else {
-			alsoVertexNormals = new VertexNormal[verticesCount];
-			for (int k2 = 0; k2 < verticesCount; k2++) {
-				VertexNormal class33 = super.vertexNormals[k2];
-				VertexNormal class33_1 = alsoVertexNormals[k2] = new VertexNormal();
-				class33_1.x = class33.x;
-				class33_1.y = class33.y;
-				class33_1.z = class33.z;
-				class33_1.magnitude = class33.magnitude;
+				var17 = types[var16];
 			}
 
+			final int var18;
+			if (alphas == null) {
+				var18 = 0;
+			} else {
+				var18 = alphas[var16];
+			}
+
+			final short var12;
+			if (materials == null) {
+				var12 = -1;
+			} else {
+				var12 = materials[var16];
+			}
+
+			if (var18 == -2) {
+				var17 = 3;
+			}
+
+			if (var18 == -1) {
+				var17 = 2;
+			}
+
+			VertexNormal var13;
+			int var14;
+			final FaceNormal var19;
+			if (var12 == -1) {
+				if (var17 == 0) {
+					final int var15 = colors[var16];
+					if (vertexNormalsOffsets != null && vertexNormalsOffsets[trianglesX[var16]] != null) {
+						var13 = vertexNormalsOffsets[trianglesX[var16]];
+					} else {
+						var13 = vertexNormals[trianglesX[var16]];
+					}
+
+					var14 = (y * var13.y + z * var13.z + x * var13.x) / (k1 * var13.magnitude) + ambient;
+					colorsX[var16] = method2792(var15, var14);
+					if (vertexNormalsOffsets != null && vertexNormalsOffsets[trianglesY[var16]] != null) {
+						var13 = vertexNormalsOffsets[trianglesY[var16]];
+					} else {
+						var13 = vertexNormals[trianglesY[var16]];
+					}
+
+					var14 = (y * var13.y + z * var13.z + x * var13.x) / (k1 * var13.magnitude) + ambient;
+					colorsY[var16] = method2792(var15, var14);
+					if (vertexNormalsOffsets != null && vertexNormalsOffsets[trianglesZ[var16]] != null) {
+						var13 = vertexNormalsOffsets[trianglesZ[var16]];
+					} else {
+						var13 = vertexNormals[trianglesZ[var16]];
+					}
+
+					var14 = (y * var13.y + z * var13.z + x * var13.x) / (k1 * var13.magnitude) + ambient;
+					colorsZ[var16] = method2792(var15, var14);
+				} else if (var17 == 1) {
+					var19 = faceNormals[var16];
+					var14 = (y * var19.y + z * var19.z + x * var19.x) / (k1 / 2 + k1) + ambient;
+					colorsX[var16] = method2792(colors[var16], var14);
+					colorsZ[var16] = -1;
+				} else if (var17 == 3) {
+					colorsX[var16] = 128;
+					colorsZ[var16] = -1;
+				} else {
+					colorsZ[var16] = -2;
+				}
+			} else if (var17 == 0) {
+				if (vertexNormalsOffsets != null && vertexNormalsOffsets[trianglesX[var16]] != null) {
+					var13 = vertexNormalsOffsets[trianglesX[var16]];
+				} else {
+					var13 = vertexNormals[trianglesX[var16]];
+				}
+
+				var14 = (y * var13.y + z * var13.z + x * var13.x) / (k1 * var13.magnitude) + ambient;
+				colorsX[var16] = method2820(var14);
+				if (vertexNormalsOffsets != null && vertexNormalsOffsets[trianglesY[var16]] != null) {
+					var13 = vertexNormalsOffsets[trianglesY[var16]];
+				} else {
+					var13 = vertexNormals[trianglesY[var16]];
+				}
+
+				var14 = (y * var13.y + z * var13.z + x * var13.x) / (k1 * var13.magnitude) + ambient;
+				colorsY[var16] = method2820(var14);
+				if (vertexNormalsOffsets != null && vertexNormalsOffsets[trianglesZ[var16]] != null) {
+					var13 = vertexNormalsOffsets[trianglesZ[var16]];
+				} else {
+					var13 = vertexNormals[trianglesZ[var16]];
+				}
+
+				var14 = (y * var13.y + z * var13.z + x * var13.x) / (k1 * var13.magnitude) + ambient;
+				colorsZ[var16] = method2820(var14);
+			} else if (var17 == 1) {
+				var19 = faceNormals[var16];
+				var14 = (y * var19.y + z * var19.z + x * var19.x) / (k1 / 2 + k1) + ambient;
+				colorsX[var16] = method2820(var14);
+				colorsZ[var16] = -1;
+			} else {
+				colorsZ[var16] = -2;
+			}
 		}
-		if (flag) {
-			method466();
-			return;
-		} else {
+		method466();
+		if (textures == null) {
 			method468(21073);
-			return;
 		}
+
+	}
+	private int method2792(final int var0, int var1) {
+		var1 = (var0 & 127) * var1 >> 7;
+		if (var1 < 2) {
+			var1 = 2;
+		} else if (var1 > 126) {
+			var1 = 126;
+		}
+
+		return (var0 & '\uff80') + var1;
+	}
+
+	private int method2820(int var0) {
+		if (var0 < 2) {
+			var0 = 2;
+		} else if (var0 > 126) {
+			var0 = 126;
+		}
+
+		return var0;
 	}
 
 	public static String ccString = "Cla";

@@ -2711,8 +2711,8 @@ public final class ItemDefinition {
 		anInt167 = 128;
 		anInt192 = 128;
 		anInt191 = 128;
-		anInt196 = 0;
-		anInt184 = 0;
+		ambient = 0;
+		contrast = 0;
 		team = 0;
 	}
 
@@ -2969,7 +2969,13 @@ public final class ItemDefinition {
 				model.retexture(originalTextureColors[k2], modifiedTextureColors[k2]);
 
 		}
-		model.method479(64 + anInt196, 768 + anInt184, -50, -10, -50, true);
+		int lightInt = 64 + ambient;
+		int lightMag = 768 + contrast;
+		try {
+			model.light(lightInt, lightMag, -50, -10, -50, true);
+		} catch(ArrayIndexOutOfBoundsException e) {
+			e.printStackTrace();
+		}
 		model.fits_on_single_square = true;
 		mruNodes2.removeFromCache(model, id);
 		return model;
@@ -3102,9 +3108,9 @@ public final class ItemDefinition {
 			else if (i == 112)
 				anInt191 = stream.readUnsignedWord();
 			else if (i == 113)
-				anInt196 = stream.readSignedByte();
+				ambient = stream.readSignedByte();
 			else if (i == 114)
-				anInt184 = stream.readSignedByte() * 5;
+				contrast = stream.readSignedByte() * 5;
 			else if (i == 115)
 				team = stream.readUnsignedByte();
 			else if (i == 139)
@@ -3153,7 +3159,7 @@ public final class ItemDefinition {
 	public int modelZoom;
 	public static boolean isMembers = true;
 	private static Buffer stream;
-	private int anInt184;
+	private int contrast;
 	private int anInt185;
 	public int anInt188;// maleArmModel
 	public String itemActions[];// itemMenuOption
@@ -3163,7 +3169,7 @@ public final class ItemDefinition {
 	public int[] stackIDs;// modelStack
 	public int modelOffset2;//
 	private static int[] streamIndices;
-	private int anInt196;
+	private int ambient;
 	public int anInt197;
 	public int modelRotationX;// modelRotateRight
 	public int anInt200;// femWieldModel

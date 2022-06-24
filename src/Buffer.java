@@ -116,7 +116,7 @@ public final class Buffer extends NodeSub {
 		payload[currentPosition++] = (byte) i;
 	}
 
-	public void writeWord(int i) {
+	public void writeShort(int i) {
 		payload[currentPosition++] = (byte) (i >> 8);
 		payload[currentPosition++] = (byte) i;
 	}
@@ -317,17 +317,17 @@ public final class Buffer extends NodeSub {
 		return (byte) (128 - payload[currentPosition++]);
 	}
 
-	public void method431(int i) {
+	public void writeLEShort(int i) {
 		payload[currentPosition++] = (byte) i;
 		payload[currentPosition++] = (byte) (i >> 8);
 	}
 
-	public void method432(int j) {
+	public void writeShortA(int j) {
 		payload[currentPosition++] = (byte) (j >> 8);
 		payload[currentPosition++] = (byte) (j + 128);
 	}
 
-	public void method433(int j) {
+	public void writeLEShortA(int j) {
 		payload[currentPosition++] = (byte) (j + 128);
 		payload[currentPosition++] = (byte) (j >> 8);
 	}

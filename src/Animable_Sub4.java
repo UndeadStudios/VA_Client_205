@@ -64,7 +64,7 @@ public final class Animable_Sub4 extends Animable {
 			model_1.method478(aSpotAnim_1592.anInt410, aSpotAnim_1592.anInt410, aSpotAnim_1592.anInt411);
 		}
 		model_1.method474(anInt1596);
-		model_1.method479(64 + aSpotAnim_1592.anInt413, 850 + aSpotAnim_1592.anInt414, -30, -50, -30, true);
+		model_1.light(64 + aSpotAnim_1592.anInt413, 850 + aSpotAnim_1592.anInt414, -30, -50, -30, true);
 		return model_1;
 	}
 
