@@ -5,18 +5,18 @@ public final class Class18 {
     public final int length;
 
 	public Class18(Buffer buffer) {
-		length = buffer.readUnsignedWord();
+		length = buffer.readUnsignedShort();
 		anIntArray342 = new int[length];
 		anIntArrayArray343 = new int[length][];
 		for (int j = 0; j < length; j++) {
-			anIntArray342[j] = buffer.readUnsignedWord();
+			anIntArray342[j] = buffer.readUnsignedShort();
 		}
 		for (int j = 0; j < length; j++) {
-			anIntArrayArray343[j] = new int[buffer.readUnsignedWord()];
+			anIntArrayArray343[j] = new int[buffer.readUnsignedShort()];
 		}
 		for (int j = 0; j < length; j++) {
 			for (int l = 0; l < anIntArrayArray343[j].length; l++) {
-				anIntArrayArray343[j][l] = buffer.readUnsignedWord();
+				anIntArrayArray343[j][l] = buffer.readUnsignedShort();
 			}
 		}
 	}

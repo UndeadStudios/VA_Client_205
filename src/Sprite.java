@@ -290,9 +290,9 @@ public final class Sprite extends Rasterizer2D {
 	public Sprite(StreamLoader streamLoader, String s, int i) {
 		Buffer stream = new Buffer(streamLoader.getDataForName(s + ".dat"));
 		Buffer stream_1 = new Buffer(streamLoader.getDataForName("index.dat"));
-		stream_1.currentPosition = stream.readUnsignedWord();
-		cropWidth = stream_1.readUnsignedWord();
-		anInt1445 = stream_1.readUnsignedWord();
+		stream_1.currentPosition = stream.readUnsignedShort();
+		cropWidth = stream_1.readUnsignedShort();
+		anInt1445 = stream_1.readUnsignedShort();
 		int j = stream_1.readUnsignedByte();
 		int ai[] = new int[j];
 		for (int k = 0; k < j - 1; k++) {
@@ -303,14 +303,14 @@ public final class Sprite extends Rasterizer2D {
 
 		for (int l = 0; l < i; l++) {
 			stream_1.currentPosition += 2;
-			stream.currentPosition += stream_1.readUnsignedWord() * stream_1.readUnsignedWord();
+			stream.currentPosition += stream_1.readUnsignedShort() * stream_1.readUnsignedShort();
 			stream_1.currentPosition++;
 		}
 
 		drawOffsetX = stream_1.readUnsignedByte();
 		drawOffsetY = stream_1.readUnsignedByte();
-		myWidth = stream_1.readUnsignedWord();
-		myHeight = stream_1.readUnsignedWord();
+		myWidth = stream_1.readUnsignedShort();
+		myHeight = stream_1.readUnsignedShort();
 		int i1 = stream_1.readUnsignedByte();
 		int j1 = myWidth * myHeight;
 		myPixels = new int[j1];
@@ -802,7 +802,7 @@ public final class Sprite extends Rasterizer2D {
 		}
 	}
 
-	public void method354(Background background, int i, int j) {
+	public void method354(IndexedImage background, int i, int j) {
 		j += drawOffsetX;
 		i += drawOffsetY;
 		int k = j + i * Rasterizer2D.width;

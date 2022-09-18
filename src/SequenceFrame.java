@@ -6,14 +6,14 @@ public final class SequenceFrame {
 		   try {
                final Buffer ay = new Buffer(array);
                final Class18 b2 = new Class18(ay);
-               final int n = ay.readUnsignedWord();;
+               final int n = ay.readUnsignedShort();;
                animationlist[file] = new SequenceFrame[n * 3];
                final int[] array2 = new int[500];
                final int[] array3 = new int[500];
                final int[] array4 = new int[500];
                final int[] array5 = new int[500];
                for (int j = 0; j < n; ++j) {
-                   final int k = ay.readUnsignedWord();;
+                   final int k = ay.readUnsignedShort();;
                    final SequenceFrame[] array6 = animationlist[file];
                    final int n2 = k;
                    final SequenceFrame q = new SequenceFrame();
@@ -84,14 +84,14 @@ public final class SequenceFrame {
 		try {
 			Buffer stream = new Buffer(abyte0);
 			Class18 class18 = new Class18(stream);
-			int k1 = stream.readUnsignedWord();
+			int k1 = stream.readUnsignedShort();
 			animationlist[file] = new SequenceFrame[k1 * 3];
 			int ai[] = new int[500];
 			int ai1[] = new int[500];
 			int ai2[] = new int[500];
 			int ai3[] = new int[500];
 			for (int l1 = 0; l1 < k1; l1++) {
-				int i2 = stream.readUnsignedWord();
+				int i2 = stream.readUnsignedShort();
 				SequenceFrame class36 = animationlist[file][i2] = new SequenceFrame();
 				class36.aClass18_637 = class18;
 				class36.aClass18_637 = class18;

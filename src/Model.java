@@ -86,18 +86,18 @@ public class Model extends Animable {
 		stream.currentPosition = abyte0.length - 18;
 		ModelHeader class21_1 = aClass21Array1661[j] = new ModelHeader();
 		class21_1.aByteArray368 = abyte0;
-		class21_1.anInt369 = stream.readUnsignedWord();
-		class21_1.anInt370 = stream.readUnsignedWord();
+		class21_1.anInt369 = stream.readUnsignedShort();
+		class21_1.anInt370 = stream.readUnsignedShort();
 		class21_1.anInt371 = stream.readUnsignedByte();
 		int k = stream.readUnsignedByte();
 		int l = stream.readUnsignedByte();
 		int i1 = stream.readUnsignedByte();
 		int j1 = stream.readUnsignedByte();
 		int k1 = stream.readUnsignedByte();
-		int l1 = stream.readUnsignedWord();
-		int i2 = stream.readUnsignedWord();
-		int j2 = stream.readUnsignedWord();
-		int k2 = stream.readUnsignedWord();
+		int l1 = stream.readUnsignedShort();
+		int i2 = stream.readUnsignedShort();
+		int j2 = stream.readUnsignedShort();
+		int k2 = stream.readUnsignedShort();
 		int l2 = 0;
 		class21_1.anInt372 = l2;
 		l2 += class21_1.anInt369;
@@ -1495,8 +1495,8 @@ public class Model extends Animable {
 
 	public final void method482(int j, int k, int l, int i1, int j1, int k1) {
 		int i = 0;
-		int l1 = Rasterizer.originViewX;
-		int i2 = Rasterizer.originViewY;
+		int l1 = Rasterizer3D.originViewX;
+		int i2 = Rasterizer3D.originViewY;
 		int j2 = SINE[i];
 		int k2 = COSINE[i];
 		int l2 = SINE[j];
@@ -1598,16 +1598,16 @@ public class Model extends Animable {
 						k4 /= i3;
 						i5 /= k5;
 					}
-					int i6 = anInt1685 - Rasterizer.originViewX;
-					int k6 = anInt1686 - Rasterizer.originViewY;
+					int i6 = anInt1685 - Rasterizer3D.originViewX;
+					int k6 = anInt1686 - Rasterizer3D.originViewY;
 					if (i6 > k3 && i6 < l3 && k6 > i5 && k6 < k4)
 						if (fits_on_single_square)
 							obj_key[obj_loaded++] = i2;
 						else
 							flag1 = true;
 				}
-				int l5 = Rasterizer.originViewX;
-				int j6 = Rasterizer.originViewY;
+				int l5 = Rasterizer3D.originViewX;
+				int j6 = Rasterizer3D.originViewY;
 				int l6 = 0;
 				int i7 = 0;
 				if (i != 0) {
@@ -1839,11 +1839,11 @@ public class Model extends Animable {
         int j = trianglesX[i];
         int k = trianglesY[i];
         int l = trianglesZ[i];
-        Rasterizer.textureOutOfDrawingBounds = hasAnEdgeToRestrict[i];
+        Rasterizer3D.textureOutOfDrawingBounds = hasAnEdgeToRestrict[i];
         if(alphas == null)
-            Rasterizer.anInt1465 = 0;
+            Rasterizer3D.alpha = 0;
         else
-            Rasterizer.anInt1465 = alphas[i];
+            Rasterizer3D.alpha = alphas[i];
         int type;
         if(types == null)
             type = 0;
@@ -1860,7 +1860,7 @@ public class Model extends Animable {
 				texture_c = texturesZ[coordinate];
 			}
 			if(colorsZ[i] == -1 || type == 3) {
-				Rasterizer.drawTexturedTriangle(
+				Rasterizer3D.drawTexturedTriangle(
 						projected_verticesY[j], projected_verticesY[k], projected_verticesY[l],
 						projected_verticesX[j], projected_verticesX[k], projected_verticesX[l],
 						colorsX[i], colorsX[i], colorsX[i],
@@ -1869,7 +1869,7 @@ public class Model extends Animable {
 						viewportTextureZ[texture_a], viewportTextureZ[texture_b], viewportTextureZ[texture_c],
 						materials[i]);
 			} else {
-				Rasterizer.drawTexturedTriangle(
+				Rasterizer3D.drawTexturedTriangle(
 						projected_verticesY[j], projected_verticesY[k], projected_verticesY[l],
 						projected_verticesX[j], projected_verticesX[k],projected_verticesX[l],
 						colorsX[i], colorsY[i], colorsZ[i],
@@ -1880,14 +1880,14 @@ public class Model extends Animable {
 			}
 		} else {
 			if (type == 0) {
-				Rasterizer.drawShadedTriangle(projected_verticesY[j], projected_verticesY[k],
+				Rasterizer3D.drawShadedTriangle(projected_verticesY[j], projected_verticesY[k],
 						projected_verticesY[l], projected_verticesX[j], projected_verticesX[k],
 						projected_verticesX[l], colorsX[i], colorsY[i], colorsZ[i], viewportTextureZ[j],
 						viewportTextureZ[k], viewportTextureZ[l]);
 				return;
 			}
 			if (type == 1) {
-				Rasterizer.drawFlatTriangle(projected_verticesY[j], projected_verticesY[k],
+				Rasterizer3D.drawFlatTriangle(projected_verticesY[j], projected_verticesY[k],
 						projected_verticesY[l], projected_verticesX[j], projected_verticesX[k],
 						projected_verticesX[l], modelIntArray3[colorsX[i]], viewportTextureZ[j],
 						viewportTextureZ[k], viewportTextureZ[l]);
@@ -1901,8 +1901,8 @@ public class Model extends Animable {
 		if (colors != null)
 			if (colors[i] == 65535)
 				return;
-		int j = Rasterizer.originViewX;
-		int k = Rasterizer.originViewY;
+		int j = Rasterizer3D.originViewX;
+		int k = Rasterizer3D.originViewY;
 		int l = 0;
 		int i1 = trianglesX[i];
 		int j1 = trianglesY[i];
@@ -2012,14 +2012,14 @@ public class Model extends Animable {
 		int k7 = anIntArray1679[2];
 		 if((j3 - j4) * (k7 - j7) - (i7 - j7) * (j5 - j4) > 0)
 	        {
-	            Rasterizer.textureOutOfDrawingBounds = false;
+	            Rasterizer3D.textureOutOfDrawingBounds = false;
 				int texture_a = i1;
 				int texture_b = j1;
 				int texture_c = k1;
 	            if(l == 3)
 	            {
 	                if(j3 < 0 || j4 < 0 || j5 < 0 || j3 > Rasterizer2D.lastX || j4 > Rasterizer2D.lastX || j5 > Rasterizer2D.lastX)
-	                    Rasterizer.textureOutOfDrawingBounds = true;
+	                    Rasterizer3D.textureOutOfDrawingBounds = true;
 	                int l7;
 	                if(types == null)
 	                    l7 = 0;
@@ -2033,7 +2033,7 @@ public class Model extends Animable {
 							texture_c = texturesZ[coordinate];
 						}
 						if(colorsZ[i] == -1) {
-							Rasterizer.drawTexturedTriangle(
+							Rasterizer3D.drawTexturedTriangle(
 									i7, j7, k7,
 									j3, j4, j5,
 									colorsX[i], colorsX[i], colorsX[i],
@@ -2042,7 +2042,7 @@ public class Model extends Animable {
 									viewportTextureZ[texture_a], viewportTextureZ[texture_b], viewportTextureZ[texture_c],
 									materials[i]);
 						} else {
-							Rasterizer.drawTexturedTriangle(
+							Rasterizer3D.drawTexturedTriangle(
 									i7, j7, k7,
 									j3, j4, j5,
 									anIntArray1680[0], anIntArray1680[1], anIntArray1680[2],
@@ -2053,16 +2053,16 @@ public class Model extends Animable {
 						}
 					} else {
 						if (l7 == 0)
-							Rasterizer.drawShadedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], -1f, -1f, -1f);
+							Rasterizer3D.drawShadedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], -1f, -1f, -1f);
 
 						else if (l7 == 1)
-							Rasterizer.drawFlatTriangle(i7, j7, k7, j3, j4, j5, modelIntArray3[colorsX[i]], -1f, -1f, -1f);
+							Rasterizer3D.drawFlatTriangle(i7, j7, k7, j3, j4, j5, modelIntArray3[colorsX[i]], -1f, -1f, -1f);
 					}
 	            }
 	            if(l == 4)
 	            {
 	                if(j3 < 0 || j4 < 0 || j5 < 0 || j3 > Rasterizer2D.lastX || j4 > Rasterizer2D.lastX || j5 > Rasterizer2D.lastX || anIntArray1678[3] < 0 || anIntArray1678[3] > Rasterizer2D.lastX)
-	                    Rasterizer.textureOutOfDrawingBounds = true;
+	                    Rasterizer3D.textureOutOfDrawingBounds = true;
 	                int i8;
 	                if(types == null)
 	                    i8 = 0;
@@ -2076,7 +2076,7 @@ public class Model extends Animable {
 							texture_c = texturesZ[coordinate];
 						}
 						if(colorsZ[i] == -1) {
-							Rasterizer.drawTexturedTriangle(
+							Rasterizer3D.drawTexturedTriangle(
 									i7, j7, k7,
 									j3, j4, j5,
 									colorsX[i], colorsX[i], colorsX[i],
@@ -2084,7 +2084,7 @@ public class Model extends Animable {
 									camera_verticesY[texture_a], camera_verticesY[texture_b], camera_verticesY[texture_c],
 									viewportTextureZ[texture_a], viewportTextureZ[texture_b], viewportTextureZ[texture_c],
 									materials[i]);
-							Rasterizer.drawTexturedTriangle(
+							Rasterizer3D.drawTexturedTriangle(
 									i7, k7, anIntArray1679[3],
 									j3, j5, anIntArray1678[3],
 									colorsX[i], colorsX[i], colorsX[i],
@@ -2093,7 +2093,7 @@ public class Model extends Animable {
 									viewportTextureZ[texture_a], viewportTextureZ[texture_b], viewportTextureZ[texture_c],
 									materials[i]);
 						} else {
-							Rasterizer.drawTexturedTriangle(
+							Rasterizer3D.drawTexturedTriangle(
 									i7, j7, k7,
 									j3, j4, j5,
 									anIntArray1680[0], anIntArray1680[1], anIntArray1680[2],
@@ -2101,7 +2101,7 @@ public class Model extends Animable {
 									camera_verticesY[texture_a], camera_verticesY[texture_b], camera_verticesY[texture_c],
 									viewportTextureZ[texture_a], viewportTextureZ[texture_b], viewportTextureZ[texture_c],
 									materials[i]);
-							Rasterizer.drawTexturedTriangle(
+							Rasterizer3D.drawTexturedTriangle(
 									i7, k7, anIntArray1679[3],
 									j3, j5, anIntArray1678[3],
 									anIntArray1680[0], anIntArray1680[2], anIntArray1680[3],
@@ -2113,14 +2113,14 @@ public class Model extends Animable {
 						}
 					} else {
 						if (i8 == 0) {
-							Rasterizer.drawShadedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], -1f, -1f, -1f);
-							Rasterizer.drawShadedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], viewportTextureZ[i1], viewportTextureZ[j1], viewportTextureZ[k1]);
+							Rasterizer3D.drawShadedTriangle(i7, j7, k7, j3, j4, j5, anIntArray1680[0], anIntArray1680[1], anIntArray1680[2], -1f, -1f, -1f);
+							Rasterizer3D.drawShadedTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], anIntArray1680[0], anIntArray1680[2], anIntArray1680[3], viewportTextureZ[i1], viewportTextureZ[j1], viewportTextureZ[k1]);
 							return;
 						}
 						if (i8 == 1) {
 							int l8 = modelIntArray3[colorsX[i]];
-							Rasterizer.drawFlatTriangle(i7, j7, k7, j3, j4, j5, l8, -1f, -1f, -1f);
-							Rasterizer.drawFlatTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8, viewportTextureZ[i1], viewportTextureZ[j1], viewportTextureZ[k1]);
+							Rasterizer3D.drawFlatTriangle(i7, j7, k7, j3, j4, j5, l8, -1f, -1f, -1f);
+							Rasterizer3D.drawFlatTriangle(i7, k7, anIntArray1679[3], j3, j5, anIntArray1678[3], l8, viewportTextureZ[i1], viewportTextureZ[j1], viewportTextureZ[k1]);
 							return;
 						}
 					}
@@ -2225,10 +2225,10 @@ public class Model extends Animable {
 	static int modelIntArray4[];
 
 	static {
-		SINE = Rasterizer.anIntArray1470;
-		COSINE = Rasterizer.anIntArray1471;
-		modelIntArray3 = Rasterizer.hslToRgb;
-		modelIntArray4 = Rasterizer.anIntArray1469;
+		SINE = Rasterizer3D.anIntArray1470;
+		COSINE = Rasterizer3D.anIntArray1471;
+		modelIntArray3 = Rasterizer3D.hslToRgb;
+		modelIntArray4 = Rasterizer3D.anIntArray1469;
 	}
 	
 	public void setTexture(int fromColor, int tex) {

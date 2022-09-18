@@ -6,7 +6,7 @@ public final class AnimationDefinition {
 	public static void unpackConfig(StreamLoader streamLoader)
     {
     	Buffer stream = new Buffer(streamLoader.getDataForName("seq.dat"));
-        int length = stream.readUnsignedWord();
+        int length = stream.readUnsignedShort();
         //System.out.println("Animations Loaded: "+length);
         if(anims == null)
             anims = new AnimationDefinition[length + 5000];
@@ -37,25 +37,25 @@ public final class AnimationDefinition {
 
 
 			if (i == 1) {
-				anInt352 = stream.readUnsignedWord();
+				anInt352 = stream.readUnsignedShort();
 				primaryFrames = new int[anInt352];
 				secondaryFrames = new int[anInt352];
 				durations = new int[anInt352];
 
 				for (int j = 0; j < anInt352; j++)
-					durations[j] = stream.readUnsignedWord();
+					durations[j] = stream.readUnsignedShort();
 
 
 				for (int j = 0; j < anInt352; j++) {
-					primaryFrames[j] = stream.readUnsignedWord();
+					primaryFrames[j] = stream.readUnsignedShort();
 					secondaryFrames[j] = -1;
 				}
 
 				for (int j = 0; j < anInt352; j++) {
-					primaryFrames[j] += stream.readUnsignedWord() << 16;
+					primaryFrames[j] += stream.readUnsignedShort() << 16;
 				}
 			} else if (i == 2)
-				anInt356 = stream.readUnsignedWord();
+				anInt356 = stream.readUnsignedShort();
 			else if (i == 3) {
 				int k = stream.readUnsignedByte();
 				anIntArray357 = new int[k + 1];
@@ -67,9 +67,9 @@ public final class AnimationDefinition {
 			else if (i == 5)
 				anInt359 = stream.readUnsignedByte();
 			else if (i == 6)
-				anInt360 = stream.readUnsignedWord();
+				anInt360 = stream.readUnsignedShort();
 			else if (i == 7)
-				anInt361 = stream.readUnsignedWord();
+				anInt361 = stream.readUnsignedShort();
 			else if (i == 8)
 				anInt362 = stream.readUnsignedByte();
 			else if (i == 9)
@@ -82,11 +82,11 @@ public final class AnimationDefinition {
 				int len = stream.readUnsignedByte();
 
 				for (int i1 = 0; i1 < len; i1++) {
-					stream.readUnsignedWord();
+					stream.readUnsignedShort();
 				}
 
 				for (int i1 = 0; i1 < len; i1++) {
-					stream.readUnsignedWord();
+					stream.readUnsignedShort();
 				}
 			} else if (i == 13) {
 				int var3 = stream.readUnsignedByte();
@@ -99,6 +99,25 @@ public final class AnimationDefinition {
 						int var9 = frameSounds[var4] & 15;
 						frameSounds[var4] = var6;
 					}
+				}
+			} else if (i == 14) {
+				skeletalId = stream.readInt();
+			} else if (i == 15) {
+				int count = stream.readUShort();
+				skeletalsoundEffect = new int[count];
+				skeletalsoundRange = new int[count];
+				for (int index = 0; index < count; ++index) {
+					skeletalsoundEffect[index] = stream.readUShort();
+					skeletalsoundRange[index] = stream.read24BitInt();
+				}
+			} else if (i == 16) {
+				skeletalRangeBegin = stream.readUShort();
+				skeletalRangeEnd = stream.readUShort();
+			} else if (i == 17) {
+				int count = stream.readUnsignedByte();
+				unknown = new int[count];
+				for (int index = 0; index < count; ++index) {
+					unknown[index] = stream.readUnsignedByte();
 				}
 			}
 		}
@@ -152,5 +171,11 @@ public final class AnimationDefinition {
     public int anInt363;
     public int anInt364;
     public int anInt365;
+	private int skeletalRangeBegin = -1;
+	private int skeletalRangeEnd = -1;
+	private int skeletalId = -1;
+	private int[] skeletalsoundEffect;
+	private int[] unknown;
+	private int[] skeletalsoundRange;
     public static int anInt367;
 }

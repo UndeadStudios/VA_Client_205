@@ -59,7 +59,7 @@ public final class Buffer extends NodeSub {
 		int var1 = 0;
 
 		int var2;
-		for (var2 = this.readUnsignedWord(); var2 == 32767; var2 = this.readUnsignedWord()) {
+		for (var2 = this.readUnsignedShort(); var2 == 32767; var2 = this.readUnsignedShort()) {
 			var1 += 32767;
 		}
 
@@ -186,7 +186,7 @@ public final class Buffer extends NodeSub {
 		return payload[currentPosition++];
 	}
 
-	public int readUnsignedWord() {
+	public int readUnsignedShort() {
 		currentPosition += 2;
 		return ((payload[currentPosition - 2] & 0xff) << 8) + (payload[currentPosition - 1] & 0xff);
 	}
@@ -265,7 +265,7 @@ public final class Buffer extends NodeSub {
 		if (i < 128)
 			return readUnsignedByte() - 64;
 		else
-			return readUnsignedWord() - 49152;
+			return readUnsignedShort() - 49152;
 	}
 
 	public int method422() {
@@ -273,7 +273,7 @@ public final class Buffer extends NodeSub {
 		if (i < 128)
 			return readUnsignedByte();
 		else
-			return readUnsignedWord() - 32768;
+			return readUnsignedShort() - 32768;
 	}
 
 	public void doKeys() {

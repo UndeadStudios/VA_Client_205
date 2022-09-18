@@ -9,8 +9,8 @@ public class ModelLoader {
         Buffer var7 = new Buffer(var1);
         Buffer var8 = new Buffer(var1);
         var2.setOffset(var1.length - 26);
-        int var9 = var2.readUnsignedWord();
-        int var10 = var2.readUnsignedWord();
+        int var9 = var2.readUnsignedShort();
+        int var10 = var2.readUnsignedShort();
         int var11 = var2.readUnsignedByte();
         int var12 = var2.readUnsignedByte();
         int var13 = var2.readUnsignedByte();
@@ -19,12 +19,12 @@ public class ModelLoader {
         int var16 = var2.readUnsignedByte();
         int var17 = var2.readUnsignedByte();
         int var18 = var2.readUnsignedByte();
-        int var19 = var2.readUnsignedWord();
-        int var20 = var2.readUnsignedWord();
-        int var21 = var2.readUnsignedWord();
-        int var22 = var2.readUnsignedWord();
-        int var23 = var2.readUnsignedWord();
-        int var24 = var2.readUnsignedWord();
+        int var19 = var2.readUnsignedShort();
+        int var20 = var2.readUnsignedShort();
+        int var21 = var2.readUnsignedShort();
+        int var22 = var2.readUnsignedShort();
+        int var23 = var2.readUnsignedShort();
+        int var24 = var2.readUnsignedShort();
         int var25 = 0;
         int var26 = 0;
         int var27 = 0;
@@ -252,7 +252,7 @@ public class ModelLoader {
 
         for (var51 = 0; var51 < var10; ++var51)
         {
-            def.colors[var51] = (short) var2.readUnsignedWord();
+            def.colors[var51] = (short) var2.readUnsignedShort();
             if (var12 == 1)
             {
                 def.types[var51] = var3.readByte();
@@ -278,7 +278,7 @@ public class ModelLoader {
 
             if (var16 == 1)
             {
-                def.materials[var51] = (short) (var7.readUnsignedWord() - 1);
+                def.materials[var51] = (short) (var7.readUnsignedShort() - 1);
             }
 
             if (def.textures != null && def.materials[var51] != -1)
@@ -354,9 +354,9 @@ public class ModelLoader {
             var56 = def.textureTypes[var55] & 255;
             if (var56 == 0)
             {
-                def.texturesX[var55] = (short) var2.readUnsignedWord();
-                def.texturesY[var55] = (short) var2.readUnsignedWord();
-                def.texturesZ[var55] = (short) var2.readUnsignedWord();
+                def.texturesX[var55] = (short) var2.readUnsignedShort();
+                def.texturesY[var55] = (short) var2.readUnsignedShort();
+                def.texturesZ[var55] = (short) var2.readUnsignedShort();
             }
         }
 
@@ -364,9 +364,9 @@ public class ModelLoader {
         var55 = var2.readUnsignedByte();
         if (var55 != 0)
         {
-            var2.readUnsignedWord();
-            var2.readUnsignedWord();
-            var2.readUnsignedWord();
+            var2.readUnsignedShort();
+            var2.readUnsignedShort();
+            var2.readUnsignedShort();
             var2.readInt();
         }
 
@@ -382,8 +382,8 @@ public class ModelLoader {
         Buffer var7 = new Buffer(var1);
         Buffer var8 = new Buffer(var1);
         var4.setOffset(var1.length - 23);
-        int var9 = var4.readUnsignedWord();
-        int var10 = var4.readUnsignedWord();
+        int var9 = var4.readUnsignedShort();
+        int var10 = var4.readUnsignedShort();
         int var11 = var4.readUnsignedByte();
         int var12 = var4.readUnsignedByte();
         int var13 = var4.readUnsignedByte();
@@ -391,11 +391,11 @@ public class ModelLoader {
         int var15 = var4.readUnsignedByte();
         int var16 = var4.readUnsignedByte();
         int var17 = var4.readUnsignedByte();
-        int var18 = var4.readUnsignedWord();
-        int var19 = var4.readUnsignedWord();
-        int var20 = var4.readUnsignedWord();
-        int var21 = var4.readUnsignedWord();
-        int var22 = var4.readUnsignedWord();
+        int var18 = var4.readUnsignedShort();
+        int var19 = var4.readUnsignedShort();
+        int var20 = var4.readUnsignedShort();
+        int var21 = var4.readUnsignedShort();
+        int var22 = var4.readUnsignedShort();
         byte var23 = 0;
         int var24 = var23 + var9;
         int var25 = var24;
@@ -563,7 +563,7 @@ public class ModelLoader {
 
         for (var40 = 0; var40 < var10; ++var40)
         {
-            def.colors[var40] = (short) var4.readUnsignedWord();
+            def.colors[var40] = (short) var4.readUnsignedShort();
             if (var12 == 1)
             {
                 var41 = var5.readUnsignedByte();
@@ -674,9 +674,9 @@ public class ModelLoader {
         for (var44 = 0; var44 < var11; ++var44)
         {
             def.textureTypes[var44] = 0;
-            def.texturesX[var44] = (short) var4.readUnsignedWord();
-            def.texturesY[var44] = (short) var4.readUnsignedWord();
-            def.texturesZ[var44] = (short) var4.readUnsignedWord();
+            def.texturesX[var44] = (short) var4.readUnsignedShort();
+            def.texturesY[var44] = (short) var4.readUnsignedShort();
+            def.texturesZ[var44] = (short) var4.readUnsignedShort();
         }
 
         if (def.textures != null)
@@ -727,8 +727,8 @@ public class ModelLoader {
         Buffer var7 = new Buffer(var1);
         Buffer var8 = new Buffer(var1);
         var2.setOffset(var1.length - 23);
-        int var9 = var2.readUnsignedWord();
-        int var10 = var2.readUnsignedWord();
+        int var9 = var2.readUnsignedShort();
+        int var10 = var2.readUnsignedShort();
         int var11 = var2.readUnsignedByte();
         int var12 = var2.readUnsignedByte();
         int var13 = var2.readUnsignedByte();
@@ -736,11 +736,11 @@ public class ModelLoader {
         int var15 = var2.readUnsignedByte();
         int var16 = var2.readUnsignedByte();
         int var17 = var2.readUnsignedByte();
-        int var18 = var2.readUnsignedWord();
-        int var19 = var2.readUnsignedWord();
-        int var20 = var2.readUnsignedWord();
-        int var21 = var2.readUnsignedWord();
-        int var22 = var2.readUnsignedWord();
+        int var18 = var2.readUnsignedShort();
+        int var19 = var2.readUnsignedShort();
+        int var20 = var2.readUnsignedShort();
+        int var21 = var2.readUnsignedShort();
+        int var22 = var2.readUnsignedShort();
         int var23 = 0;
         int var24 = 0;
         int var25 = 0;
@@ -946,7 +946,7 @@ public class ModelLoader {
 
         for (var49 = 0; var49 < var10; ++var49)
         {
-            def.colors[var49] = (short) var2.readUnsignedWord();
+            def.colors[var49] = (short) var2.readUnsignedShort();
             if (var12 == 1)
             {
                 def.types[var49] = var3.readByte();
@@ -972,7 +972,7 @@ public class ModelLoader {
 
             if (var16 == 1)
             {
-                def.materials[var49] = (short) (var7.readUnsignedWord() - 1);
+                def.materials[var49] = (short) (var7.readUnsignedShort() - 1);
             }
 
             if (def.textures != null && def.materials[var49] != -1)
@@ -1048,9 +1048,9 @@ public class ModelLoader {
             var54 = def.textureTypes[var53] & 255;
             if (var54 == 0)
             {
-                def.texturesX[var53] = (short) var2.readUnsignedWord();
-                def.texturesY[var53] = (short) var2.readUnsignedWord();
-                def.texturesZ[var53] = (short) var2.readUnsignedWord();
+                def.texturesX[var53] = (short) var2.readUnsignedShort();
+                def.texturesY[var53] = (short) var2.readUnsignedShort();
+                def.texturesZ[var53] = (short) var2.readUnsignedShort();
             }
         }
 
@@ -1058,9 +1058,9 @@ public class ModelLoader {
         var53 = var2.readUnsignedByte();
         if (var53 != 0)
         {
-            var2.readUnsignedWord();
-            var2.readUnsignedWord();
-            var2.readUnsignedWord();
+            var2.readUnsignedShort();
+            var2.readUnsignedShort();
+            var2.readUnsignedShort();
             var2.readInt();
         }
 
@@ -1076,18 +1076,18 @@ public class ModelLoader {
         Buffer var7 = new Buffer(var1);
         Buffer var8 = new Buffer(var1);
         var4.setOffset(var1.length - 18);
-        int var9 = var4.readUnsignedWord();
-        int var10 = var4.readUnsignedWord();
+        int var9 = var4.readUnsignedShort();
+        int var10 = var4.readUnsignedShort();
         int var11 = var4.readUnsignedByte();
         int var12 = var4.readUnsignedByte();
         int var13 = var4.readUnsignedByte();
         int var14 = var4.readUnsignedByte();
         int var15 = var4.readUnsignedByte();
         int var16 = var4.readUnsignedByte();
-        int var17 = var4.readUnsignedWord();
-        int var18 = var4.readUnsignedWord();
-        int var19 = var4.readUnsignedWord();
-        int var20 = var4.readUnsignedWord();
+        int var17 = var4.readUnsignedShort();
+        int var18 = var4.readUnsignedShort();
+        int var19 = var4.readUnsignedShort();
+        int var20 = var4.readUnsignedShort();
         byte var21 = 0;
         int var22 = var21 + var9;
         int var23 = var22;
@@ -1237,7 +1237,7 @@ public class ModelLoader {
 
         for (var38 = 0; var38 < var10; ++var38)
         {
-            def.colors[var38] = (short) var4.readUnsignedWord();
+            def.colors[var38] = (short) var4.readUnsignedShort();
             if (var12 == 1)
             {
                 var39 = var5.readUnsignedByte();
@@ -1348,9 +1348,9 @@ public class ModelLoader {
         for (var42 = 0; var42 < var11; ++var42)
         {
             def.textureTypes[var42] = 0;
-            def.texturesX[var42] = (short) var4.readUnsignedWord();
-            def.texturesY[var42] = (short) var4.readUnsignedWord();
-            def.texturesZ[var42] = (short) var4.readUnsignedWord();
+            def.texturesX[var42] = (short) var4.readUnsignedShort();
+            def.texturesY[var42] = (short) var4.readUnsignedShort();
+            def.texturesZ[var42] = (short) var4.readUnsignedShort();
         }
 
         if (def.textures != null)

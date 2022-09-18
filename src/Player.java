@@ -80,7 +80,7 @@ public final class Player extends Entity {
 			int i1 = stream.readUnsignedByte();
 			equipment[j] = (k << 8) + i1;
 			if (j == 0 && equipment[0] == 65535) {
-				desc = EntityDef.forID(stream.readUnsignedWord());
+				desc = EntityDef.forID(stream.readUnsignedShort());
 				break;
 			}
 			if (equipment[j] >= 512 && equipment[j] - 512 < ItemDefinition.totalItems) {
@@ -97,25 +97,25 @@ public final class Player extends Entity {
 			anIntArray1700[l] = j1;
 		}
 
-		super.idle_animation_id = stream.readUnsignedWord();
+		super.idle_animation_id = stream.readUnsignedShort();
 		if (super.idle_animation_id == 65535)
 			super.idle_animation_id = -1;
-		super.standing_turn_animation_id = stream.readUnsignedWord();
+		super.standing_turn_animation_id = stream.readUnsignedShort();
 		if (super.standing_turn_animation_id == 65535)
 			super.standing_turn_animation_id = -1;
-		super.walk_animation_id = stream.readUnsignedWord();
+		super.walk_animation_id = stream.readUnsignedShort();
 		if (super.walk_animation_id == 65535)
 			super.walk_animation_id = -1;
-		super.turn_around_animation_id = stream.readUnsignedWord();
+		super.turn_around_animation_id = stream.readUnsignedShort();
 		if (super.turn_around_animation_id == 65535)
 			super.turn_around_animation_id = -1;
-		super.pivot_right_animation_id = stream.readUnsignedWord();
+		super.pivot_right_animation_id = stream.readUnsignedShort();
 		if (super.pivot_right_animation_id == 65535)
 			super.pivot_right_animation_id = -1;
-		super.pivot_left_animation_id = stream.readUnsignedWord();
+		super.pivot_left_animation_id = stream.readUnsignedShort();
 		if (super.pivot_left_animation_id == 65535)
 			super.pivot_left_animation_id = -1;
-		super.running_animation_id = stream.readUnsignedWord();
+		super.running_animation_id = stream.readUnsignedShort();
 		if (super.running_animation_id == 65535)
 			super.running_animation_id = -1;
 		username = TextClass.fixName(stream.readString());

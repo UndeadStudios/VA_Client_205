@@ -257,8 +257,8 @@ final class Class6
 
 		anInt109 = stream.method422();
 		anInt110 = stream.method422();
-		anInt113 = stream.readUnsignedWord();
-		anInt114 = stream.readUnsignedWord();
+		anInt113 = stream.readUnsignedShort();
+		anInt114 = stream.readUnsignedShort();
 		aClass39_111 = new Class39();
 		aClass29_112 = new Class29();
 		aClass39_111.method545(stream, aClass29_112);

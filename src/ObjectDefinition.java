@@ -277,6 +277,8 @@ public final class ObjectDefinition {
 		description = null;
 		modifiedModelColors = null;
 		originalModelColors = null;
+		originalTexture = null;
+		modifiedTexture = null;
 		anInt744 = 1;
 		anInt761 = 1;
 		aBoolean767 = true;
@@ -285,12 +287,12 @@ public final class ObjectDefinition {
 		aBoolean762 = false;
 		aBoolean769 = false;
 		aBoolean764 = false;
-		anInt781 = -1;
+		animation = -1;
 		anInt775 = 16;
 		aByte737 = 0;
 		aByte742 = 0;
 		actions = null;
-		anInt746 = -1;
+		AreaType = -1;
 		anInt758 = -1;
 		aBoolean751 = false;
 		aBoolean779 = true;
@@ -303,6 +305,7 @@ public final class ObjectDefinition {
 		anInt783 = 0;
 		aBoolean736 = false;
 		aBoolean766 = false;
+		field3621 = true;
 		supportItems = -1;
 		anInt774 = -1;
 		anInt749 = -1;
@@ -327,12 +330,12 @@ public final class ObjectDefinition {
 	public static void unpackConfig(StreamLoader streamLoader) {
 			stream = new Buffer(streamLoader.getDataForName("loc.dat"));
 		Buffer stream = new Buffer(streamLoader.getDataForName("loc.idx"));
-		int totalObjects = stream.readUnsignedWord();
+		int totalObjects = stream.readUnsignedShort();
 		streamIndices = new int[totalObjects];
 		int i = 2;
 		for (int j = 0; j < totalObjects; j++) {
 			streamIndices[j] = i;
-			i += stream.readUnsignedWord();
+			i += stream.readUnsignedShort();
 		}
 		cache = new ObjectDefinition[20];
 		for (int k = 0; k < 20; k++)
@@ -488,9 +491,9 @@ public final class ObjectDefinition {
 				model_3.method476(modifiedModelColors[k2], originalModelColors[k2]);
 
 		}
-		if (textureFind != null) {
-			for (int k2 = 0; k2 < textureFind.length; k2++) {
-				model_3.retexture(textureFind[k2], textureReplace[k2]);
+		if (originalTexture != null) {
+			for (int k2 = 0; k2 < originalTexture.length; k2++) {
+				model_3.retexture(originalTexture[k2], modifiedTexture[k2]);
 			}
 
 		}
@@ -519,7 +522,7 @@ public final class ObjectDefinition {
 						anIntArray776 = new int[len];
 						anIntArray773 = new int[len];
 						for (int k1 = 0; k1 < len; k1++) {
-							anIntArray773[k1] = stream.readUnsignedWord();
+							anIntArray773[k1] = stream.readUnsignedShort();
 							anIntArray776[k1] = stream.readUnsignedByte();
 						}
 					} else {
@@ -537,7 +540,7 @@ public final class ObjectDefinition {
 						anIntArray776 = null;
 						anIntArray773 = new int[len];
 						for (int l1 = 0; l1 < len; l1++)
-							anIntArray773[l1] = stream.readUnsignedWord();
+							anIntArray773[l1] = stream.readUnsignedShort();
 					} else {
 						stream.currentPosition += len * 2;
 					}
@@ -559,9 +562,9 @@ public final class ObjectDefinition {
 			else if (type == 23)
 				aBoolean764 = true;
 			else if (type == 24) {
-				anInt781 = stream.readUnsignedWord();
-				if (anInt781 == 65535)
-					anInt781 = -1;
+				animation = stream.readUnsignedShort();
+				if (animation == 65535)
+					animation = -1;
 			} else if (type == 28)
 				anInt775 = stream.readUnsignedByte();
 			else if (type == 29)
@@ -579,31 +582,31 @@ public final class ObjectDefinition {
 				modifiedModelColors = new int[i1];
 				originalModelColors = new int[i1];
 				for (int i2 = 0; i2 < i1; i2++) {
-					modifiedModelColors[i2] = stream.readUnsignedWord();
-					originalModelColors[i2] = stream.readUnsignedWord();
+					modifiedModelColors[i2] = stream.readUnsignedShort();
+					originalModelColors[i2] = stream.readUnsignedShort();
 				}
 			} else if (type == 41) {
 				int i1 = stream.readUnsignedByte();
-				textureFind = new short[i1];
-				textureReplace = new short[i1];
+				originalTexture = new short[i1];
+				modifiedTexture = new short[i1];
 				for (int i2 = 0; i2 < i1; i2++) {
-					textureFind[i2] = (short) stream.readUnsignedWord();
-					textureReplace[i2] = (short) stream.readUnsignedWord();
+					originalTexture[i2] = (short) stream.readUnsignedShort();
+					modifiedTexture[i2] = (short) stream.readUnsignedShort();
 				}
 			} else if (type == 61)
-				opcode61 = stream.readUnsignedWord();
+				opcode61 = stream.readUnsignedShort();
 			else if (type == 62)
 				aBoolean751 = true;
 			else if (type == 64)
 				aBoolean779 = false;
 			else if (type == 65)
-				anInt748 = stream.readUnsignedWord();
+				anInt748 = stream.readUnsignedShort();
 			else if (type == 66)
-				anInt772 = stream.readUnsignedWord();
+				anInt772 = stream.readUnsignedShort();
 			else if (type == 67)
-				anInt740 = stream.readUnsignedWord();
+				anInt740 = stream.readUnsignedShort();
 			else if (type == 68)
-				anInt758 = stream.readUnsignedWord();
+				anInt758 = stream.readUnsignedShort();
 			else if (type == 69)
 				anInt768 = stream.readUnsignedByte();
 			else if (type == 70)
@@ -619,20 +622,20 @@ public final class ObjectDefinition {
 			else if (type == 75)
 				supportItems = stream.readUnsignedByte();
 			else if (type == 77|| type == 92) {
-				anInt774 = stream.readUnsignedWord();
+				anInt774 = stream.readUnsignedShort();
 				if (anInt774 == 65535)
 					anInt774 = -1;
-				anInt749 = stream.readUnsignedWord();
+				anInt749 = stream.readUnsignedShort();
 				if (anInt749 == 65535)
 					anInt749 = -1;
 				int var3 = -1;
 				if(type == 92) {
-					var3 = stream.readUnsignedWord();
+					var3 = stream.readUnsignedShort();
 				}
 				int j1 = stream.readUnsignedByte();
 				childrenIDs = new int[j1 + 2];
 				for (int j2 = 0; j2 <= j1; j2++) {
-					childrenIDs[j2] = stream.readUnsignedWord();
+					childrenIDs[j2] = stream.readUnsignedShort();
 					if (childrenIDs[j2] == 65535)
 						childrenIDs[j2] = -1;
 				}
@@ -646,11 +649,9 @@ public final class ObjectDefinition {
 			} else if(type == 81) {
 				stream.skip(1);//Clip type?
 			} else if (type == 82) {
-				anInt746 = stream.readUnsignedWord();//AreaType
+				AreaType = stream.readUnsignedShort();//AreaType
 			} else if(type == 89) {
 				field3621 = false;
-			} else if (type == 94) {
-				opcode150 = stream.readString();
 			}
 		} while (true);
 		if (flag == -1  && name != "null" && name != null) {
@@ -679,10 +680,10 @@ public final class ObjectDefinition {
 	public byte aByte742;
 	public int anInt744;
 	public int anInt745;
-	public int anInt746;
+	public int AreaType;
 	public int[] originalModelColors;
-	public short[] textureReplace;
-	public short[] textureFind;
+	public short[] modifiedTexture;
+	public short[] originalTexture;
 	public int anInt748;
 	public int anInt749;
 	public boolean aBoolean751;
@@ -712,7 +713,7 @@ public final class ObjectDefinition {
 	public boolean isInteractive;
 	public boolean aBoolean779;
 	public static MRUNodes mruNodes2 = new MRUNodes(30);
-	public int anInt781;
+	public int animation;
 	public static ObjectDefinition[] cache;
 	public int anInt783;
 	public int[] modifiedModelColors;

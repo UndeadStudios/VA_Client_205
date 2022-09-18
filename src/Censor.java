@@ -53,7 +53,7 @@ final class Censor {
 	{
 		anIntArray620 = new int[stream.readDWord()];
 		for(int i = 0; i < anIntArray620.length; i++)
-			anIntArray620[i] = stream.readUnsignedWord();
+			anIntArray620[i] = stream.readUnsignedShort();
 	}
 
 	private static void method493(Buffer stream, char ac[][], byte abyte0[][][])

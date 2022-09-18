@@ -2,7 +2,7 @@ public final class GraphicsDefinition {
 
 	public static void unpackConfig(StreamLoader streamLoader) {
 		Buffer stream = new Buffer(streamLoader.getDataForName("spotanim.dat"));
-		int length = stream.readUnsignedWord();
+		int length = stream.readUnsignedShort();
 		//System.out.println("Graphics Loaded: "+length);
 		if (cache == null)
 			cache = new GraphicsDefinition[length + 50000];
@@ -22,18 +22,18 @@ public final class GraphicsDefinition {
 				return;
 			}
 			if (i == 1) {
-				anInt405 = stream.readUnsignedWord();
+				anInt405 = stream.readUnsignedShort();
 			} else if (i == 2) {
-				anInt406 = stream.readUnsignedWord();
+				anInt406 = stream.readUnsignedShort();
 				if (AnimationDefinition.anims != null) {
 					aAnimation_407 = AnimationDefinition.anims[anInt406];
 				}
 			} else if (i == 4) {
-				anInt410 = stream.readUnsignedWord();
+				anInt410 = stream.readUnsignedShort();
 			} else if (i == 5) {
-				anInt411 = stream.readUnsignedWord();
+				anInt411 = stream.readUnsignedShort();
 			} else if (i == 6) {
-				anInt412 = stream.readUnsignedWord();
+				anInt412 = stream.readUnsignedShort();
 			} else if (i == 7) {
 				anInt413 = stream.readUnsignedByte();
 			} else if (i == 8) {
@@ -41,16 +41,16 @@ public final class GraphicsDefinition {
 			} else if (i == 40) {
 				int j = stream.readUnsignedByte();
 				for (int k = 0; k < j; k++) {
-					anIntArray408[k] = stream.readUnsignedWord();
-					anIntArray409[k] = stream.readUnsignedWord();
+					anIntArray408[k] = stream.readUnsignedShort();
+					anIntArray409[k] = stream.readUnsignedShort();
 				}
 			} else if (i == 41) {
 				final int len = stream.readUnsignedByte();
 				textureToFind = new short[len];
 				textureToReplace = new short[len];
 				for (int k = 0; k < len; k++) {
-					textureToFind[k] = (short) stream.readUnsignedWord();
-					textureToReplace[k] = (short) stream.readUnsignedWord();
+					textureToFind[k] = (short) stream.readUnsignedShort();
+					textureToReplace[k] = (short) stream.readUnsignedShort();
 				}
 			} else {
 				System.out.println("Error unrecognised spotanim config code: " + i);

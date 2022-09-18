@@ -4,6 +4,9 @@ public final class EntityDef {
 
 	private int Category;
 	private String opcode112;
+	public short[] modifiedTexture;
+	public short[] originalTexture;
+	private boolean isClickable2;
 
 	public static EntityDef forID(int i, boolean cached) {
 		if (cached) {
@@ -1507,13 +1510,13 @@ public final class EntityDef {
 	public static void unpackConfig(StreamLoader streamLoader) {
 		stream = new Buffer(streamLoader.getDataForName("npc.dat"));
 		Buffer stream2 = new Buffer(streamLoader.getDataForName("npc.idx"));
-		int totalNPCs = stream2.readUnsignedWord();
+		int totalNPCs = stream2.readUnsignedShort();
 		//System.out.println("Npcs Loaded: " + totalNPCs);
 		streamIndices = new int[totalNPCs + 50000];
 		int i = 2;
 		for (int j = 0; j < totalNPCs; j++) {
 			streamIndices[j] = i;
-			i += stream2.readUnsignedWord();
+			i += stream2.readUnsignedShort();
 		}
 
 		cache = new EntityDef[20];
@@ -1639,8 +1642,14 @@ public final class EntityDef {
 						model.method476(anIntArray70[k1], anIntArray76[k1]);
 
 				}
+				if (originalTexture != null) {
+					for (int k2 = 0; k2 < originalTexture.length; k2++) {
+						model.retexture(originalTexture[k2], modifiedTexture[k2]);
+					}
+
+				}
 	            model.method469();
-	            model.light(64 + anInt85, 1500 + anInt92, -30, -50, -30, true);
+	            model.light(64 + anInt85, 850 + anInt92, -30, -50, -30, true);
 	            mruNodes.removeFromCache(model, interfaceType);
 	        }
 	        final Model model_1 = Model.EMPTY_MODEL;
@@ -1691,8 +1700,14 @@ public final class EntityDef {
 					model.method476(anIntArray76[k1], anIntArray70[k1]);
 
 			}
+			if (originalTexture != null) {
+				for (int k2 = 0; k2 < originalTexture.length; k2++) {
+					model.retexture(originalTexture[k2], modifiedTexture[k2]);
+				}
+
+			}
 			model.method469();
-			model.light(64 + anInt85, 1500 + anInt92, -30, -50, -30, true);
+			model.light(64 + anInt85, 850 + anInt92, -30, -50, -30, true);
 			mruNodes.removeFromCache(model, interfaceType);
 		}
 		Model model_1 = Model.EMPTY_MODEL;
@@ -1720,7 +1735,7 @@ public final class EntityDef {
 				int j = stream.readUnsignedByte();
 				anIntArray94 = new int[j];
 				for (int j1 = 0; j1 < j; j1++)
-					anIntArray94[j1] = stream.readUnsignedWord();
+					anIntArray94[j1] = stream.readUnsignedShort();
 
 			} else if (i == 2)
 				name = stream.readString();
@@ -1729,16 +1744,16 @@ public final class EntityDef {
 			else if (i == 12)
 				occupied_tiles = stream.readSignedByte();
 			else if (i == 13)
-				standAnim = stream.readUnsignedWord();
+				standAnim = stream.readUnsignedShort();
 			else if (i == 14)
-				walkAnim = stream.readUnsignedWord();
+				walkAnim = stream.readUnsignedShort();
 			else if (i == 17) {
-				walkAnim = stream.readUnsignedWord();
-				anInt58 = stream.readUnsignedWord();
-				anInt83 = stream.readUnsignedWord();
-				anInt55 = stream.readUnsignedWord();
+				walkAnim = stream.readUnsignedShort();
+				anInt58 = stream.readUnsignedShort();
+				anInt83 = stream.readUnsignedShort();
+				anInt55 = stream.readUnsignedShort();
 			} else if(i == 18){
-				Category = stream.readUnsignedWord();
+				Category = stream.readUnsignedShort();
 			} else if (i >= 30 && i < 40) {
 				if (actions == null)
 					actions = new String[5];
@@ -1750,36 +1765,38 @@ public final class EntityDef {
 				anIntArray76 = new int[k];
 				anIntArray70 = new int[k];
 				for (int k1 = 0; k1 < k; k1++) {
-					anIntArray76[k1] = stream.readUnsignedWord();
-					anIntArray70[k1] = stream.readUnsignedWord();
+					anIntArray76[k1] = stream.readUnsignedShort();
+					anIntArray70[k1] = stream.readUnsignedShort();
 				}
 			} else if (i == 41) {
-				int k = stream.readUnsignedByte();
-				for (int k1 = 0; k1 < k; k1++) {
-					stream.readUnsignedWord();
-					stream.readUnsignedWord();
+				int i1 = stream.readUnsignedByte();
+				originalTexture = new short[i1];
+				modifiedTexture = new short[i1];
+				for (int i2 = 0; i2 < i1; i2++) {
+					originalTexture[i2] = (short) stream.readUnsignedShort();
+					modifiedTexture[i2] = (short) stream.readUnsignedShort();
 				}
 
 			} else if (i == 60) {
 				int l = stream.readUnsignedByte();
 				anIntArray73 = new int[l];
 				for (int l1 = 0; l1 < l; l1++)
-					anIntArray73[l1] = stream.readUnsignedWord();
+					anIntArray73[l1] = stream.readUnsignedShort();
 
 			} else if (i == 90)
-				stream.readUnsignedWord();
+				stream.readUnsignedShort();
 			else if (i == 91)
-				stream.readUnsignedWord();
+				stream.readUnsignedShort();
 			else if (i == 92)
-				stream.readUnsignedWord();
+				stream.readUnsignedShort();
 			else if (i == 93)
 				aBoolean87 = false;
 			else if (i == 95)
-				combatLevel = stream.readUnsignedWord();
+				combatLevel = stream.readUnsignedShort();
 			else if (i == 97)
-				anInt91 = stream.readUnsignedWord();
+				anInt91 = stream.readUnsignedShort();
 			else if (i == 98)
-				anInt86 = stream.readUnsignedWord();
+				anInt86 = stream.readUnsignedShort();
 			else if (i == 99)
 				render_priority = true;
 			else if (i == 100)
@@ -1787,35 +1804,50 @@ public final class EntityDef {
 			else if (i == 101)
 				anInt92 = stream.readSignedByte() * 5;
 			else if (i == 102)
-				anInt75 = stream.readUnsignedWord();
+				anInt75 = stream.readUnsignedShort();
 			else if (i == 103)
-				anInt79 = stream.readUnsignedWord();
+				anInt79 = stream.readUnsignedShort();
 			else if (i == 106 || i == 118) {
-				anInt57 = stream.readUnsignedWord();
+				anInt57 = stream.readUnsignedShort();
 				if (anInt57 == 65535)
 					anInt57 = -1;
-				anInt59 = stream.readUnsignedWord();
+				anInt59 = stream.readUnsignedShort();
 				if (anInt59 == 65535)
 					anInt59 = -1;
 
 				int var3 = -1;
 				if(i == 118) {
-					var3 = stream.readUnsignedWord();
+					var3 = stream.readUnsignedShort();
 				}
 				int i1 = stream.readUnsignedByte();
 				childrenIDs = new int[i1 + 2];
 				for (int i2 = 0; i2 <= i1; i2++) {
-					childrenIDs[i2] = stream.readUnsignedWord();
+					childrenIDs[i2] = stream.readUnsignedShort();
 					if (childrenIDs[i2] == 65535)
 						childrenIDs[i2] = -1;
 				}
 				childrenIDs[i1 + 1] = var3;
 
-			} else if (i == 107)
+			} else if (i == 107){
 				isClickable = false;
-			else if(i == 111 || i == 107 || i == 109) {
-			} else if (i == 112) {
-				opcode112 = stream.readString();
+			} else if(i == 109) {
+				this.isClickable2 = false;
+			} else if(i == 111) {
+				this.aBool2190 = true;
+			} else if(i == 114) {
+				this.field1914 = stream.readUShort();
+			} else if(i == 115) {
+				this.field1914 = stream.readUShort();
+				this.field1919 = stream.readUShort();
+				this.field1918 = stream.readUShort();
+				this.field1938 = stream.readUShort();
+			} else if(i == 116) {
+				this.field1920 = stream.readUShort();
+			} else if(i == 117) {
+				this.field1920 = stream.readUShort();
+				this.field1933 = stream.readUShort();
+				this.field1922 = stream.readUShort();
+				this.field1923 = stream.readUShort();
 			}
 		} while (true);
 	}
@@ -1864,11 +1896,21 @@ public final class EntityDef {
 	public static EntityDef[] cache;
 	public static Client clientInstance;
 	public int anInt83;
+	private boolean aBool2190= false;
+
 	public boolean isClickable;
 	public int anInt85;
 	public int anInt86;
 	public boolean aBoolean87;
 	public int childrenIDs[];
+	public int field1914 = -1;
+	public int field1919 = -1;
+	public int field1918 = -1;
+	public int field1938 = -1;
+	public int field1920 = -1;
+	public int field1933 = -1;
+	public int field1922 = -1;
+	public int field1923 = -1;
 	public byte description[];
 	public int anInt91;
 	public int anInt92;

@@ -2574,13 +2574,13 @@ public final class ItemDefinition {
 	public static void unpackConfig(StreamLoader archive) {
 		stream = new Buffer(archive.getDataForName("obj.dat"));
 		Buffer stream = new Buffer(archive.getDataForName("obj.idx"));
-		totalItems = stream.readUnsignedWord();
+		totalItems = stream.readUnsignedShort();
 		System.out.println("Items Loaded: "+totalItems);
 		streamIndices = new int[totalItems +5000];
 		int i = 2;
 		for (int j = 0; j < totalItems; j++) {
 			streamIndices[j] = i;
-			i += stream.readUnsignedWord();
+			i += stream.readUnsignedShort();
 		}
 
 		cache = new ItemDefinition[10];
@@ -2764,9 +2764,9 @@ public final class ItemDefinition {
 		if(model == null)
 			return null;
 		Sprite image = new Sprite(32, 32);
-		int k1 = Rasterizer.originViewX;
-		int l1 = Rasterizer.originViewY;
-		int ai[] = Rasterizer.scanOffsets;
+		int k1 = Rasterizer3D.originViewX;
+		int l1 = Rasterizer3D.originViewY;
+		int ai[] = Rasterizer3D.scanOffsets;
 		int ai1[] = Rasterizer2D.pixels;
 		float depthBuffer[] = Rasterizer2D.depthBuffer;
 		int i2 = Rasterizer2D.width;
@@ -2775,13 +2775,13 @@ public final class ItemDefinition {
 		int l2 = Rasterizer2D.bottomX;
 		int i3 = Rasterizer2D.topY;
 		int j3 = Rasterizer2D.clip_bottom;
-		Rasterizer.aBoolean1464 = false;
+		Rasterizer3D.aBoolean1464 = false;
 		Rasterizer2D.initDrawingArea(32, 32, image.myPixels, new float[32*32]);
 		Rasterizer2D.drawPixels(32, 0, 0, 0, 32);
-		Rasterizer.method364();
+		Rasterizer3D.method364();
 		int itemZoom = item.modelZoom * zoom - 500;
-		int l3 = Rasterizer.anIntArray1470[item.modelRotationY] * itemZoom >> 16;
-		int i4 = Rasterizer.anIntArray1471[item.modelRotationY] * itemZoom >> 16;
+		int l3 = Rasterizer3D.anIntArray1470[item.modelRotationY] * itemZoom >> 16;
+		int i4 = Rasterizer3D.anIntArray1471[item.modelRotationY] * itemZoom >> 16;
 		model.method482(item.modelRotationX, item.anInt204, item.modelRotationY, item.modelOffset1, l3 + model.modelHeight / 2 + item.modelOffset2, i4 + item.modelOffset2);
 		if(color == 0) {
 			for(int index = 31; index >= 0; index--) {
@@ -2792,10 +2792,10 @@ public final class ItemDefinition {
 		}
 		Rasterizer2D.initDrawingArea(j2, i2, ai1, depthBuffer);
 		Rasterizer2D.setDrawingArea(j3, k2, l2, i3);
-		Rasterizer.originViewX = k1;
-		Rasterizer.originViewY = l1;
-		Rasterizer.scanOffsets = ai;
-		Rasterizer.aBoolean1464 = true;
+		Rasterizer3D.originViewX = k1;
+		Rasterizer3D.originViewY = l1;
+		Rasterizer3D.scanOffsets = ai;
+		Rasterizer3D.aBoolean1464 = true;
 		if (item.stackable) {
 			image.cropWidth = 33;
 		} else {
@@ -2841,9 +2841,9 @@ public final class ItemDefinition {
 				return null;
 		}
 		Sprite enabledSprite = new Sprite(32, 32);
-		int k1 = Rasterizer.originViewX;
-		int l1 = Rasterizer.originViewY;
-		int ai[] = Rasterizer.scanOffsets;
+		int k1 = Rasterizer3D.originViewX;
+		int l1 = Rasterizer3D.originViewY;
+		int ai[] = Rasterizer3D.scanOffsets;
 		int ai1[] = Rasterizer2D.pixels;
 		float depthBuffer[] = Rasterizer2D.depthBuffer;
 		int i2 = Rasterizer2D.width;
@@ -2852,17 +2852,17 @@ public final class ItemDefinition {
 		int l2 = Rasterizer2D.bottomX;
 		int i3 = Rasterizer2D.topY;
 		int j3 = Rasterizer2D.clip_bottom;
-		Rasterizer.aBoolean1464 = false;
+		Rasterizer3D.aBoolean1464 = false;
 		Rasterizer2D.initDrawingArea(32, 32, enabledSprite.myPixels, new float[32*32]);
 		Rasterizer2D.method336(32, 0, 0, 0, 32);
-		Rasterizer.method364();
+		Rasterizer3D.method364();
 		int k3 = itemDef.modelZoom;
 		if (k == -1)
 			k3 = (int) ((double) k3 * 1.5D);
 		if (k > 0)
 			k3 = (int) ((double) k3 * 1.04D);
-		int l3 = Rasterizer.anIntArray1470[itemDef.modelRotationY] * k3 >> 16;
-		int i4 = Rasterizer.anIntArray1471[itemDef.modelRotationY] * k3 >> 16;
+		int l3 = Rasterizer3D.anIntArray1470[itemDef.modelRotationY] * k3 >> 16;
+		int i4 = Rasterizer3D.anIntArray1471[itemDef.modelRotationY] * k3 >> 16;
 		model.method482(itemDef.modelRotationX, itemDef.anInt204,
 				itemDef.modelRotationY, itemDef.modelOffset1, l3
 						+ model.modelHeight / 2 + itemDef.modelOffset2, i4
@@ -2929,10 +2929,10 @@ public final class ItemDefinition {
 			mruNodes1.removeFromCache(enabledSprite, i);
 		Rasterizer2D.initDrawingArea(j2, i2, ai1, depthBuffer);
 		Rasterizer2D.setDrawingArea(j3, k2, l2, i3);
-		Rasterizer.originViewX = k1;
-		Rasterizer.originViewY = l1;
-		Rasterizer.scanOffsets = ai;
-		Rasterizer.aBoolean1464 = true;
+		Rasterizer3D.originViewX = k1;
+		Rasterizer3D.originViewY = l1;
+		Rasterizer3D.scanOffsets = ai;
+		Rasterizer3D.aBoolean1464 = true;
 		if (itemDef.stackable)
 			enabledSprite.cropWidth = 33;
 		else
@@ -3013,23 +3013,23 @@ public final class ItemDefinition {
 			if (i == 0)
 				return;
 			if (i == 1)
-				modelID = stream.readUnsignedWord();
+				modelID = stream.readUnsignedShort();
 			else if (i == 2)
 				name = stream.readString();
 			else if (i == 3)
 				description = stream.readBytes();
 			else if (i == 4)
-				modelZoom = stream.readUnsignedWord();
+				modelZoom = stream.readUnsignedShort();
 			else if (i == 5)
-				modelRotationY = stream.readUnsignedWord();
+				modelRotationY = stream.readUnsignedShort();
 			else if (i == 6)
-				modelRotationX = stream.readUnsignedWord();
+				modelRotationX = stream.readUnsignedShort();
 			else if (i == 7) {
-				modelOffset1 = stream.readUnsignedWord();
+				modelOffset1 = stream.readUnsignedShort();
 				if (modelOffset1 > 32767)
 					modelOffset1 -= 0x10000;
 			} else if (i == 8) {
-				modelOffset2 = stream.readUnsignedWord();
+				modelOffset2 = stream.readUnsignedShort();
 				if (modelOffset2 > 32767)
 					modelOffset2 -= 0x10000;
 			} else if (i == 11)
@@ -3039,15 +3039,15 @@ public final class ItemDefinition {
 			else if (i == 16)
 				membersObject = true;
 			else if (i == 23) {
-				anInt165 = stream.readUnsignedWord();
+				anInt165 = stream.readUnsignedShort();
 				aByte205 = stream.readSignedByte();
 			} else if (i == 24)
-				anInt188 = stream.readUnsignedWord();
+				anInt188 = stream.readUnsignedShort();
 			else if (i == 25) {
-				anInt200 = stream.readUnsignedWord();
+				anInt200 = stream.readUnsignedShort();
 				aByte154 = stream.readSignedByte();
 			} else if (i == 26)
-				anInt164 = stream.readUnsignedWord();
+				anInt164 = stream.readUnsignedShort();
 			else if (i >= 30 && i < 35) {
 				if (groundActions == null)
 					groundActions = new String[5];
@@ -3063,50 +3063,50 @@ public final class ItemDefinition {
 				originalModelColors = new int[j];
 				modifiedModelColors = new int[j];
 				for (int k = 0; k < j; k++) {
-					originalModelColors[k] = stream.readUnsignedWord();
-					modifiedModelColors[k] = stream.readUnsignedWord();
+					originalModelColors[k] = stream.readUnsignedShort();
+					modifiedModelColors[k] = stream.readUnsignedShort();
 				}
 			} else if (i == 41) {
 				int size = stream.readUnsignedByte();
 				originalTextureColors = new short[size];
 				modifiedTextureColors = new short[size];
 				for (int index = 0; index < size; index++) {
-					originalTextureColors[index] = (short) stream.readUnsignedWord();
-					modifiedTextureColors[index] = (short) stream.readUnsignedWord();
+					originalTextureColors[index] = (short) stream.readUnsignedShort();
+					modifiedTextureColors[index] = (short) stream.readUnsignedShort();
 				}
 			} else if (i == 78)
-				anInt185 = stream.readUnsignedWord();
+				anInt185 = stream.readUnsignedShort();
 			else if (i == 79)
-				anInt162 = stream.readUnsignedWord();
+				anInt162 = stream.readUnsignedShort();
 			else if (i == 90)
-				anInt175 = stream.readUnsignedWord();
+				anInt175 = stream.readUnsignedShort();
 			else if (i == 91)
-				anInt197 = stream.readUnsignedWord();
+				anInt197 = stream.readUnsignedShort();
 			else if (i == 92)
-				anInt166 = stream.readUnsignedWord();
+				anInt166 = stream.readUnsignedShort();
 			else if (i == 93)
-				anInt173 = stream.readUnsignedWord();
+				anInt173 = stream.readUnsignedShort();
 			else if (i == 94)
-				opcode94 = stream.readUnsignedWord();
+				opcode94 = stream.readUnsignedShort();
 			else if (i == 95)
-				anInt204 = stream.readUnsignedWord();
+				anInt204 = stream.readUnsignedShort();
 			else if (i == 97)
-				certID = stream.readUnsignedWord();
+				certID = stream.readUnsignedShort();
 			else if (i == 98)
-				certTemplateID = stream.readUnsignedWord();
+				certTemplateID = stream.readUnsignedShort();
 			else if (i >= 100 && i < 110) {
 				if (stackIDs == null) {
 					stackIDs = new int[10];
 					stackAmounts = new int[10];
 				}
-				stackIDs[i - 100] = stream.readUnsignedWord();
-				stackAmounts[i - 100] = stream.readUnsignedWord();
+				stackIDs[i - 100] = stream.readUnsignedShort();
+				stackAmounts[i - 100] = stream.readUnsignedShort();
 			} else if (i == 110)
-				anInt167 = stream.readUnsignedWord();
+				anInt167 = stream.readUnsignedShort();
 			else if (i == 111)
-				anInt192 = stream.readUnsignedWord();
+				anInt192 = stream.readUnsignedShort();
 			else if (i == 112)
-				anInt191 = stream.readUnsignedWord();
+				anInt191 = stream.readUnsignedShort();
 			else if (i == 113)
 				ambient = stream.readSignedByte();
 			else if (i == 114)
@@ -3114,15 +3114,13 @@ public final class ItemDefinition {
 			else if (i == 115)
 				team = stream.readUnsignedByte();
 			else if (i == 139)
-				unnotedId = stream.readUnsignedWord();
+				unnotedId = stream.readUnsignedShort();
 			else if (i == 140)
-				notedId = stream.readUnsignedWord();
+				notedId = stream.readUnsignedShort();
 			else if (i == 148)
-				placeholderId = stream.readUnsignedWord();
+				placeholderId = stream.readUnsignedShort();
 			else if (i == 149) {
-				placeholderTemplateId = stream.readUnsignedWord();
-			} else if (i == 150) {
-				opcode150 = stream.readString();
+				placeholderTemplateId = stream.readUnsignedShort();
 			}
 		} while (true);
 	}

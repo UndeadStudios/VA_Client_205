@@ -164,19 +164,19 @@ public class Client extends ClientEngine {
 	}
 
 	private static void setBounds() {
-		Rasterizer.method365(frameWidth, frameHeight);
-		fullScreenTextureArray = Rasterizer.scanOffsets;
-		Rasterizer.method365(frameMode == ScreenMode.FIXED ? (aRSImageProducer_1166 != null ? aRSImageProducer_1166.canvasWidth : 519) : frameWidth, frameMode == ScreenMode.FIXED ? (aRSImageProducer_1166 != null ? aRSImageProducer_1166.canvasHeight : 165) : frameHeight);
-		anIntArray1180 = Rasterizer.scanOffsets;
-		Rasterizer.method365(frameMode == ScreenMode.FIXED ? (aRSImageProducer_1163 != null ? aRSImageProducer_1163.canvasWidth : 250) : frameWidth, frameMode == ScreenMode.FIXED ? (aRSImageProducer_1163 != null ? aRSImageProducer_1163.canvasHeight : 335) : frameHeight);
-		anIntArray1181 = Rasterizer.scanOffsets;
-		Rasterizer.method365(screenAreaWidth, screenAreaHeight);
-		anIntArray1182 = Rasterizer.scanOffsets;
+		Rasterizer3D.method365(frameWidth, frameHeight);
+		fullScreenTextureArray = Rasterizer3D.scanOffsets;
+		Rasterizer3D.method365(frameMode == ScreenMode.FIXED ? (aRSImageProducer_1166 != null ? aRSImageProducer_1166.canvasWidth : 519) : frameWidth, frameMode == ScreenMode.FIXED ? (aRSImageProducer_1166 != null ? aRSImageProducer_1166.canvasHeight : 165) : frameHeight);
+		anIntArray1180 = Rasterizer3D.scanOffsets;
+		Rasterizer3D.method365(frameMode == ScreenMode.FIXED ? (aRSImageProducer_1163 != null ? aRSImageProducer_1163.canvasWidth : 250) : frameWidth, frameMode == ScreenMode.FIXED ? (aRSImageProducer_1163 != null ? aRSImageProducer_1163.canvasHeight : 335) : frameHeight);
+		anIntArray1181 = Rasterizer3D.scanOffsets;
+		Rasterizer3D.method365(screenAreaWidth, screenAreaHeight);
+		anIntArray1182 = Rasterizer3D.scanOffsets;
 		int ai[] = new int[9];
 		for (int i8 = 0; i8 < 9; i8++) {
 			int k8 = 128 + i8 * 32 + 15;
 			int l8 = 600 + k8 * 3;
-			int i9 = Rasterizer.anIntArray1470[k8];
+			int i9 = Rasterizer3D.anIntArray1470[k8];
 			ai[i8] = l8 * i9 >> 16;
 		}
 		if (frameMode == ScreenMode.RESIZABLE && (frameWidth >= 766) && (frameWidth <= 1025) && (frameHeight >= 504) && (frameHeight <= 850)) {
@@ -560,7 +560,7 @@ public class Client extends ClientEngine {
 		if (frameMode == ScreenMode.FIXED) {
 			aRSImageProducer_1166.initDrawingArea();
 		}
-		Rasterizer.scanOffsets = anIntArray1180;
+		Rasterizer3D.scanOffsets = anIntArray1180;
 		if (chatStateCheck()) {
 			showChatComponents = true;
 			fixedGameComponents[2].drawSprite(0, yOffset);
@@ -938,7 +938,7 @@ public class Client extends ClientEngine {
 			aRSImageProducer_1166.drawGraphics(338, super.graphics, 0);
 		}
 		aRSImageProducer_1165.initDrawingArea();
-		Rasterizer.scanOffsets = anIntArray1182;
+		Rasterizer3D.scanOffsets = anIntArray1182;
 	}
 
 	public void init() {
@@ -1073,7 +1073,7 @@ public class Client extends ClientEngine {
 					stream.writeString(RSInterface.currentInputField.disabledMessage);
 				}
 
-				
+
 				RSInterface.currentInputField.disabledMessage = "";
 			}
 			RSInterface.currentInputField = null;
@@ -1133,7 +1133,7 @@ public class Client extends ClientEngine {
 			anInt985 = -1;
 			aClass19_1056.removeAll();
 			aClass19_1013.removeAll();
-			Rasterizer.method366();
+			Rasterizer3D.method366();
 			unlinkMRUNodes();
 			scene.initToNull();
 			System.gc();
@@ -1279,7 +1279,7 @@ public class Client extends ClientEngine {
 
 		}
 		System.gc();
-		Rasterizer.method367();
+		Rasterizer3D.method367();
 		onDemandFetcher.method566();
 		int k = (anInt1069 - 6) / 8 - 1;
 		int j1 = (anInt1069 + 6) / 8 + 1;
@@ -1345,9 +1345,9 @@ public class Client extends ClientEngine {
 			int i1 = 24628 + (103 - l) * 512 * 4;
 			for (int k1 = 1; k1 < 103; k1++) {
 				if ((tileFlags[i][k1][l] & 0x18) == 0)
-					scene.method309(ai, i1, i, k1, l);
+					scene.drawTileMinimapSD(ai, i1, i, k1, l);
 				if (i < 3 && (tileFlags[i + 1][k1][l] & 8) != 0)
-					scene.method309(ai, i1, i + 1, k1, l);
+					scene.drawTileMinimapSD(ai, i1, i + 1, k1, l);
 				i1 += 4;
 			}
 
@@ -1372,7 +1372,7 @@ public class Client extends ClientEngine {
 			for (int l2 = 0; l2 < 104; l2++) {
 				long id = scene.get_ground_decor_uid(plane, k2, l2);
 				if (id != 0l) {
-					int j3 = ObjectDefinition.forID(get_object_key(id)).anInt746 ;
+					int j3 = ObjectDefinition.forID(get_object_key(id)).AreaType;
 					if (j3 >= 0) {
 						int sprite = AreaDefinition.lookup(j3).spriteId;
 						if (sprite != -1) {
@@ -1984,7 +1984,7 @@ public class Client extends ClientEngine {
 					stream.writeShort(RSInterface.currentInputField.id);
 					stream.writeString(RSInterface.currentInputField.disabledMessage);
 				}
-				
+
 				RSInterface.currentInputField.disabledMessage = "";
 			}
 			RSInterface.currentInputField = null;
@@ -2129,10 +2129,10 @@ public class Client extends ClientEngine {
 
 	private void updateConfigValues(int i) {
 		try {
-			
+
 			int k = variousSettings[i];
-			
-			
+
+
 			if (i == 1050) {
 				switch (k) {
 				case 1:
@@ -2148,13 +2148,13 @@ public class Client extends ClientEngine {
 				return;
 			if (j == 1) {
 				if (k == 1)
-					Rasterizer.method372(0.90000000000000002D);
+					Rasterizer3D.method372(0.90000000000000002D);
 				if (k == 2)
-					Rasterizer.method372(0.80000000000000004D);
+					Rasterizer3D.method372(0.80000000000000004D);
 				if (k == 3)
-					Rasterizer.method372(0.69999999999999996D);
+					Rasterizer3D.method372(0.69999999999999996D);
 				if (k == 4)
-					Rasterizer.method372(0.59999999999999998D);
+					Rasterizer3D.method372(0.59999999999999998D);
 				ItemDefinition.mruNodes1.unlinkAll();
 				welcomeScreenRaised = true;
 			}
@@ -2263,7 +2263,7 @@ public class Client extends ClientEngine {
 					}
 					if (j >= 0 && anInt855 == 10 && anInt933 == local_players[j]) {
 						npcScreenPos(((Entity) (obj)), ((Entity) (obj)).height + 15);
-						if (spriteDrawX > -1) 
+						if (spriteDrawX > -1)
 							headIconsHint[0].drawSprite(spriteDrawX - 12, spriteDrawY - l);
 					}
 				} else {
@@ -2313,7 +2313,7 @@ public class Client extends ClientEngine {
 							if (percent > barWidth) {
 								percent = barWidth;
 							}
-							
+
 							if (!Configuration.enableNewHpBars) {
 								Rasterizer2D.drawPixels(5, spriteDrawY - 3, spriteDrawX - 15, 65280, i1);
 								Rasterizer2D.drawPixels(5, spriteDrawY - 3, (spriteDrawX - 15) + i1, 0xff0000, 30 - i1);
@@ -2324,9 +2324,9 @@ public class Client extends ClientEngine {
 									fullBar.drawSprite(spriteDrawX - (barWidth / 2), spriteDrawY - 3);
 								}
 							}
-							if (Configuration.drawEntityFeed)				
+							if (Configuration.drawEntityFeed)
 								displayEntityFeed();
-							
+
 						}
 					} catch (Exception e) {
 					}
@@ -2586,7 +2586,7 @@ public class Client extends ClientEngine {
 		if (frameMode == ScreenMode.FIXED) {
 			aRSImageProducer_1163.initDrawingArea();
 		}
-		Rasterizer.scanOffsets = anIntArray1181;
+		Rasterizer3D.scanOffsets = anIntArray1181;
 		if (frameMode == ScreenMode.FIXED) {
 			fixedGameComponents[1].drawSprite(0, 0);
 		} else if (frameMode != ScreenMode.FIXED && !changeTabArea) {
@@ -2638,15 +2638,15 @@ public class Client extends ClientEngine {
 			aRSImageProducer_1163.drawGraphics(168, super.graphics, 516);
 			aRSImageProducer_1165.initDrawingArea();
 		}
-		Rasterizer.scanOffsets = anIntArray1182;
+		Rasterizer3D.scanOffsets = anIntArray1182;
 	}
 
 	private void method37(int j) {
 		if (Configuration.enableMovingTextures) {
-			if (Rasterizer.anIntArray1480[17] >= j) {
-				Background background = Rasterizer.aBackgroundArray1474s[17];
-				int k = background.anInt1452 * background.anInt1453 - 1;
-				int j1 = background.anInt1452 * anInt945 * 2;
+			if (Rasterizer3D.textureLastUsed[17] >= j) {
+				IndexedImage background = Rasterizer3D.textures[17];
+				int k = background.width * background.anInt1453 - 1;
+				int j1 = background.width * anInt945 * 2;
 				byte abyte0[] = background.palettePixels;
 				byte abyte3[] = aByteArray912;
 				for (int i2 = 0; i2 <= k; i2++)
@@ -2654,7 +2654,7 @@ public class Client extends ClientEngine {
 
 				background.palettePixels = abyte3;
 				aByteArray912 = abyte0;
-				Rasterizer.method370(17);
+				Rasterizer3D.method370(17);
 				anInt854++;
 				if (anInt854 > 1235) {
 					anInt854 = 0;
@@ -2675,10 +2675,10 @@ public class Client extends ClientEngine {
 					stream.writeBytes(stream.currentPosition - l2);
 				}
 			}
-			if (Rasterizer.anIntArray1480[24] >= j) {
-				Background background_1 = Rasterizer.aBackgroundArray1474s[24];
-				int l = background_1.anInt1452 * background_1.anInt1453 - 1;
-				int k1 = background_1.anInt1452 * anInt945 * 2;
+			if (Rasterizer3D.textureLastUsed[24] >= j) {
+				IndexedImage background_1 = Rasterizer3D.textures[24];
+				int l = background_1.width * background_1.anInt1453 - 1;
+				int k1 = background_1.width * anInt945 * 2;
 				byte abyte1[] = background_1.palettePixels;
 				byte abyte4[] = aByteArray912;
 				for (int j2 = 0; j2 <= l; j2++)
@@ -2686,12 +2686,12 @@ public class Client extends ClientEngine {
 
 				background_1.palettePixels = abyte4;
 				aByteArray912 = abyte1;
-				Rasterizer.method370(24);
+				Rasterizer3D.method370(24);
 			}
-			if (Rasterizer.anIntArray1480[34] >= j) {
-				Background background_2 = Rasterizer.aBackgroundArray1474s[34];
-				int i1 = background_2.anInt1452 * background_2.anInt1453 - 1;
-				int l1 = background_2.anInt1452 * anInt945 * 2;
+			if (Rasterizer3D.textureLastUsed[34] >= j) {
+				IndexedImage background_2 = Rasterizer3D.textures[34];
+				int i1 = background_2.width * background_2.anInt1453 - 1;
+				int l1 = background_2.width * anInt945 * 2;
 				byte abyte2[] = background_2.palettePixels;
 				byte abyte5[] = aByteArray912;
 				for (int k2 = 0; k2 <= i1; k2++)
@@ -2699,12 +2699,12 @@ public class Client extends ClientEngine {
 
 				background_2.palettePixels = abyte5;
 				aByteArray912 = abyte2;
-				Rasterizer.method370(34);
+				Rasterizer3D.method370(34);
 			}
-			if (Rasterizer.anIntArray1480[40] >= j) {
-				Background background_2 = Rasterizer.aBackgroundArray1474s[40];
-				int i1 = background_2.anInt1452 * background_2.anInt1453 - 1;
-				int l1 = background_2.anInt1452 * anInt945 * 2;
+			if (Rasterizer3D.textureLastUsed[40] >= j) {
+				IndexedImage background_2 = Rasterizer3D.textures[40];
+				int i1 = background_2.width * background_2.anInt1453 - 1;
+				int l1 = background_2.width * anInt945 * 2;
 				byte abyte2[] = background_2.palettePixels;
 				byte abyte5[] = aByteArray912;
 				for (int k2 = 0; k2 <= i1; k2++)
@@ -2712,12 +2712,12 @@ public class Client extends ClientEngine {
 
 				background_2.palettePixels = abyte5;
 				aByteArray912 = abyte2;
-				Rasterizer.method370(40);
+				Rasterizer3D.method370(40);
 			}
-			if (Rasterizer.anIntArray1480[59] >= j) {
-				Background background_2 = Rasterizer.aBackgroundArray1474s[59];
-				int i1 = background_2.anInt1452 * background_2.anInt1453 - 1;
-				int l1 = background_2.anInt1452 * anInt945 * 2;
+			if (Rasterizer3D.textureLastUsed[59] >= j) {
+				IndexedImage background_2 = Rasterizer3D.textures[59];
+				int i1 = background_2.width * background_2.anInt1453 - 1;
+				int l1 = background_2.width * anInt945 * 2;
 				byte abyte2[] = background_2.palettePixels;
 				byte abyte5[] = aByteArray912;
 				for (int k2 = 0; k2 <= i1; k2++)
@@ -2725,7 +2725,7 @@ public class Client extends ClientEngine {
 
 				background_2.palettePixels = abyte5;
 				aByteArray912 = abyte2;
-				Rasterizer.method370(59);
+				Rasterizer3D.method370(59);
 			}
 		}
 	}
@@ -3330,9 +3330,9 @@ public class Client extends ClientEngine {
 			int i5 =  get_object_key(id);
 			ObjectDefinition class46_2 = ObjectDefinition.forID(i5);
 			if (class46_2.anInt758 != -1) {
-				Background background_2 = mapScenes[class46_2.anInt758];
+				IndexedImage background_2 = mapScenes[class46_2.anInt758];
 				if (background_2 != null) {
-					int i6 = (class46_2.anInt744 * 4 - background_2.anInt1452) / 2;
+					int i6 = (class46_2.anInt744 * 4 - background_2.width) / 2;
 					int j6 = (class46_2.anInt761 * 4 - background_2.anInt1453) / 2;
 					background_2.drawBackground(48 + l * 4 + i6, 48 + (104 - i - class46_2.anInt761) * 4 + j6);
 				}
@@ -3399,9 +3399,9 @@ public class Client extends ClientEngine {
 			int object_id = get_object_key(id);
 			ObjectDefinition class46_1 = ObjectDefinition.forID(object_id);
 			if (class46_1.anInt758 != -1) {
-				Background background_1 = mapScenes[class46_1.anInt758];
+				IndexedImage background_1 = mapScenes[class46_1.anInt758];
 				if (background_1 != null) {
-					int j5 = (class46_1.anInt744 * 4 - background_1.anInt1452) / 2;
+					int j5 = (class46_1.anInt744 * 4 - background_1.width) / 2;
 					int k5 = (class46_1.anInt761 * 4 - background_1.anInt1453) / 2;
 					background_1.drawBackground(48 + l * 4 + j5, 48 + (104 - i - class46_1.anInt761) * 4 + k5);
 				}
@@ -3429,9 +3429,9 @@ public class Client extends ClientEngine {
 			int j2 = get_object_key(id);
 			ObjectDefinition class46 = ObjectDefinition.forID(j2);
 			if (class46.anInt758 != -1) {
-				Background background = mapScenes[class46.anInt758];
+				IndexedImage background = mapScenes[class46.anInt758];
 				if (background != null) {
-					int i4 = (class46.anInt744 * 4 - background.anInt1452) / 2;
+					int i4 = (class46.anInt744 * 4 - background.width) / 2;
 					int j4 = (class46.anInt761 * 4 - background.anInt1453) / 2;
 					background.drawBackground(48 + l * 4 + i4, 48 + (104 - i - class46.anInt761) * 4 + j4);
 				}
@@ -3440,9 +3440,9 @@ public class Client extends ClientEngine {
 	}
 
 	private void loadTitleScreen() {
-		aBackground_966 = new Background(titleStreamLoader, "titlebox", 0);
-		aBackground_967 = new Background(titleStreamLoader, "titlebutton", 0);
-		aBackgroundArray1152s = new Background[12];
+		aBackground_966 = new IndexedImage(titleStreamLoader, "titlebox", 0);
+		aBackground_967 = new IndexedImage(titleStreamLoader, "titlebutton", 0);
+		aBackgroundArray1152s = new IndexedImage[12];
 		int j = 0;
 		try {
 			j = Integer.parseInt(getParameter("fl_icon"));
@@ -3450,11 +3450,11 @@ public class Client extends ClientEngine {
 		}
 		if (j == 0) {
 			for (int k = 0; k < 12; k++)
-				aBackgroundArray1152s[k] = new Background(titleStreamLoader, "runes", k);
+				aBackgroundArray1152s[k] = new IndexedImage(titleStreamLoader, "runes", k);
 
 		} else {
 			for (int l = 0; l < 12; l++)
-				aBackgroundArray1152s[l] = new Background(titleStreamLoader, "runes", 12 + (l & 3));
+				aBackgroundArray1152s[l] = new IndexedImage(titleStreamLoader, "runes", 12 + (l & 3));
 
 		}
 		aClass30_Sub2_Sub1_Sub1_1201 = new Sprite(128, 265);
@@ -3518,7 +3518,7 @@ public class Client extends ClientEngine {
 
 	private static void setHighMem() {
 		WorldController.lowMem = false;
-		Rasterizer.lowMem = false;
+		Rasterizer3D.lowMem = false;
 		low_detail = false;
 		ObjectManager.lowMem = false;
 		ObjectDefinition.lowMem = false;
@@ -3949,11 +3949,11 @@ public class Client extends ClientEngine {
 				super.clickMode3 = 0;
 			}
 		}
-		if (WorldController.anInt470 != -1) {
-			int k = WorldController.anInt470;
-			int k1 = WorldController.anInt471;
+		if (WorldController.clickedTileX != -1) {
+			int k = WorldController.clickedTileX;
+			int k1 = WorldController.clickedTileY;
 			boolean flag = doWalkTo(0, 0, 0, 0, local_player.waypoint_y[0], 0, 0, k1, local_player.waypoint_x[0], true, k);
-			WorldController.anInt470 = -1;
+			WorldController.clickedTileX = -1;
 			if (flag) {
 				crossX = super.saveClickX;
 				crossY = super.saveClickY;
@@ -4468,11 +4468,11 @@ public class Client extends ClientEngine {
 			if (class9.contentType > 0)
 				flag8 = promptUserForInput(class9);
 			if (flag8) {
-		
+
 				/*if (SettingHandler.handle(k)) {
 					return;
 				}*/
-				
+
 				if (Settings.click(this, second_menu_action)) {
 					return;
 				}
@@ -4527,9 +4527,9 @@ public class Client extends ClientEngine {
 				case 36010:
 					frameMode(ScreenMode.FULLSCREEN);
 					break;
-					
-					
-					
+
+
+
 				case 19144:
 					sendFrame248(15106, 3213);
 					method60(15106);
@@ -5781,7 +5781,7 @@ public class Client extends ClientEngine {
 		Varp.cache = null;
 		super.fullGameScreen = null;
 		Player.mruNodes = null;
-		Rasterizer.nullLoader();
+		Rasterizer3D.nullLoader();
 		WorldController.nullLoader();
 		Model.nullLoader();
 		SequenceFrame.nullLoader();
@@ -6137,7 +6137,7 @@ public class Client extends ClientEngine {
 							StreamLoader streamLoader_2 = streamLoaderForName(4, "2d graphics", "media", expectedCRCs[4], 40);
 							RSInterface.unpack(streamLoader_1, aclass30_sub2_sub1_sub4s, streamLoader_2);
 							sendFrame126("0", 8135);
-							
+
 						}
 						if (inputString.equals("::objs")) {
 							for (int i = 0; i < ObjectDefinition.streamIndices.length; i++) {
@@ -6147,7 +6147,7 @@ public class Client extends ClientEngine {
 									continue;
 								}
 
-								System.out.println(i + " " + def.anInt781);
+								System.out.println(i + " " + def.animation);
 							}
 						}
 						if (inputString.equals("::debug")) {
@@ -7552,7 +7552,7 @@ public class Client extends ClientEngine {
 	public void login(String username, String password, boolean flag) {
 		Signlink.errorname = username;
 		try {
-			if (rememberMe && username != null && password != null) {			
+			if (rememberMe && username != null && password != null) {
 				SettingHandler.save();
 			}
 			if (!flag) {
@@ -8093,7 +8093,7 @@ public class Client extends ClientEngine {
 				npc.maxHealth = stream.readUnsignedByte();
 			}
 			if ((l & 0x80) != 0) {
-				npc.graphic_id = stream.readUnsignedWord();
+				npc.graphic_id = stream.readUnsignedShort();
 				int k1 = stream.readDWord();
 				npc.anInt1524 = k1 >> 16;
 				npc.anInt1523 = game_tick + (k1 & 0xffff);
@@ -8105,7 +8105,7 @@ public class Client extends ClientEngine {
 					npc.graphic_id = -1;
 			}
 			if ((l & 0x20) != 0) {
-				npc.engaged_entity_id = stream.readUnsignedWord();
+				npc.engaged_entity_id = stream.readUnsignedShort();
 				if (npc.engaged_entity_id == 65535)
 					npc.engaged_entity_id = -1;
 			}
@@ -8429,7 +8429,7 @@ public class Client extends ClientEngine {
 			mapIcon6 = new Sprite(mediaStreamLoader, "mapfunction", 78); //Ironman
 
 			multiOverlay = new Sprite(streamLoader_2, "overlay_multiway", 0);
-			mapBack = new Background(streamLoader_2, "mapback", 0);
+			mapBack = new IndexedImage(streamLoader_2, "mapback", 0);
 			for (int j3 = 0; j3 <= 16; j3++) {
 				sideIcons[j3] = new Sprite(streamLoader_2, "sideicons", j3);
 			}
@@ -8444,7 +8444,7 @@ public class Client extends ClientEngine {
 			compass = new Sprite(streamLoader_2, "compass", 0);
 			try {
 				for (int k3 = 0; k3 < 105; k3++)
-					mapScenes[k3] = new Background(streamLoader_2, "mapscene", k3);
+					mapScenes[k3] = new IndexedImage(streamLoader_2, "mapscene", k3);
 			} catch (Exception _ex) {
 			}
 			try {
@@ -8504,9 +8504,9 @@ public class Client extends ClientEngine {
 					mapScenes[i6].method360(i5 + l5, j5 + l5, k5 + l5);
 			}
 			drawSmoothLoading(550, "Valius is now loading... Please wait.");
-			Rasterizer.method368(streamLoader_3);
-			Rasterizer.method372(0.80000000000000004D);
-			Rasterizer.method367();
+			Rasterizer3D.method368(streamLoader_3);
+			Rasterizer3D.method372(0.80000000000000004D);
+			Rasterizer3D.method367();
 			//drawSmoothLoading(325, "Unpacking config");
 			AnimationDefinition.unpackConfig(streamLoader);
 			ObjectDefinition.unpackConfig(streamLoader);
@@ -8527,7 +8527,7 @@ public class Client extends ClientEngine {
 				int k6 = 999;
 				int i7 = 0;
 				for (int k7 = 0; k7 < 34; k7++) {
-					if (mapBack.palettePixels[k7 + j6 * mapBack.anInt1452] == 0) {
+					if (mapBack.palettePixels[k7 + j6 * mapBack.width] == 0) {
 						if (k6 == 999)
 							k6 = k7;
 						continue;
@@ -8544,7 +8544,7 @@ public class Client extends ClientEngine {
 				int j7 = 999;
 				int l7 = 0;
 				for (int j8 = 24; j8 < 177; j8++) {
-					if (mapBack.palettePixels[j8 + l6 * mapBack.anInt1452] == 0 && (j8 > 34 || l6 > 34)) {
+					if (mapBack.palettePixels[j8 + l6 * mapBack.width] == 0 && (j8 > 34 || l6 > 34)) {
 						if (j7 == 999) {
 							j7 = j8;
 						}
@@ -8604,7 +8604,7 @@ public class Client extends ClientEngine {
 	}
 
 	public String indexLocation(int cacheIndex, int index) {
-		return Signlink.findcachedir() + "index" + cacheIndex + "/" + (index != -1 ? index + ".gz" : "");
+		return "D:\\dump\\index" + cacheIndex + "/" + (index != -1 ? index + ".gz" : "");
 	}
 
 	public void repackCacheIndex(int cacheIndex) {
@@ -8663,8 +8663,8 @@ public class Client extends ClientEngine {
 				i -= 73;
 				j -= 75;
 				int k = minimapInt1 + minimapInt2 & 0x7ff;
-				int i1 = Rasterizer.anIntArray1470[k];
-				int j1 = Rasterizer.anIntArray1471[k];
+				int i1 = Rasterizer3D.anIntArray1470[k];
+				int j1 = Rasterizer3D.anIntArray1471[k];
 				i1 = i1 * (minimapInt3 + 256) >> 8;
 				j1 = j1 * (minimapInt3 + 256) >> 8;
 				int k1 = j * i1 + i * j1 >> 11;
@@ -8958,7 +8958,7 @@ public class Client extends ClientEngine {
 					entity.anInt1542--;
 			}
 		} catch(Exception e) {
-			
+
 		}
 	}
 
@@ -9100,7 +9100,7 @@ public class Client extends ClientEngine {
 				anInt945 = 0;
 				resetAllImageProducers();
 				super.fullGameScreen.initDrawingArea();
-				Rasterizer.scanOffsets = fullScreenTextureArray;
+				Rasterizer3D.scanOffsets = fullScreenTextureArray;
 				Rasterizer2D.setAllPixelsToZero();
 				welcomeScreenRaised = true;
 				if (openInterfaceID != -1) {
@@ -9634,11 +9634,11 @@ public class Client extends ClientEngine {
 					}
 					if((child.parentID == 1151) || (child.parentID == 12855)) {
 						switch (color) {
-							case 16773120: 
+							case 16773120:
 								color = 0xFE981F;
 								break;
-							case 7040819: 
-								color = 0xAF6A1A; 
+							case 7040819:
+								color = 0xAF6A1A;
 								break;
 						}
 					}
@@ -9727,12 +9727,12 @@ public class Client extends ClientEngine {
 							}
 					}
 				} else if (child.type == 6) {
-					int k3 = Rasterizer.originViewX;
-					int j4 = Rasterizer.originViewY;
-					Rasterizer.originViewX = k2 + child.width / 2;
-					Rasterizer.originViewY = l2 + child.height / 2;
-					int i5 = Rasterizer.anIntArray1470[child.modelRotation1] * child.modelZoom >> 16;
-					int l5 = Rasterizer.anIntArray1471[child.modelRotation1] * child.modelZoom >> 16;
+					int k3 = Rasterizer3D.originViewX;
+					int j4 = Rasterizer3D.originViewY;
+					Rasterizer3D.originViewX = k2 + child.width / 2;
+					Rasterizer3D.originViewY = l2 + child.height / 2;
+					int i5 = Rasterizer3D.anIntArray1470[child.modelRotation1] * child.modelZoom >> 16;
+					int l5 = Rasterizer3D.anIntArray1471[child.modelRotation1] * child.modelZoom >> 16;
 					boolean flag2 = interfaceIsSelected(child);
 					int i7;
 					if (flag2)
@@ -9748,8 +9748,8 @@ public class Client extends ClientEngine {
 					}
 					if (model != null)
 						model.method482(child.modelRotation2, 0, child.modelRotation1, 0, i5, l5);
-					Rasterizer.originViewX = k3;
-					Rasterizer.originViewY = j4;
+					Rasterizer3D.originViewX = k3;
+					Rasterizer3D.originViewY = j4;
 				} else if (child.type == 7) {
 					TextDrawingArea textDrawingArea_1 = child.textDrawingAreas;
 					int k4 = 0;
@@ -9986,7 +9986,7 @@ public class Client extends ClientEngine {
 						xx = frameWidth - 197;
 						yy = frameWidth >= 1000 ? frameHeight - 280 : frameHeight - 262 + yy - j;
 					}
-					
+
 					if (super.mouseX >= xx && super.mouseX <= xx + child.width && super.mouseY >= yy && super.mouseY <= yy + child.height) {
 						hover = true;
 					}
@@ -10017,14 +10017,14 @@ public class Client extends ClientEngine {
 
 					Rasterizer2D.drawPixels(child.height, l2, k2, color, child.width);
 					Rasterizer2D.fillPixels(k2, child.width, child.height, 0, l2);
-					
+
 					x = k2;
 					y = l2;
 
 					StringBuilder builder = new StringBuilder();
-					
+
 					String message = child.disabledMessage;
-					
+
 					if (child.enabledMessage != null && RSInterface.currentInputField != child) {
 						message = child.enabledMessage;
 					}
@@ -10050,7 +10050,7 @@ public class Client extends ClientEngine {
 		return 0;
 	}
 
-	private void randomizeBackground(Background background) {
+	private void randomizeBackground(IndexedImage background) {
 		int j = 256;
 		for (int k = 0; k < anIntArray1190.length; k++)
 			anIntArray1190[k] = 0;
@@ -10074,7 +10074,7 @@ public class Client extends ClientEngine {
 		if (background != null) {
 			int l1 = 0;
 			for (int j2 = 0; j2 < background.anInt1453; j2++) {
-				for (int l2 = 0; l2 < background.anInt1452; l2++)
+				for (int l2 = 0; l2 < background.width; l2++)
 					if (background.palettePixels[l1++] != 0) {
 						int i3 = l2 + 16 + background.anInt1454;
 						int j3 = j2 + 16 + background.anInt1455;
@@ -10453,7 +10453,7 @@ public class Client extends ClientEngine {
 		} else if (inWGLobby(next_region_start + (local_player.world_x - 6 >> 7), next_region_end + (local_player.world_y - 6 >> 7), plane)) {
 			anInt1018 = 41250;
 		} else if (inWGGame(next_region_start + (local_player.world_x - 6 >> 7), next_region_end + (local_player.world_y - 6 >> 7), plane)) {
-			anInt1018 = 41270;	
+			anInt1018 = 41270;
 		} else if (inCyclops(next_region_start + (local_player.world_x - 6 >> 7), next_region_end + (local_player.world_y - 6 >> 7), plane)) {
 			anInt1018 = 51200;
 		} else if (inPcBoat(next_region_start + (local_player.world_x - 6 >> 7), next_region_end + (local_player.world_y - 6 >> 7), plane)) {
@@ -10697,7 +10697,7 @@ public class Client extends ClientEngine {
 	public final boolean inCyclops(int x, int y, int z) {
 		return (x >= 2847 && x <= 2876 && y >= 3534 && y <= 3556 && z == 2 || x >= 2838 && x <= 2847 && y >= 3543 && y <= 3556 && z == 2);
 	}
-	
+
 	private final boolean inWGGame(int x, int y, int z) {
 		return (x > 2136 && x < 2166 && y > 5089 && y < 5108);
 	}
@@ -11189,9 +11189,9 @@ public class Client extends ClientEngine {
 		if (menuActionRow < 2 && itemSelected == 0 && spellSelected == 0) {
 			return;
 		}
-		
+
 		String s;
-		
+
 		if (itemSelected == 1 && menuActionRow < 2) {
 			s = "Use " + selectedItemName + " with...";
 		} else if (spellSelected == 1 && menuActionRow < 2) {
@@ -11199,13 +11199,13 @@ public class Client extends ClientEngine {
 		} else {
 			s = menuActionText[menuActionRow - 1];
 		}
-		
+
 		if (menuActionRow > 2 && !Configuration.menuHovers) {
 			s = s + "@whi@ / " + (menuActionRow - 2) + " more options";
 		} else {
 			s = s + "@whi@";
 		}
-		
+
 		if (Configuration.menuHovers && !s.contains("Walk here")) {
 			Rasterizer2D.drawAlphaPixels(super.mouseX, super.mouseY - 11, newBoldFont.getTextWidth(s.trim()) + 6, 17, 0, 100);
 			newBoldFont.drawBasicString(s, super.mouseX + 2, super.mouseY + 2, 0xFFFFFF, 1);
@@ -11288,7 +11288,7 @@ public class Client extends ClientEngine {
 			markMinimap(mapIcon4, ((1623 - next_region_start) * 4 + 2) - local_player.world_x / 32, ((3664 - next_region_end) * 4 + 2) - local_player.world_y / 32);//donator icon
 			markMinimap(mapIcon5, ((1627 - next_region_start) * 4 + 2) - local_player.world_x / 32, ((3671 - next_region_end) * 4 + 2) - local_player.world_y / 32);//guide
 			markMinimap(mapIcon6, ((1650 - next_region_start) * 4 + 2) - local_player.world_x / 32, ((3670 - next_region_end) * 4 + 2) - local_player.world_y / 32);//ironman
-			
+
 		}
 		for (int k5 = 0; k5 < 104; k5++) {
 			for (int l5 = 0; l5 < 104; l5++) {
@@ -11438,9 +11438,9 @@ public class Client extends ClientEngine {
 		l = i1 * j1 + l * k1 >> 16;
 		i1 = j2;
 		if (l >= 50) {
-			this.spriteDrawX = (Rasterizer.originViewX + i
+			this.spriteDrawX = (Rasterizer3D.originViewX + i
 					* WorldController.focalLength / l);
-			this.spriteDrawY = (Rasterizer.originViewY + i1
+			this.spriteDrawY = (Rasterizer3D.originViewY + i1
 					* WorldController.focalLength / l);
 		} else {
 			spriteDrawX = -1;
@@ -11649,7 +11649,7 @@ public class Client extends ClientEngine {
 		chatTitles[0] = title;
 		chatColors[0] = color;
 	}
-	
+
 	public void pushMessage(String s, int i, String s1) {
 		if (i == 0 && dialogID != -1) {
 			aString844 = s;
@@ -11679,9 +11679,9 @@ public class Client extends ClientEngine {
 			int k = stream.readUnsignedByte();
 			int j3 = anInt1268 + (k >> 4 & 7);
 			int i6 = anInt1269 + (k & 7);
-			int l8 = stream.readUnsignedWord();
-			int k11 = stream.readUnsignedWord();
-			int l13 = stream.readUnsignedWord();
+			int l8 = stream.readUnsignedShort();
+			int k11 = stream.readUnsignedShort();
+			int l13 = stream.readUnsignedShort();
 			if (j3 >= 0 && i6 >= 0 && j3 < 104 && i6 < 104) {
 				NodeList class19_1 = groundArray[plane][j3][i6];
 				if (class19_1 != null) {
@@ -11701,7 +11701,7 @@ public class Client extends ClientEngine {
 			int l = stream.readUnsignedByte();
 			int k3 = anInt1268 + (l >> 4 & 7);
 			int j6 = anInt1269 + (l & 7);
-			int i9 = stream.readUnsignedWord();
+			int i9 = stream.readUnsignedShort();
 			int l11 = stream.readUnsignedByte();
 			int i14 = l11 >> 4 & 0xf;
 			int i16 = l11 & 7;
@@ -11718,7 +11718,7 @@ public class Client extends ClientEngine {
 			int k6 = anInt1268 + (l3 >> 4 & 7);
 			int j9 = anInt1269 + (l3 & 7);
 			int i12 = stream.method435();
-			int j14 = stream.readUnsignedWord();
+			int j14 = stream.readUnsignedShort();
 			if (k6 >= 0 && j9 >= 0 && k6 < 104 && j9 < 104 && i12 != unknownInt10) {
 				Item class30_sub2_sub4_sub2_2 = new Item();
 				class30_sub2_sub4_sub2_2.ID = i1;
@@ -11734,7 +11734,7 @@ public class Client extends ClientEngine {
 			int j1 = stream.method426();
 			int i4 = anInt1268 + (j1 >> 4 & 7);
 			int l6 = anInt1269 + (j1 & 7);
-			int k9 = stream.readUnsignedWord();
+			int k9 = stream.readUnsignedShort();
 			if (i4 >= 0 && l6 >= 0 && i4 < 104 && l6 < 104) {
 				NodeList class19 = groundArray[plane][i4][l6];
 				if (class19 != null) {
@@ -11802,17 +11802,17 @@ public class Client extends ClientEngine {
 			int l1 = stream.method428();
 			int k4 = anInt1268 + (l1 >> 4 & 7);
 			int j7 = anInt1269 + (l1 & 7);
-			int i10 = stream.readUnsignedWord();
+			int i10 = stream.readUnsignedShort();
 			byte byte0 = stream.method430();
 			int l14 = stream.method434();
 			byte byte1 = stream.method429();
-			int k17 = stream.readUnsignedWord();
+			int k17 = stream.readUnsignedShort();
 			int k18 = stream.method428();
 			int j19 = k18 >> 2;
 			int i20 = k18 & 3;
 			int l20 = anIntArray1177[j19];
 			byte byte2 = stream.readSignedByte();
-			int l21 = stream.readUnsignedWord();
+			int l21 = stream.readUnsignedShort();
 			byte byte3 = stream.method429();
 			Player player;
 			if (i10 == unknownInt10)
@@ -11874,9 +11874,9 @@ public class Client extends ClientEngine {
 			int j2 = stream.readUnsignedByte();
 			int i5 = anInt1268 + (j2 >> 4 & 7);
 			int l7 = anInt1269 + (j2 & 7);
-			int k10 = stream.readUnsignedWord();
+			int k10 = stream.readUnsignedShort();
 			int l12 = stream.readUnsignedByte();
-			int j15 = stream.readUnsignedWord();
+			int j15 = stream.readUnsignedShort();
 			if (i5 >= 0 && l7 >= 0 && i5 < 104 && l7 < 104) {
 				i5 = i5 * 128 + 64;
 				l7 = l7 * 128 + 64;
@@ -11887,7 +11887,7 @@ public class Client extends ClientEngine {
 		}
 		if (j == 44) {
 			int k2 = stream.method436();
-			int j5 = stream.readUnsignedWord();
+			int j5 = stream.readUnsignedShort();
 			int i8 = stream.readUnsignedByte();
 			int l10 = anInt1268 + (i8 >> 4 & 7);
 			int i13 = anInt1269 + (i8 & 7);
@@ -11921,11 +11921,11 @@ public class Client extends ClientEngine {
 			int j11 = l5 + stream.readSignedByte();
 			int k13 = k8 + stream.readSignedByte();
 			int l15 = stream.readSignedWord();
-			int i17 = stream.readUnsignedWord();
+			int i17 = stream.readUnsignedShort();
 			int i18 = stream.readUnsignedByte() * 4;
 			int l18 = stream.readUnsignedByte() * 4;
-			int k19 = stream.readUnsignedWord();
-			int j20 = stream.readUnsignedWord();
+			int k19 = stream.readUnsignedShort();
+			int j20 = stream.readUnsignedShort();
 			int i21 = stream.readUnsignedByte();
 			int j21 = stream.readUnsignedByte();
 			if (l5 >= 0 && k8 >= 0 && l5 < 104 && k8 < 104 && j11 >= 0 && k13 >= 0 && j11 < 104 && k13 < 104 && i17 != 65535) {
@@ -12043,7 +12043,7 @@ public class Client extends ClientEngine {
 		anInt839 = 0;
 		anInt893 = 0;
 		method117(stream);
-		method134(stream); 
+		method134(stream);
 		method91(stream, i);
 		method49(stream);
 		for (int k = 0; k < anInt839; k++) {
@@ -12256,7 +12256,7 @@ public class Client extends ClientEngine {
 				if (i > 1) {
 					socketStream.flushInputStream(inStream.payload, 2);
 					inStream.currentPosition = 0;
-					pktSize = inStream.readUnsignedWord();
+					pktSize = inStream.readUnsignedShort();
 					i -= 2;
 				} else {
 					return false;
@@ -12281,7 +12281,7 @@ public class Client extends ClientEngine {
 				unreadMessages = inStream.method435();
 				membersInt = inStream.readUnsignedByte();
 				anInt1193 = inStream.method440();
-				daysSinceLastLogin = inStream.readUnsignedWord();
+				daysSinceLastLogin = inStream.readUnsignedShort();
 				if (anInt1193 != 0 && openInterfaceID == -1) {
 					Signlink.dnslookup(TextClass.method586(anInt1193));
 					clearTopInterfaces();
@@ -12332,7 +12332,7 @@ public class Client extends ClientEngine {
 					clanUsername = inStream.readString();
 					clanMessage = TextInput.processText(inStream.readString());
 					clanTitle = inStream.readString();
-					channelRights = inStream.readUnsignedWord();
+					channelRights = inStream.readUnsignedShort();
 					pushMessage(clanMessage, 16, clanUsername);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -12369,7 +12369,7 @@ public class Client extends ClientEngine {
 				aBoolean1160 = true;
 				anInt1098 = inStream.readUnsignedByte();
 				anInt1099 = inStream.readUnsignedByte();
-				anInt1100 = inStream.readUnsignedWord();
+				anInt1100 = inStream.readUnsignedShort();
 				anInt1101 = inStream.readUnsignedByte();
 				anInt1102 = inStream.readUnsignedByte();
 				if (anInt1102 >= 100) {
@@ -12395,7 +12395,7 @@ public class Client extends ClientEngine {
 				return true;
 
 			case 71:
-				int l1 = inStream.readUnsignedWord();
+				int l1 = inStream.readUnsignedShort();
 				int j10 = inStream.method426();
 				if (l1 == 65535)
 					l1 = -1;
@@ -12450,7 +12450,7 @@ public class Client extends ClientEngine {
 				int i11 = anInt1070;
 				if (pktType == 73) {
 					l2 = inStream.method435();
-					i11 = inStream.readUnsignedWord();
+					i11 = inStream.readUnsignedShort();
 					aBoolean1159 = false;
 				}
 				if (pktType == 241) {
@@ -12468,7 +12468,7 @@ public class Client extends ClientEngine {
 						}
 					}
 					inStream.finishBitAccess();
-					l2 = inStream.readUnsignedWord();
+					l2 = inStream.readUnsignedShort();
 					aBoolean1159 = true;
 				}
 				if (anInt1069 == l2 && anInt1070 == i11 && loadingStage == 2) {
@@ -12679,9 +12679,9 @@ public class Client extends ClientEngine {
 				return true;
 
 			case 174:
-				int i4 = inStream.readUnsignedWord();
+				int i4 = inStream.readUnsignedShort();
 				int l11 = inStream.readUnsignedByte();
-				int k17 = inStream.readUnsignedWord();
+				int k17 = inStream.readUnsignedShort();
 				if (aBoolean848 && !low_detail && anInt1062 < 50) {
 					anIntArray1207[anInt1062] = i4;
 					anIntArray1241[anInt1062] = l11;
@@ -12723,19 +12723,19 @@ public class Client extends ClientEngine {
 					}
 					if (!flag2 && anInt1251 == 0)
 						pushMessage("wishes to trade with you.", 4, s3);
-					
+
 				} else if (s.startsWith(":updateSettings:")) {
 					Settings.updateText();
 				} else if (s.startsWith(":defaultSettings:")) {
 					Settings.defaultValues();
 				} else if (s.startsWith(":saveSettings:")) {
-					Settings.save();		
+					Settings.save();
 				} else if (s.startsWith(":transparentTab:")) {
 					if (frameMode != ScreenMode.FIXED) {
 						transparentTabArea = !transparentTabArea;
 					} else {
 						pushMessage("Settings are not applicable in fixed mode!", 0, "");
-					}	
+					}
 				} else if (s.startsWith(":transparentChatbox:")) {
 					if (frameMode != ScreenMode.FIXED) {
 						changeChatArea = !changeChatArea;
@@ -12754,7 +12754,7 @@ public class Client extends ClientEngine {
 				} else if (s.startsWith(":prestigeColorsFalse:")) {
 					Configuration.enablePrestigeColors = false;
 					Settings.updateText();
-					
+
 				} else if (s.endsWith(":clan:")) {
 					String s4 = s.substring(0, s.indexOf(":"));
 					TextClass.longForName(s4);
@@ -12858,7 +12858,7 @@ public class Client extends ClientEngine {
 			case 254:
 				anInt855 = inStream.readUnsignedByte();
 				if (anInt855 == 1)
-					anInt1222 = inStream.readUnsignedWord();
+					anInt1222 = inStream.readUnsignedShort();
 				if (anInt855 >= 2 && anInt855 <= 6) {
 					if (anInt855 == 2) {
 						anInt937 = 64;
@@ -12881,18 +12881,18 @@ public class Client extends ClientEngine {
 						anInt938 = 128;
 					}
 					anInt855 = 2;
-					anInt934 = inStream.readUnsignedWord();
-					anInt935 = inStream.readUnsignedWord();
+					anInt934 = inStream.readUnsignedShort();
+					anInt935 = inStream.readUnsignedShort();
 					anInt936 = inStream.readUnsignedByte();
 				}
 				if (anInt855 == 10)
-					anInt933 = inStream.readUnsignedWord();
+					anInt933 = inStream.readUnsignedShort();
 				pktType = -1;
 				return true;
 
 			case 248:
 				int i5 = inStream.method435();
-				int k12 = inStream.readUnsignedWord();
+				int k12 = inStream.readUnsignedShort();
 				if (backDialogID != -1) {
 					backDialogID = -1;
 					inputTaken = true;
@@ -12933,16 +12933,16 @@ public class Client extends ClientEngine {
 
 			case 173:
 				try {
-					pushKill(inStream.readString(), inStream.readString(), inStream.readUnsignedWord(), inStream.readUnsignedByte() == 1);
+					pushKill(inStream.readString(), inStream.readString(), inStream.readUnsignedShort(), inStream.readUnsignedByte() == 1);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				pktType = -1;
 				return true;
-				
+
 			case 175:
-				try {			
-					pushFeed(inStream.readString(), inStream.readUnsignedWord(), inStream.readUnsignedWord());		
+				try {
+					pushFeed(inStream.readString(), inStream.readUnsignedShort(), inStream.readUnsignedShort());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -13005,8 +13005,8 @@ public class Client extends ClientEngine {
 
 			case 246:
 				int i6 = inStream.method434();
-				int i13 = inStream.readUnsignedWord();
-				int k18 = inStream.readUnsignedWord();
+				int i13 = inStream.readUnsignedShort();
+				int k18 = inStream.readUnsignedShort();
 				if (k18 == 65535) {
 					RSInterface.interfaceCache[i6].anInt233 = 0;
 					pktType = -1;
@@ -13024,7 +13024,7 @@ public class Client extends ClientEngine {
 
 			case 171:
 				boolean flag1 = inStream.readUnsignedByte() == 1;
-				int j13 = inStream.readUnsignedWord();
+				int j13 = inStream.readUnsignedShort();
 				RSInterface.interfaceCache[j13].isMouseoverTriggered = flag1;
 				pktType = -1;
 				return true;
@@ -13137,7 +13137,7 @@ public class Client extends ClientEngine {
 
 			case 201:
 				try {
-					playerIndex = inStream.readUnsignedWord();
+					playerIndex = inStream.readUnsignedShort();
 				} catch (Exception e) {
 				}
 				pktType = -1;
@@ -13160,7 +13160,7 @@ public class Client extends ClientEngine {
 
 			case 8:
 				int k6 = inStream.method436();
-				int l13 = inStream.readUnsignedWord();
+				int l13 = inStream.readUnsignedShort();
 				RSInterface.interfaceCache[k6].anInt233 = 1;
 				RSInterface.interfaceCache[k6].mediaID = l13;
 				pktType = -1;
@@ -13178,9 +13178,9 @@ public class Client extends ClientEngine {
 				return true;
 
 			case 53:
-				int i7 = inStream.readUnsignedWord();
+				int i7 = inStream.readUnsignedShort();
 				RSInterface class9_1 = RSInterface.interfaceCache[i7];
-				int j19 = inStream.readUnsignedWord();
+				int j19 = inStream.readUnsignedShort();
 				for (int j22 = 0; j22 < j19; j22++) {
 					int i25 = inStream.readUnsignedByte();
 					if (i25 == 255)
@@ -13194,7 +13194,7 @@ public class Client extends ClientEngine {
 				}
 				if (class9_1.contentType == 206) {
 					for (int tab = 0; tab < 10; tab++) {
-						int amount = inStream.readSignedByte() << 8 | inStream.readUnsignedWord();
+						int amount = inStream.readSignedByte() << 8 | inStream.readUnsignedShort();
 						tabAmounts[tab] = amount;
 					}
 
@@ -13217,8 +13217,8 @@ public class Client extends ClientEngine {
 
 			case 230:
 				int j7 = inStream.method435();
-				int j14 = inStream.readUnsignedWord();
-				int k19 = inStream.readUnsignedWord();
+				int j14 = inStream.readUnsignedShort();
+				int k19 = inStream.readUnsignedShort();
 				int k22 = inStream.method436();
 				RSInterface.interfaceCache[j14].modelRotation1 = k19;
 				RSInterface.interfaceCache[j14].modelRotation2 = k22;
@@ -13235,7 +13235,7 @@ public class Client extends ClientEngine {
 				aBoolean1160 = true;
 				anInt995 = inStream.readUnsignedByte();
 				anInt996 = inStream.readUnsignedByte();
-				anInt997 = inStream.readUnsignedWord();
+				anInt997 = inStream.readUnsignedShort();
 				anInt998 = inStream.readUnsignedByte();
 				anInt999 = inStream.readUnsignedByte();
 				if (anInt999 >= 100) {
@@ -13284,7 +13284,7 @@ public class Client extends ClientEngine {
 				return true;
 
 			case 97:
-				int l7 = inStream.readUnsignedWord();
+				int l7 = inStream.readUnsignedShort();
 				method60(l7);
 				if (invOverlayInterfaceID != -1) {
 					invOverlayInterfaceID = -1;
@@ -13342,7 +13342,7 @@ public class Client extends ClientEngine {
 				return true;
 
 			case 200:
-				int l8 = inStream.readUnsignedWord();
+				int l8 = inStream.readUnsignedShort();
 				int i15 = inStream.readSignedWord();
 				RSInterface class9_4 = RSInterface.interfaceCache[l8];
 				class9_4.anInt257 = i15;
@@ -13368,11 +13368,11 @@ public class Client extends ClientEngine {
 				return true;
 
 			case 34:
-				int i9 = inStream.readUnsignedWord();
+				int i9 = inStream.readUnsignedShort();
 				RSInterface class9_2 = RSInterface.interfaceCache[i9];
 				while (inStream.currentPosition < pktSize) {
 					int j20 = inStream.method422();
-					int i23 = inStream.readUnsignedWord();
+					int i23 = inStream.readUnsignedShort();
 					int l25 = inStream.readUnsignedByte();
 					if (l25 == 255)
 						l25 = inStream.readDWord();
@@ -13517,7 +13517,7 @@ public class Client extends ClientEngine {
 		int j1 = yCameraPos;
 		int k1 = yCameraCurve;
 		int l1 = xCameraCurve;
-		int k2 = Rasterizer.anInt1481;
+		int k2 = Rasterizer3D.lastTextureRetrievalCount;
 		for (int i2 = 0; i2 < 5; i2++)
 			if (aBooleanArray876[i2]) {
 				int j2 = (int) ((Math.random() * (double) (anIntArray873[i2] * 2 + 1) - (double) anIntArray873[i2]) + Math.sin((double) anIntArray1030[i2] * ((double) anIntArray928[i2] / 100D)) * (double) anIntArray1203[i2]);
@@ -13571,7 +13571,7 @@ public class Client extends ClientEngine {
 		updateEntities();
 		drawHeadIcon();
 		method37(k2);
-		
+
 		if (Configuration.showKillFeed) {
 			displayKillFeed();
 		}
@@ -13735,11 +13735,11 @@ public class Client extends ClientEngine {
 		int y = walkableInterfaceMode ? 46 : 10;
 		digits = xpCounter == 0 ? 1 : 1 + (int) Math.floor(Math.log10(xpCounter));
 		int i = smallText.getTextWidth(Integer.toString(xpCounter)) - smallText.getTextWidth(Integer.toString(xpCounter)) / 2;
-		
+
 		cacheSprite[490].drawSprite(x - 108, 2);
 		cacheSprite[491].drawSprite(x - 108, 6);
 		//smallText.method382(0xffffff, x - 38 - i - digits - 12, "Total:", y + 50, true);
-		
+
 		if (xpCounter >= 0) {
 			smallText.method382(0xFFFFFD, x + 1 - i, NumberFormat.getIntegerInstance().format(xpCounter), y + 11, true);
 		}
@@ -14034,7 +14034,7 @@ public class Client extends ClientEngine {
 		aClass19_1056 = new NodeList();
 		anIntArray1057 = new int[33];
 		aClass9_1059 = new RSInterface();
-		mapScenes = new Background[105];
+		mapScenes = new IndexedImage[105];
 		barFillColor = 0x4d4233;
 		anIntArray1065 = new int[7];
 		anIntArray1072 = new int[1000];
@@ -14221,8 +14221,8 @@ public class Client extends ClientEngine {
 	private int spriteDrawX;
 	private int spriteDrawY;
 	private final int[] anIntArray965 = { 0xffff00, 0xff0000, 65280, 65535, 0xff00ff, 0xffffff };
-	public Background aBackground_966;
-	public Background aBackground_967;
+	public IndexedImage aBackground_966;
+	public IndexedImage aBackground_967;
 	private final int[] anIntArray968;
 	public final int[] anIntArray969;
 	final Decompressor[] decompressors;
@@ -14312,7 +14312,7 @@ public class Client extends ClientEngine {
 	private NodeList aClass19_1056;
 	private final int[] anIntArray1057;
 	public final RSInterface aClass9_1059;
-	private Background[] mapScenes;
+	private IndexedImage[] mapScenes;
 	private int anInt1062;
 	private final int barFillColor;
 	private int friendsListAction;
@@ -14393,7 +14393,7 @@ public class Client extends ClientEngine {
 	private boolean aBoolean1149;
 	private Sprite[] crosses;
 	private boolean musicEnabled;
-	private Background[] aBackgroundArray1152s;
+	private IndexedImage[] aBackgroundArray1152s;
 	private int unreadMessages;
 	private static int anInt1155;
 	private static boolean fpsOn;
@@ -14435,7 +14435,7 @@ public class Client extends ClientEngine {
 	public static Buffer stream;
 	private int anInt1193;
 	private int splitPrivateChat;
-	private Background mapBack;
+	private IndexedImage mapBack;
 	private String[] menuActionText;
 	private Sprite aClass30_Sub2_Sub1_Sub1_1201;
 	private Sprite aClass30_Sub2_Sub1_Sub1_1202;

@@ -166,7 +166,7 @@ public class RSFont extends Rasterizer2D {
 		strikeThrough = false;
 		Buffer stream = new Buffer(archive.getDataForName(s + ".dat"));
 		Buffer stream_1 = new Buffer(archive.getDataForName("index.dat"));
-		stream_1.currentPosition = stream.readUnsignedWord() + 4;
+		stream_1.currentPosition = stream.readUnsignedShort() + 4;
 		int k = stream_1.readUnsignedByte();
 		if (k > 0) {
 			stream_1.currentPosition += 3 * (k - 1);
@@ -174,8 +174,8 @@ public class RSFont extends Rasterizer2D {
 		for (int l = 0; l < 256; l++) {
 			characterDrawXOffsets[l] = stream_1.readUnsignedByte();
 			characterDrawYOffsets[l] = stream_1.readUnsignedByte();
-			int i1 = characterWidths[l] = stream_1.readUnsignedWord();
-			int j1 = characterHeights[l] = stream_1.readUnsignedWord();
+			int i1 = characterWidths[l] = stream_1.readUnsignedShort();
+			int j1 = characterHeights[l] = stream_1.readUnsignedShort();
 			int k1 = stream_1.readUnsignedByte();
 			int l1 = i1 * j1;
 			fontPixels[l] = new byte[l1];

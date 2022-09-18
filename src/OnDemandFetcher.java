@@ -88,14 +88,14 @@ public final class OnDemandFetcher extends OnDemandFetcherParent implements Runn
 		//byte[] abyte2 = FileOperations.ReadFile(Signlink.findcachedir()+ "map_index");
 		byte[] abyte2 = streamLoader.getDataForName("map_index");
 		Buffer stream2 = new Buffer(abyte2);
-		int j1 = stream2.readUnsignedWord();
+		int j1 = stream2.readUnsignedShort();
 		mapIndices1 = new int[j1];
 		mapIndices2 = new int[j1];
 		mapIndices3 = new int[j1];
 		for (int i2 = 0; i2 < j1; i2++) {
-			mapIndices1[i2] = stream2.readUnsignedWord();
-			mapIndices2[i2] = stream2.readUnsignedWord();
-			mapIndices3[i2] = stream2.readUnsignedWord();
+			mapIndices1[i2] = stream2.readUnsignedShort();
+			mapIndices2[i2] = stream2.readUnsignedShort();
+			mapIndices3[i2] = stream2.readUnsignedShort();
 		}
 		System.out.println("Map Amount: " + j1 + "");
 		abyte2 = streamLoader.getDataForName("midi_index");

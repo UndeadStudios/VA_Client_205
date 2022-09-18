@@ -29,7 +29,7 @@ public class Configuration {
 	/**
 	 * Check to enable HD textures
 	 */
-	public static boolean enableHDTextures = true;
+	public static boolean enableHDTextures = false;
 
 	/**
 	 * Check to enable HD minimap
